@@ -56,8 +56,8 @@ const Home = (props) => {
     setUser(data)
   }
 
-
   const secondUserData = ["Popular Courses", "Featured", "Member Only"];
+
   const changesecondTab = (tab) => {
     if (tab == 0) {
       setsecondtab("0")
@@ -72,7 +72,6 @@ const Home = (props) => {
     <>
       <View style={styles.container}>
         <AnimatedLoader loading={loading} />
-        
         <View style={styles.repeatContainer}>
           <View style={{ marginVertical: HEIGHT * 0.020 }}>
             <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.MEDIUM }}>Good Morning, <Text style={{ fontFamily: FONT.FAMILY.BOLD }}>{userMe != null ? userMe.fname : ""}</Text></Text>

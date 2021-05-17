@@ -15,6 +15,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from "../Utils/DrawerContent";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import UpdatePassword from '../Screens/UpdatePassword';
+import Courses from '../Screens/Courses';
 
 
 const Stack = createStackNavigator();
@@ -90,11 +91,28 @@ export default Navigation = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="Courses"
+          component={Courses}
+          options={{
+            headerShown: true,
+            headerTitle: (props) => (<Text style={{ fontSize: FONT.SIZE.MEDIUM, fontFamily: FONT.FAMILY.MEDIUM }}>Program Design</Text>),
+            headerStyle: { height: HEIGHT * 0.08 },
+            headerLeft: (props) => (<TouchableOpacity onPress={()=> navigation.openDrawer()}>
+              <Image source={require('../Assets/Auths/arrow.png')} resizeMode="contain" style={{width: WIDTH * 0.055, HEIGHT: HEIGHT * 0.01, marginLeft: WIDTH * 0.04}} />
+            </TouchableOpacity>),
+            headerRight: (props) => (
+              <FontAwesome
+                name="bell-o"
+                size={25}
+                color={COLORS.BLACK}
+                style={{paddingHorizontal: 15}}
+              />)
+          }}
+        />
       </Stack.Navigator>
     );
   };
-
-  console.log("userMe", userMe);
 
   return (
     <>
