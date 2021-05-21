@@ -73,7 +73,7 @@ function Details() {
               </View>
               <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: HEIGHT * 0.02 }}>
                 <Text style={[styles.description, { color: "#909090", fontSize: FONT.SIZE.SMALL }]}>Related documents &amp; Videos audios :</Text>
-                <Text style={[styles.description, { color: COLORS.PRIMARY }]}>{"View all"}</Text>
+                <Text style={[styles.description, { color: COLORS.PRIMARY }]} onPress={()=> navigation.navigate("AllCourses")}>{"View all"}</Text>
               </View>
               <FlatList
                 showsHorizontalScrollIndicator={false}

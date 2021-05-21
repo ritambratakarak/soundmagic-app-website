@@ -21,6 +21,9 @@ import Details from '../Screens/Courses/Details';
 import Track from '../Screens/Track';
 import Payment from '../Screens/Payment';
 import AddPayment from '../Screens/Payment/Add';
+import AllCourses from '../Screens/Courses/AllCourses';
+
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -171,6 +174,16 @@ export default Navigation = () => {
             headerTitle: (props) => (<Title title={"Add Debit / Credit Card"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Payment")} />),
             headerRight: (props) => (<Right/>)
+          }}
+        />
+        <Stack.Screen
+          name="AllCourses"
+          component={AllCourses}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Course List"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Payment")} />),
           }}
         />
       </Stack.Navigator>
