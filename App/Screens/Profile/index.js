@@ -56,17 +56,7 @@ function Profile(props) {
     return (
         <View style={styles.container}>
             <AnimatedLoader loading={loader} />
-            <LinearGradient start={{ x: 0, y: 1 }} end={{ x: 1.2, y: 0 }} colors={['#A54729', '#2D4DBE']} style={{ height: HEIGHT, width: WIDTH, alignItems: "center", }}>
-                <TouchableOpacity style={{ padding: HEIGHT * 0.02, flexDirection: "row", alignSelf: "flex-start", justifyContent: "center" }}
-                    onPress={() => navigation.navigate("Home")} activeOpacity={1}>
-                    <Feather
-                        name="chevron-left"
-                        size={35}
-                        color={'white'}
-                        style={{ paddingRight: WIDTH * 0.04 }}
-                    />
-                    <Text style={{ color: COLORS.WHITE, fontSize: FONT.SIZE.VERYLARGE, fontFamily: FONT.FAMILY.SEMI_BOLD, paddingVertical: 5 }}>Profile</Text>
-                </TouchableOpacity>
+            <LinearGradient start={{ x: 0, y: 1 }} end={{ x: 1.2, y: 0 }} colors={['#A54729', '#2D4DBE']} style={{ height: HEIGHT, width: WIDTH, alignItems: "center", justifyContent:"center" }}>
                 <View style={{ alignItems: "center", width: "80%" }}>
                     <ImageBackground source={require('../../Assets/Ellipse.png')} style={{ width: WIDTH * 0.40, height: WIDTH * 0.40, alignItems: "center", justifyContent: "center" }}>
                         <Image source={userMe && userMe.image == '' ? require('../../Assets/Home/image.png') : { uri: userMe && userMe.profile_image }} style={{ borderRadius: HEIGHT / 2, width: WIDTH * 0.25, height: WIDTH * 0.25, }} />

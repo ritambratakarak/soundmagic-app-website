@@ -4,6 +4,7 @@ export const base_url = 'https://nodeserver.mydevfactory.com:1449/api'
 
 export const FONT = {
   SIZE: {
+    MINI: 12,
     SMALL: 14,
     MEDIUM: 16,
     LARGE: 18,

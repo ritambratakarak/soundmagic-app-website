@@ -68,16 +68,6 @@ function UpdatePassword(props) {
     <View style={styles.container}>
       <AnimatedLoader loading={loader} />
       <View style={{ height: HEIGHT, width: WIDTH, alignItems: "center", }}>
-        <TouchableOpacity style={{ padding: HEIGHT * 0.02, flexDirection: "row", alignSelf: "flex-start", justifyContent: "center" }}
-          onPress={() => navigation.navigate("Profile")} activeOpacity={1}>
-          <Feather
-            name="chevron-left"
-            size={35}
-            color={'black'}
-            style={{ paddingRight: WIDTH * 0.04 }}
-          />
-          <Text style={{ color: COLORS.BLACK, fontSize: FONT.SIZE.VERYLARGE, fontFamily: FONT.FAMILY.SEMI_BOLD, paddingVertical: 5 }}>Change Password</Text>
-        </TouchableOpacity>
         <View style={{ alignItems: "center", width: "85%" }}>
           <View style={{ marginTop: 20, width: "100%", alignItems:"center"}}>
             <Formik

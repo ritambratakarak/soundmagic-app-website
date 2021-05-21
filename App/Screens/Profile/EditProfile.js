@@ -246,16 +246,6 @@ function EditProfile(props) {
         </View>
       </RBSheet>
       <View style={{ height: HEIGHT, width: WIDTH, alignItems: "center", }}>
-        <TouchableOpacity style={{ padding: HEIGHT * 0.02, flexDirection: "row", alignSelf: "flex-start", justifyContent: "center" }}
-          onPress={() => navigation.navigate("Profile")} activeOpacity={1}>
-          <Feather
-            name="chevron-left"
-            size={35}
-            color={'black'}
-            style={{ paddingRight: WIDTH * 0.04 }}
-          />
-          <Text style={{ color: COLORS.BLACK, fontSize: FONT.SIZE.VERYLARGE, fontFamily: FONT.FAMILY.SEMI_BOLD, paddingVertical: 5 }}>Edit Profile</Text>
-        </TouchableOpacity>
         <View style={{ alignItems: "center", width: "80%" }}>
           <ImageBackground source={require('../../Assets/Ellipse2.png')} style={{ width: WIDTH * 0.40, height: WIDTH * 0.40, alignItems: "center", justifyContent: "center", marginVertical: 20 }}>
             <View style={{ position: "relative" }}>

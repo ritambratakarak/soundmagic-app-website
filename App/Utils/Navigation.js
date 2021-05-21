@@ -16,7 +16,11 @@ import DrawerContent from "../Utils/DrawerContent";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import UpdatePassword from '../Screens/UpdatePassword';
 import Courses from '../Screens/Courses';
-
+import Feather from 'react-native-vector-icons/Feather';
+import Details from '../Screens/Courses/Details';
+import Track from '../Screens/Track';
+import Payment from '../Screens/Payment';
+import AddPayment from '../Screens/Payment/Add';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -29,22 +33,39 @@ export default Navigation = () => {
     let user = userdata && userdata._id ? true : false
     setUser(user);
     console.log("USerData", userdata);
-    
+
   }, [userdata]);
 
-  const LogoTitle = (props) => {
+  const Left = (props) => {
     return (
-      <Image
-        source={require('./../Assets/logo.png')}
-        style={{
-          width: 35,
-          height: 35,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      />
+      <TouchableOpacity onPress={props.onPress}>
+        {props.menu ?
+          <Image source={require('../Assets/Home/menu.png')} resizeMode="contain" style={{ width: WIDTH * 0.055, HEIGHT: HEIGHT * 0.01, marginLeft: WIDTH * 0.04 }} /> :
+          <Image source={require('../Assets/Auths/arrow.png')} resizeMode="contain" style={{ width: 12, HEIGHT: 18, marginLeft: WIDTH * 0.06 }} />
+        }
+      </TouchableOpacity>
     );
   };
+
+  const Right = (props) => {
+    return (
+      <TouchableOpacity onPress={props.onPress}>
+        <FontAwesome
+          name="bell-o"
+          size={25}
+          color={COLORS.BLACK}
+          style={{ paddingHorizontal: 15 }}
+        />
+      </TouchableOpacity>
+    )
+  }
+
+  const Title = (props) => {
+    return (
+      <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.SEMI_BOLD }}>{props.title}</Text>
+    )
+  }
+
   const HomeStack = ({ navigation }) => {
     return (
       <Stack.Navigator>
@@ -54,17 +75,9 @@ export default Navigation = () => {
           options={{
             title: '',
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08 },
-            headerLeft: (props) => (<TouchableOpacity onPress={()=> navigation.openDrawer()}>
-              <Image source={require('../Assets/Home/menu.png')} resizeMode="contain" style={{width: WIDTH * 0.055, HEIGHT: HEIGHT * 0.01, marginLeft: WIDTH * 0.04}} />
-            </TouchableOpacity>) ,
-            headerRight: (props) => (
-              <FontAwesome
-                name="bell-o"
-                size={25}
-                color={COLORS.BLACK}
-                style={{paddingHorizontal: 15}}
-              />)
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerLeft: (props) => (<Left menu={true} onPress={()=> navigation.openDrawer()} />),
+            headerRight: (props) => (<Right/>)
           }}
         />
         <Stack.Screen
@@ -72,23 +85,37 @@ export default Navigation = () => {
           component={Profile}
           options={{
             title: '',
-            headerShown: false,
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: (props) => (<Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.SEMI_BOLD, color: COLORS.WHITE }}>Profile</Text>),
+            headerLeft: (props) => (<TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <Feather
+                name="chevron-left"
+                size={30}
+                color={'white'}
+                style={{ marginLeft: WIDTH * 0.04 }}
+              />
+            </TouchableOpacity>),
           }}
         />
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
           options={{
-            title: '',
-            headerShown: false,
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Edit Profile"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Profile")} />),
           }}
         />
         <Stack.Screen
           name="UpdatePassword"
           component={UpdatePassword}
           options={{
-            title: '',
-            headerShown: false,
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Change Password"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Profile")} />),
           }}
         />
         <Stack.Screen
@@ -96,18 +123,54 @@ export default Navigation = () => {
           component={Courses}
           options={{
             headerShown: true,
-            headerTitle: (props) => (<Text style={{ fontSize: FONT.SIZE.MEDIUM, fontFamily: FONT.FAMILY.MEDIUM }}>Program Design</Text>),
-            headerStyle: { height: HEIGHT * 0.08 },
-            headerLeft: (props) => (<TouchableOpacity onPress={()=> navigation.openDrawer()}>
-              <Image source={require('../Assets/Auths/arrow.png')} resizeMode="contain" style={{width: WIDTH * 0.055, HEIGHT: HEIGHT * 0.01, marginLeft: WIDTH * 0.04}} />
-            </TouchableOpacity>),
-            headerRight: (props) => (
-              <FontAwesome
-                name="bell-o"
-                size={25}
-                color={COLORS.BLACK}
-                style={{paddingHorizontal: 15}}
-              />)
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Courses"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
+            headerRight: (props) => (<Right/>)
+          }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={Details}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Courses Details"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Courses")} />),
+            headerRight: (props) => (<Right/>)
+          }}
+        />
+        <Stack.Screen
+          name="Track"
+          component={Track}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Track"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
+            headerRight: (props) => (<Right/>)
+          }}
+        />
+        <Stack.Screen
+          name="Payment"
+          component={Payment}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Payment"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
+            headerRight: (props) => (<Right/>)
+          }}
+        />
+        <Stack.Screen
+          name="AddPayment"
+          component={AddPayment}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Add Debit / Credit Card"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Payment")} />),
+            headerRight: (props) => (<Right/>)
           }}
         />
       </Stack.Navigator>
@@ -118,9 +181,9 @@ export default Navigation = () => {
     <>
       {userMe ? (
         <>
-          <Drawer.Navigator drawerContent={(props) => (<DrawerContent {...props} />)} initialRouteName="Home" drawerPosition="right">
+          <Drawer.Navigator drawerContent={(props) => (<DrawerContent {...props} />)} initialRouteName="HomeStack" drawerPosition="right">
             <Drawer.Screen
-              name="Home"
+              name="HomeStack"
               component={HomeStack}
             />
           </Drawer.Navigator>
