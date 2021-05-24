@@ -12,6 +12,7 @@ import Search from '../../Components/SearchComponent/Search';
 import ImageView from '../../Components/Home/ImageView';
 import Category from '../../Components/Home/Category';
 import Filter from '../../Components/SearchComponent/Filter';
+import Toast from 'react-native-root-toast';
 
 
 const Home = (props) => {
@@ -22,6 +23,8 @@ const Home = (props) => {
   const [userMe, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [modal, setModal] = React.useState(false);
+  const [categorydata, setcategorydata] = React.useState([]);
+  const [cousesdata, setcousesdata] = React.useState([]);
 
   useEffect(() => {
     // setTimeout(() => { setLoading(false) }, 2500)
@@ -38,18 +41,17 @@ const Home = (props) => {
     const alldata = await AsyncStorage.getItem("@user");
     const data = JSON.parse(alldata);
     setUser(data)
+    getCategory(data)
   }
 
-  const secondUserData = ["Mind", "Body", "Sprit", "More"];
-
-  const changesecondTab = (tab) => {
-    if (tab == 0) {
-      setsecondtab("0")
-    } else if (tab == 1) {
-      setsecondtab("1")
-    } else if (tab == 2) {
-      setsecondtab("2")
-    }
+  const changesecondTab = (tab, id) => {
+    categorydata.map((data, i) => {
+      if (i == tab) {
+        console.log("tab", tab, id);
+        setsecondtab(tab)
+        getCourses(id)
+      }
+    })
   }
 
   const Recentdata = [
@@ -82,127 +84,89 @@ const Home = (props) => {
     }
   ]
 
-  const Popular = [
-    {
-      _id: 1,
-      name: "Yoga for DOSHA",
-      img: "https://mk0doyoucomnn0s0iurt.kinstacdn.com/wp-content/uploads/2021/03/j-u0wzxoxg8-scaled.jpg",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 2,
-      name: "Yoga for DOSHA",
-      img: "https://m.timesofindia.com/thumb/msid-69889676/69889676.jpg?resizemode=4&width=400",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 3,
-      name: "Yoga for DOSHA",
-      img: "https://st.depositphotos.com/1686706/4692/i/600/depositphotos_46924139-stock-photo-young-asian-woman-practicing-yoga.jpg",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 4,
-      name: "Yoga for DOSHA",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNjnw7uUuIVXqOs2SNig7to8D1La-qYiJ6Ew&usqp=CAU",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    }
-  ]
+  const getCategory = (data) => {
+    setLoading(true)
+    Network('/get-course-category', 'get', { authtoken: data.authtoken })
+      .then(async (res) => {
+        setLoading(false)
+        if (res.response_code === 200) {
+          console.log("category data", res.response_data);
+          setcategorydata(res.response_data)
+          if(res.response_data.length != 0){
+            console.log("courses default id", res.response_data[0]._id);
+            getCourses(res.response_data[0]._id)
+          }
+          // Toast.show(res.response_message);
+        }
+        else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser())
+        }
+        else {
+          Toast.show(res.response_message);
+        }
+      }).catch(error => {
+        Toast.show(error)
+        setLoading(false)
+      })
+  }
 
-  const Featured = [
-    {
-      _id: 1,
-      name: "Yoga for DOSHA",
-      img: "https://st.depositphotos.com/1686706/4692/i/600/depositphotos_46924139-stock-photo-young-asian-woman-practicing-yoga.jpg",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 2,
-      name: "Yoga for DOSHA",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNjnw7uUuIVXqOs2SNig7to8D1La-qYiJ6Ew&usqp=CAU",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 3,
-      name: "Yoga for DOSHA",
-      img: "https://mk0doyoucomnn0s0iurt.kinstacdn.com/wp-content/uploads/2021/03/j-u0wzxoxg8-scaled.jpg",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 4,
-      name: "Yoga for DOSHA",
-      img: "https://m.timesofindia.com/thumb/msid-69889676/69889676.jpg?resizemode=4&width=400",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    }
-  ]
+  const getCourses = async (id) => {
+    setLoading(true)
+    const alldata = await AsyncStorage.getItem("@user");
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    Network('/get-course?page=' + `${1}` + "&limit=" + `${100}` + "&categoryID=" + `${id}`, 'get', { authtoken })
+      .then(async (res) => {
+        setLoading(false)
+        if (res.response_code === 200) {
+          console.log("courses data", res.response_data.docs);
+          setcousesdata(res.response_data.docs)
+          // Toast.show(res.response_message);
+        }
+        else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser())
+        }
+        else {
+          Toast.show(res.response_message);
+        }
+      }).catch(error => {
+        Toast.show(error)
+        setLoading(false)
+      })
+  }
 
-  const Member = [
-    {
-      _id: 1,
-      name: "Yoga for DOSHA",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNjnw7uUuIVXqOs2SNig7to8D1La-qYiJ6Ew&usqp=CAU",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 2,
-      name: "Yoga for DOSHA",
-      img: "https://mk0doyoucomnn0s0iurt.kinstacdn.com/wp-content/uploads/2021/03/j-u0wzxoxg8-scaled.jpg",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 3,
-      name: "Yoga for DOSHA",
-      img: "https://m.timesofindia.com/thumb/msid-69889676/69889676.jpg?resizemode=4&width=400",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
-    },
-    {
-      _id: 4,
-      name: "Yoga for DOSHA",
-      img: "https://st.depositphotos.com/1686706/4692/i/600/depositphotos_46924139-stock-photo-young-asian-woman-practicing-yoga.jpg",
-      author: "Alex D Costa",
-      price: "29",
-      authorimg: "https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X.jpg",
+  const gettime = () => {
+    var curHr = new Date().getHours()
+    if (curHr < 12) {
+      return "Good Morning"
+    } else if (curHr < 18) {
+      return 'Good Afternoon'
+    } else if (curHr > 17 && curHr < 24) {
+      return 'Good Evening'
+    } else {
+      return 'Good Night'
     }
-  ]
-
+  }
 
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Filter
           modal={modal}
-          close={()=> setModal(!modal)}
-          caregory={()=> console.log("aaa")}
-          classduration={()=> console.log("bbb")}
-          rating={()=> console.log("ccc")}
+          close={() => setModal(!modal)}
+          caregory={() => console.log("aaa")}
+          classduration={() => console.log("bbb")}
+          rating={() => console.log("ccc")}
         />
         <View style={styles.container}>
           <AnimatedLoader loading={loading} />
           <View style={styles.repeatContainer}>
             <View style={{ marginVertical: HEIGHT * 0.020 }}>
-              <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.MEDIUM }}>Good Morning, <Text style={{ fontFamily: FONT.FAMILY.BOLD }}>{userMe != null ? userMe.fname : ""}</Text></Text>
+              <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.MEDIUM }}>{gettime()+", "} <Text style={{ fontFamily: FONT.FAMILY.BOLD }}>{userMe != null ? userMe.fname : ""}</Text></Text>
             </View>
             <Search
               onChange={(text) => setsearch(text)}
@@ -210,7 +174,7 @@ const Home = (props) => {
               onPress={() => setModal(true)}
             />
           </View>
-          <View style={[styles.repeatContainer, {marginBottom: 0}]}>
+          <View style={[styles.repeatContainer, { marginBottom: 0 }]}>
             <View style={styles.categorycontainer}>
               <Category
                 name={"Breath"}
@@ -264,28 +228,31 @@ const Home = (props) => {
           </View>
           <View style={[styles.repeatContainer]}>
             <WeightTab
-              data={secondUserData}
+              data={categorydata}
               active={secondtab}
-              onPress={(tab) => changesecondTab(tab)}
+              onPress={(tab, id) => changesecondTab(tab, id)}
             />
             <FlatList
               showsHorizontalScrollIndicator={false}
               horizontal={true}
-              data={secondtab == "0" ? Popular : secondtab == "1" ? Member : secondtab == "2" ? Featured : []}
+              data={cousesdata}
               renderItem={({ item }) => (
                 <HomeList
                   name={item.name}
-                  img={item.img}
-                  author={item.author}
+                  img={item.banner}
+                  author={"Admin"}
                   onPress={() => {
-                    console.log("aa");
+                    navigation.navigate("Details", {item:item})
                   }}
                   price={item.price}
-                  authorimg={item.authorimg}
                 />
               )}
               keyExtractor={item => item._id}
-              ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center" }}>No data Found</Text>}
+              ListEmptyComponent={
+                <View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
+                  <Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>This category have no data!</Text>
+                </View>
+              }
             />
           </View>
           <ImageView

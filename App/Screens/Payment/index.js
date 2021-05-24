@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     marginVertical: HEIGHT * 0.02,
-    
   },
   addcard: {
     color:"#424242", fontFamily:FONT.FAMILY.BLACK, fontSize:FONT.SIZE.SMALL, paddingBottom: HEIGHT * 0.02,
