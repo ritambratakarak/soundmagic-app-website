@@ -11,7 +11,7 @@ export default CourseItem = ({ heading, image, textsize, textcolor, text, catego
   return (
     <TouchableOpacity style={{ flexDirection: "row", marginBottom: HEIGHT * 0.02, borderBottomColor: "#E5E5E5", borderBottomWidth: 0.5, paddingBottom: HEIGHT * 0.02,}} onPress={onPress}>
       <View style={{ width: WIDTH * 0.30, height: HEIGHT * 0.10, marginRight: GAP.SMALL }}>
-        <Image source={image} style={{ borderRadius: 10, width: "100%", height: "100%" }} resizeMode={"contain"} />
+        <Image source={image} style={{ borderRadius: 5, width: "100%", height: "100%" }} resizeMode={"contain"} />
       </View>
       <View style={{width:"80%"}}>
         <Heading2
