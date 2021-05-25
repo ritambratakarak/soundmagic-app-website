@@ -17,14 +17,14 @@ export default CustomerRating = ({ main, data }) => {
         renderItem={({ item }) => (
           <View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image source={item.image} style={{ marginRight: 10, borderRadius: HEIGHT / 2, height: 35, width: 35 }} />
+              <Image source={{uri: item.userDetails.profile_image}} style={{ marginRight: 10, borderRadius: HEIGHT / 2, height: 35, width: 35 }} />
               <Heading2
-                name={item.heading}
+                name={item.userDetails.fname+" "+item.userDetails.lname}
               />
             </View>
             <View style={{ justifyContent: "flex-start", alignCenter: "flex-start", alignSelf: "flex-start", }}>
               <RatingComponent
-                value={item.commentrate}
+                value={item.rating}
                 rate={() => console.log()}
                 backgroundColor={"#fff"}
                 disable={true}
@@ -33,7 +33,7 @@ export default CustomerRating = ({ main, data }) => {
             <TextContainer
               size={FONT.SIZE.SMALL}
               color={"#909090"}
-              content={item.comment}
+              content={item.review}
             />
           </View>
         )}

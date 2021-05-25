@@ -8,6 +8,8 @@ import CoursesItem from '../../Components/Courses/Courses';
 import Filter from '../../Components/SearchComponent/Filter';
 import Search from '../../Components/SearchComponent/Search';
 import { COLORS, FONT, GAP, HEIGHT, WIDTH } from '../../Utils/constants';
+import { logoutUser } from '../../Redux/Actions/authAction';
+import Toast from 'react-native-root-toast';
 
 
 function Courses() {
@@ -81,7 +83,7 @@ function Courses() {
                 categoryname={item.categoryDetails.name}
                 tutorname={"Admin"}
                 qty={item.totalAudio+" Audio" + " & " + item.totalVideo + " Video"}
-                rateingvalue={4}
+                rateingvalue={item.avgRating}
                 rating={() => console.log("")}
                 ratingcolor={"#ECECEC"}
                 price={"$"+item.price}

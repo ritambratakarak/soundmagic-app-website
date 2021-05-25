@@ -8,34 +8,55 @@ import { COLORS, FONT, GAP, HEIGHT, WIDTH } from '../../Utils/constants';
 import RatingComponent from '../../Components/Rating/Rating';
 import CourseItem from '../../Components/Details/CourseItem';
 import CustomerRating from '../../Components/Details/CustomerRating';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../Redux/Actions/authAction';
+import Toast from 'react-native-root-toast';
 
 
 function Details() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const route = useRoute();
-  const [search, setsearch] = useState("");
   const [alldata, setalldata] = useState("");
-  const [modal, setModal] = React.useState(false);
+  const [review, setreview] = useState([]);
+
 
   useEffect(() => {
     console.log("details", route.params.item);
     setalldata(route.params.item)
+    const coursedata = route.params.item;
+    const couseid = coursedata._id;
+    getReviews(couseid)
   }, [route])
 
-  const data2 = [
-    {
-      heading: "Regular Yoga",
-      image: require("../../Assets/Courses/Rectangle_1.png"),
-      commentrate: 5,
-      comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      heading: "Regular Yoga",
-      image: require("../../Assets/Courses/Rectangle_2.png"),
-      commentrate: 5,
-      comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    }
-  ]
+  const getReviews = async (id) => {
+    // setLoading(true)
+    const alldata = await AsyncStorage.getItem("@user");
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    Network('/get-course-review-list?page=' + `${1}` + "&limit=" + `${20}` + "&courseID=" + `${id}`, 'get', { authtoken })
+      .then(async (res) => {
+        // setLoading(false)
+        if (res.response_code === 200) {
+          console.log("review data", res.response_data.docs);
+          setreview(res.response_data.docs)
+          // setcousesdata(res.response_data.docs)
+          // Toast.show(res.response_message);
+        }
+        else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser())
+        }
+        else {
+          Toast.show(res.response_message);
+        }
+      }).catch(error => {
+        Toast.show(error)
+        // setLoading(false)
+      })
+  }
 
   function format(time) {
     let hrs = ~~(time / 3600);
@@ -98,9 +119,7 @@ function Details() {
                   />
                 )}
                 keyExtractor={item => item._id}
-                ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
-                <Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>
-              </View>}
+                ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>}
                 initialNumToRender={2}
               />
               <View style={{ alignSelf: "center", width: "100%", alignItems: "center", marginVertical: GAP.MEDIUM }}>
@@ -112,7 +131,7 @@ function Details() {
               </View>
               <CustomerRating
                 main={"Rating & Reviews :"}
-                data={data2}
+                data={review}
               />
             </View>
           </View>
