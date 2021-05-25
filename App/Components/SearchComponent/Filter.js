@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Modal, TextInput, TouchableOpacity, Image, StyleSheet, Text, TouchableHighlight, LayoutAnimation } from 'react-native';
+import { View, Modal, TextInput, TouchableOpacity, Image, StyleSheet, Text, TouchableHighlight, LayoutAnimation, ScrollView } from 'react-native';
 import { COLORS, HEIGHT, FONT, GAP, WIDTH } from '../../Utils/constants';
 import Ripple from 'react-native-material-ripple';
 import Button from '../../Components/Common/Button';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { CheckBox } from 'react-native-elements';
 import RatingComponent from '../Rating/Rating';
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import { useSelector } from 'react-redux';
 
 
-export default FilterModal = ({ modal, close, onPress }) => {
+export default FilterModal = ({ modal, category, close, onPress }) => {
+  const allcategory = useSelector(state => state.categorydata)
   const [expanded, setexpanded] = useState(false);
   const [expanded2, setexpanded2] = useState(false);
   const [expanded3, setexpanded3] = useState(false);
@@ -16,6 +19,8 @@ export default FilterModal = ({ modal, close, onPress }) => {
   const [medium, setmedium] = useState(false);
   const [long, setlong] = useState(false);
   const [verylong, setveylong] = useState(false);
+  const [mealtime, setmealtime] = useState("");
+  const [categorydata, setcategorydata] = useState([]);
 
   const toggleExpand = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -32,6 +37,14 @@ export default FilterModal = ({ modal, close, onPress }) => {
     setexpanded3(!expanded3)
   }
 
+  const radio_props = allcategory.map((data, i) => {
+    return { label: data.name, value: data._id }
+  })
+
+  useEffect(() => {
+    console.log("allcategory", allcategory);
+  }, [allcategory])
+
   return (
     <Modal
       animationType="slide"
@@ -46,71 +59,85 @@ export default FilterModal = ({ modal, close, onPress }) => {
             <TouchableOpacity style={styles.privacycloseIcon} onPress={close}>
               <Image source={require('../../Assets/close.png')} style={{ width: 25, height: 25 }} />
             </TouchableOpacity>
-            <View style={styles.privacyContainer}>
-              <View style={{ marginBottom: GAP.LARGE }}>
-                <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, marginTop: 0, textAlign: "center", fontFamily: FONT.FAMILY.MEDIUM }}>Filter</Text>
+            <ScrollView>
+              <View style={styles.privacyContainer}>
+                <View style={{ marginBottom: GAP.LARGE }}>
+                  <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, marginTop: 0, textAlign: "center", fontFamily: FONT.FAMILY.MEDIUM }}>Filter</Text>
+                </View>
+                <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand()}>
+                  <Text style={[styles.title]}>{"Category"}</Text>
+                  <Icon name={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color={'#5E5E5E'} />
+                </Ripple>
+                <View style={styles.parentHr} />
+                {
+                  expanded &&
+                  <View>
+                    <RadioForm
+                      radio_props={radio_props}
+                      initial={0}
+                      formHorizontal={false}
+                      labelHorizontal={true}
+                      buttonColor={COLORS.PRIMARY}
+                      selectedButtonColor={COLORS.PRIMARY}
+                      animation={false}
+                      buttonStyle={{ borderWidth: 0.5 }}
+                      onPress={(value) => setmealtime(value)}
+                      labelStyle={{ fontFamily: FONT.FAMILY.REGULAR, fontSize: FONT.SIZE.MEDIUM, marginBottom: 12, color: COLORS.PRIMARY, marginRight: 10 }}
+                      buttonSize={12}
+                      style={{ flexWrap: "wrap", justifyContent: "center" }}
+                    />
+                  </View>
+                }
+                <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand2()}>
+                  <Text style={[styles.title]}>{"Class duration"}</Text>
+                  <Icon name={expanded2 ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color={'#5E5E5E'} />
+                </Ripple>
+                {
+                  expanded2 &&
+                  <View>
+                    <CheckBox
+                      title={"0-3 Hours"}
+                      checked={short}
+                      onPress={() => setshort(!short)}
+                      containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
+                      textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
+                    />
+                    <CheckBox
+                      title={"3-6 Hours"}
+                      checked={medium}
+                      onPress={() => setmedium(!medium)}
+                      containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
+                      textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
+                    />
+                    <CheckBox
+                      title={"6-17 Hours"}
+                      checked={long}
+                      onPress={() => setlong(!long)}
+                      containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
+                      textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
+                    />
+                    <CheckBox
+                      title={"17+ Hours"}
+                      checked={verylong}
+                      onPress={() => setveylong(!verylong)}
+                      containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
+                      textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
+                    />
+                  </View>
+                }
+
+                <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand3()}>
+                  <Text style={[styles.title]}>{"Rating"}</Text>
+                  <Icon name={expanded3 ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color={'#5E5E5E'} />
+                </Ripple>
+                {
+                  expanded3 &&
+                  <View style={{ justifyContent: "flex-start", alignItems: "flex-start" }}>
+
+                  </View>
+                }
               </View>
-
-              <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand()}>
-                <Text style={[styles.title]}>{"Category"}</Text>
-                <Icon name={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color={'#5E5E5E'} />
-              </Ripple>
-              <View style={styles.parentHr} />
-              {
-                expanded &&
-                <View>
-
-                </View>
-              }
-              <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand2()}>
-                <Text style={[styles.title]}>{"Class duration"}</Text>
-                <Icon name={expanded2 ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color={'#5E5E5E'} />
-              </Ripple>
-              {
-                expanded2 &&
-                <View>
-                  <CheckBox
-                    title={"0-3 Hours"}
-                    checked={short}
-                    onPress={() => setshort(!short)}
-                    containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
-                    textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
-                  />
-                  <CheckBox
-                    title={"3-6 Hours"}
-                    checked={medium}
-                    onPress={() => setmedium(!medium)}
-                    containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
-                    textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
-                  />
-                  <CheckBox
-                    title={"6-17 Hours"}
-                    checked={long}
-                    onPress={() => setlong(!long)}
-                    containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
-                    textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
-                  />
-                  <CheckBox
-                    title={"17+ Hours"}
-                    checked={verylong}
-                    onPress={() => setveylong(!verylong)}
-                    containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
-                    textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
-                  />
-                </View>
-              }
-
-              <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand3()}>
-                <Text style={[styles.title]}>{"Rating"}</Text>
-                <Icon name={expanded3 ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color={'#5E5E5E'} />
-              </Ripple>
-              {
-                expanded3 &&
-                <View style={{justifyContent:"flex-start", alignItems:"flex-start"}}>
-                  
-                </View>
-              }
-            </View>
+            </ScrollView>
             <View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
               <Button
                 onPress={onPress}

@@ -13,6 +13,7 @@ import ImageView from '../../Components/Home/ImageView';
 import Category from '../../Components/Home/Category';
 import Filter from '../../Components/SearchComponent/Filter';
 import Toast from 'react-native-root-toast';
+import { category } from '../../Redux/Actions/Categoryaction';
 
 
 const Home = (props) => {
@@ -92,6 +93,7 @@ const Home = (props) => {
         if (res.response_code === 200) {
           console.log("category data", res.response_data);
           setcategorydata(res.response_data)
+          dispatch(category(res.response_data))
           if(res.response_data.length != 0){
             console.log("courses default id", res.response_data[0]._id);
             getCourses(res.response_data[0]._id)
@@ -158,7 +160,6 @@ const Home = (props) => {
         <Filter
           modal={modal}
           close={() => setModal(!modal)}
-          
         />
         <View style={styles.container}>
           <AnimatedLoader loading={loading} />

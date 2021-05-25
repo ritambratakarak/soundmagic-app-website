@@ -10,7 +10,7 @@ import Search from '../../Components/SearchComponent/Search';
 import { COLORS, FONT, GAP, HEIGHT, WIDTH } from '../../Utils/constants';
 
 
-function Courses() {
+function ShowFilterData() {
   const navigation = useNavigation();
   const [search, setsearch] = useState("");
   const [modal, setModal] = React.useState(false);
@@ -100,7 +100,7 @@ function Courses() {
   );
 }
 
-export default Courses;
+export default ShowFilterData;
 
 const styles = StyleSheet.create({
   container: {

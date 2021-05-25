@@ -77,9 +77,6 @@ function Track() {
       <Filter
         modal={modal}
         close={() => setModal(!modal)}
-        caregory={() => console.log("aaa")}
-        classduration={() => console.log("bbb")}
-        rating={() => console.log("ccc")}
       />
       <View style={styles.repeatContainer}>
         <Search
