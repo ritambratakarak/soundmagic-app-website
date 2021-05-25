@@ -1,6 +1,8 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect, useNavigation } from '@react-navigation/core';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native';
+import AnimatedLoader from '../../Components/AnimatedLoader';
 import CategogyList from '../../Components/Common/CategogyList';
 import CoursesItem from '../../Components/Courses/Courses';
 import Filter from '../../Components/SearchComponent/Filter';
@@ -12,42 +14,49 @@ function Courses() {
   const navigation = useNavigation();
   const [search, setsearch] = useState("");
   const [modal, setModal] = React.useState(false);
+  const [cousesdata, setcousesdata] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
-  const data = [
-    {
-      _id: 1,
-      image: require('../../Assets/Courses/rectangle.png'),
-      heading: "Women Working Out",
-      cName: "Yoga",
-      tName: "Jasica Smith",
-      qty:"10 Videos & 2 Audios",
-      rate: 3,
-      price: "$56"
-    },
-    {
-      _id: 2,
-      image: require('../../Assets/Courses/rectangle2.png'),
-      heading: "Men Working Out",
-      cName: "Yoga",
-      tName: "John Smith",
-      qty:"14 Audios",
-      rate: 4,
-      price: "$30"
-    },
-    {
-      _id: 3,
-      image: require('../../Assets/Courses/rectangle.png'),
-      heading: "Stretch",
-      cName: "Yoga",
-      tName: "John Smith",
-      qty:"14 Audios",
-      rate: 4,
-      price: "$30"
-    },
-  ]
+  useEffect(()=>{
+    getCourses()
+  }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      getCourses()
+    }, []),
+  );
+
+  const getCourses = async () => {
+    setLoading(true)
+    const alldata = await AsyncStorage.getItem("@user");
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    Network('/get-course?page=' + `${1}` + "&limit=" + `${20}`, 'get', { authtoken })
+      .then(async (res) => {
+        setLoading(false)
+        if (res.response_code === 200) {
+          console.log("courses data", res.response_data.docs);
+          setcousesdata(res.response_data.docs)
+          // Toast.show(res.response_message);
+        }
+        else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser())
+        }
+        else {
+          Toast.show(res.response_message);
+        }
+      }).catch(error => {
+        Toast.show(error)
+        setLoading(false)
+      })
+  }
 
   return (
     <View style={styles.container}>
+      <AnimatedLoader loading={loading} />
       <Filter
         modal={modal}
         close={() => setModal(!modal)}
@@ -67,20 +76,20 @@ function Courses() {
             style={{marginBottom: HEIGHT * 0.18}}
             showsVerticalScrollIndicator={false}
             horizontal={false}
-            data={data}
+            data={cousesdata}
             renderItem={({ item }) => (
               <CoursesItem
-                image={item.image}
-                heading={item.heading}
-                categoryname={item.cName}
-                tutorname={item.tName}
-                qty={item.qty}
-                rateingvalue={item.rate}
+                image={item.banner}
+                heading={item.name}
+                categoryname={item.categoryDetails.name}
+                tutorname={"Admin"}
+                qty={item.totalAudio+" Audio" + " & " + item.totalVideo + " Video"}
+                rateingvalue={4}
                 rating={() => console.log("")}
                 ratingcolor={"#ECECEC"}
-                price={item.price}
+                price={"$"+item.price}
                 ratingdisable={true}
-                onPress={()=> navigation.navigate("Details")}
+                onPress={()=> navigation.navigate("Details", {item:item})}
               />
             )}
             keyExtractor={item => item._id}

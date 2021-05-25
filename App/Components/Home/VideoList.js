@@ -21,7 +21,7 @@ const HomeList = (props) =>
                     <View>
                         <Text style={{ color: COLORS.WHITE, fontSize: FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.HEAVY  }} ellipsizeMode={"tail"} numberOfLines={1}>{props.name}</Text>
                         <View style={{flexDirection: "row"}}>
-                            <Image  source={{ uri: props.authorimg }} style={{height: 15, width:15, borderRadius: HEIGHT / 2}} />
+                            {/* <Image  source={{ uri: props.authorimg }} style={{height: 15, width:15, borderRadius: HEIGHT / 2}} /> */}
                             <Text style={{ color: COLORS.WHITE, fontSize: FONT.SIZE.SMALL, fontFamily:FONT.FAMILY.LIGHT, marginLeft: 5 }}>{props.author}</Text>
                         </View>
                     </View>

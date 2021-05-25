@@ -51,7 +51,6 @@ export default FilterModal = ({ modal, caregory, classduration, rating, close, o
                 <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, marginTop: 0, textAlign: "center", fontFamily: FONT.FAMILY.MEDIUM }}>Filter</Text>
               </View>
 
-
               <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand()}>
                 <Text style={[styles.title]}>{"Category"}</Text>
                 <Icon name={expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color={'#5E5E5E'} />

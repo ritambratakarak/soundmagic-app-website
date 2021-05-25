@@ -22,6 +22,7 @@ import Track from '../Screens/Track';
 import Payment from '../Screens/Payment';
 import AddPayment from '../Screens/Payment/Add';
 import AllCourses from '../Screens/Courses/AllCourses';
+import Player from '../Screens/Player';
 
 
 
@@ -184,6 +185,16 @@ export default Navigation = () => {
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Course List"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Courses")} />),
+          }}
+        />
+        <Stack.Screen
+          name="Player"
+          component={Player}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Player"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
           }}
         />
       </Stack.Navigator>

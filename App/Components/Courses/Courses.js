@@ -10,7 +10,7 @@ import RatingComponent from '../Rating/Rating';
 export default Courses = ({ image, heading, categoryname, tutorname, qty, rateingvalue, rating, ratingcolor, price, ratingdisable, onPress }) => {
   return (
     <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={{ width: "100%", overflow: 'hidden', borderRadius: 8, backgroundColor: "#ECECEC", marginBottom:HEIGHT * 0.02 }} onPress={onPress}>
-      <Image source={image} style={{ width: "100%", height: HEIGHT * 0.22 }} resizeMode={"cover"} />
+      <Image source={{ uri: image}} style={{ width: "100%", height: HEIGHT * 0.22 }} resizeMode={"cover"} />
       <View style={{ padding: 15 }}>
         <Heading color={"#000"} name={heading} />
         <CategogyList
