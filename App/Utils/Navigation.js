@@ -184,7 +184,7 @@ export default Navigation = () => {
             headerShown: true,
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Course List"} />),
-            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Courses")} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Details")} />),
           }}
         />
         <Stack.Screen

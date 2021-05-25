@@ -17,34 +17,34 @@ function Details() {
   const [alldata, setalldata] = useState("");
   const [modal, setModal] = React.useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("details", route.params.item);
     setalldata(route.params.item)
   }, [route])
 
   const data2 = [
     {
-      heading:"Regular Yoga",
-      image:require("../../Assets/Courses/Rectangle_1.png"),
+      heading: "Regular Yoga",
+      image: require("../../Assets/Courses/Rectangle_1.png"),
       commentrate: 5,
       comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-      heading:"Regular Yoga",
-      image:require("../../Assets/Courses/Rectangle_2.png"),
+      heading: "Regular Yoga",
+      image: require("../../Assets/Courses/Rectangle_2.png"),
       commentrate: 5,
       comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     }
   ]
-  
-  function format(time) {   
+
+  function format(time) {
     let hrs = ~~(time / 3600);
     let mins = ~~((time % 3600) / 60);
     let secs = ~~time % 60;
 
     let ret = "";
     if (hrs > 0) {
-        ret += "" + hrs + " hours " + (mins < 10 ? "0" : "");
+      ret += "" + hrs + " hours " + (mins < 10 ? "0" : "");
     }
     ret += "" + mins + " min " + (secs < 10 ? "0" : "");
     ret += "" + secs + " sec ";
@@ -56,11 +56,11 @@ function Details() {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.repeatContainer}>
-            <Image source={require("../../Assets/Courses/rectangle.png")} style={{ width: "100%", height: HEIGHT * 0.26, borderRadius: 10 }} resizeMode={"cover"} />
+            <Image source={{ uri: alldata.banner }} style={{ width: "100%", height: HEIGHT * 0.26, borderRadius: 10 }} resizeMode={"cover"} />
             <View style={{ paddingHorizontal: 5, paddingVertical: 15 }}>
               <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                 <Heading color={"#000"} name={alldata.name} />
-                <Heading color={COLORS.PRIMARY} name={"$"+alldata.price} />
+                <Heading color={COLORS.PRIMARY} name={"$" + alldata.price} />
               </View>
               <CategogyList
                 categoryname={"Category"}
@@ -79,7 +79,7 @@ function Details() {
               </View>
               <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: HEIGHT * 0.02 }}>
                 <Text style={[styles.description, { color: "#909090", fontSize: FONT.SIZE.SMALL }]}>Related documents &amp; Videos audios :</Text>
-                <Text style={[styles.description, { color: COLORS.PRIMARY }]} onPress={()=> navigation.navigate("AllCourses", {item: alldata.tutorials})}>{"View all"}</Text>
+                <Text style={[styles.description, { color: COLORS.PRIMARY }]} onPress={() => navigation.navigate("AllCourses", { item: alldata.tutorials })}>{"View all"}</Text>
               </View>
               <FlatList
                 showsHorizontalScrollIndicator={false}
@@ -87,18 +87,20 @@ function Details() {
                 data={alldata.tutorials}
                 renderItem={({ item }) => (
                   <CourseItem
-                    heading={item.heading}
+                    heading={item.name}
                     image={item.type == "video" ? item.videoThumbnail : "https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg"}
                     textsize={FONT.SIZE.SMALL}
                     textcolor={"#909090"}
-                    text={item.type +" | "+ format(item.duration)}
+                    text={item.type + " | " + format(item.duration)}
                     categoryname={"Admin"}
-                    onPress={()=> navigation.navigate("Details", )}
+                    onPress={() => navigation.navigate("Player", { url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type })}
                     showfavorite={false}
                   />
                 )}
                 keyExtractor={item => item._id}
-                ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center" }}>No data Found</Text>}
+                ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
+                <Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>
+              </View>}
                 initialNumToRender={2}
               />
               <View style={{ alignSelf: "center", width: "100%", alignItems: "center", marginVertical: GAP.MEDIUM }}>

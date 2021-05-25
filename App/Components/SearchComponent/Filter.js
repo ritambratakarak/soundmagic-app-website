@@ -8,7 +8,7 @@ import { CheckBox } from 'react-native-elements';
 import RatingComponent from '../Rating/Rating';
 
 
-export default FilterModal = ({ modal, caregory, classduration, rating, close, onPress }) => {
+export default FilterModal = ({ modal, close, onPress }) => {
   const [expanded, setexpanded] = useState(false);
   const [expanded2, setexpanded2] = useState(false);
   const [expanded3, setexpanded3] = useState(false);
@@ -58,7 +58,9 @@ export default FilterModal = ({ modal, caregory, classduration, rating, close, o
               <View style={styles.parentHr} />
               {
                 expanded &&
-                <Text>aaaaa</Text>
+                <View>
+
+                </View>
               }
               <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={styles.row} onPress={() => toggleExpand2()}>
                 <Text style={[styles.title]}>{"Class duration"}</Text>

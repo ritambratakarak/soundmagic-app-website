@@ -158,9 +158,7 @@ const Home = (props) => {
         <Filter
           modal={modal}
           close={() => setModal(!modal)}
-          caregory={() => console.log("aaa")}
-          classduration={() => console.log("bbb")}
-          rating={() => console.log("ccc")}
+          
         />
         <View style={styles.container}>
           <AnimatedLoader loading={loading} />

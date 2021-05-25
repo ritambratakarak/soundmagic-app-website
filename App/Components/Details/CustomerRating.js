@@ -38,7 +38,9 @@ export default CustomerRating = ({ main, data }) => {
           </View>
         )}
         keyExtractor={item => item._id}
-        ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center" }}>No data Found</Text>}
+        ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
+        <Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>
+      </View>}
       />
     </View>
   )
