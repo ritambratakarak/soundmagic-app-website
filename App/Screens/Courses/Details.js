@@ -23,6 +23,7 @@ function Details() {
   const [review, setreview] = useState([]);
   const [loadmore, setloadmore] = useState(false);
   const [limit, setlimit] = useState(10);
+  const [onEndReachedCalledDuringMomentum, setonEndReachedCalledDuringMomentum] = useState(true);
 
   useEffect(() => {
     console.log("details", route.params.item);
@@ -75,8 +76,16 @@ function Details() {
     return ret;
   }
 
-  console.log(loadmore, limit);
-  
+  const _loadMoreData = () => {
+    if (!onEndReachedCalledDuringMomentum) {
+      console.log("call load more");
+      setloadmore(true)
+      setlimit(limit + 10)
+      getReviews();
+      setonEndReachedCalledDuringMomentum(true)
+    }
+  }
+
   return (
     <>
       <ScrollView>
@@ -124,7 +133,7 @@ function Details() {
                   />
                 )}
                 keyExtractor={item => item._id}
-                ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>}
+                ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center", fontSize: FONT.SIZE.MEDIUM, fontFamily: FONT.FAMILY.MEDIUM }}>No data found!</Text>}
                 initialNumToRender={2}
               />
               <View style={{ alignSelf: "center", width: "100%", alignItems: "center", marginVertical: GAP.MEDIUM }}>
@@ -139,11 +148,10 @@ function Details() {
                 data={review}
                 loadmore={loadmore}
                 endreached={info => {
-                  setloadmore(true)
-                  setlimit(limit+10)
-                  getReviews();
+                  _loadMoreData()
                 }}
                 throttle={200}
+                scrollbegin={() => setonEndReachedCalledDuringMomentum(false)}
               />
             </View>
           </View>

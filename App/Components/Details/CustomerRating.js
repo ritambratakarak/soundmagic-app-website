@@ -6,7 +6,7 @@ import RatingComponent from '../Rating/Rating';
 import TextContainer from '../../Components/Common/Text';
 
 
-export default CustomerRating = ({ main, data, loadmore, endreached, throttle }) => {
+export default CustomerRating = ({ main, data, loadmore, endreached, throttle, scrollbegin }) => {
   return (
     <View style={{ marginVertical: GAP.MEDIUM, }}>
       <Text style={[styles.description, { color: "#909090", fontSize: FONT.SIZE.SMALL }]}>{main}</Text>
@@ -51,6 +51,7 @@ export default CustomerRating = ({ main, data, loadmore, endreached, throttle })
         scrollEventThrottle={throttle}
         onEndReached={endreached}
         onEndReachedThreshold={0.01}
+        onMomentumScrollBegin={scrollbegin}
       />
     </View>
   )
