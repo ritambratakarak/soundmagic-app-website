@@ -14,13 +14,15 @@ import { logoutUser } from '../../Redux/Actions/authAction';
 import Toast from 'react-native-root-toast';
 
 
+
 function Details() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const route = useRoute();
   const [alldata, setalldata] = useState("");
   const [review, setreview] = useState([]);
-
+  const [loadmore, setloadmore] = useState(false);
+  const [limit, setlimit] = useState(10);
 
   useEffect(() => {
     console.log("details", route.params.item);
@@ -31,11 +33,12 @@ function Details() {
   }, [route])
 
   const getReviews = async (id) => {
+    console.log("review id", id);
     // setLoading(true)
-    const alldata = await AsyncStorage.getItem("@user");
-    const data = JSON.parse(alldata);
+    const userdata = await AsyncStorage.getItem("@user");
+    const data = JSON.parse(userdata);
     const authtoken = data.authtoken;
-    Network('/get-course-review-list?page=' + `${1}` + "&limit=" + `${20}` + "&courseID=" + `${id}`, 'get', { authtoken })
+    Network('/get-course-review-list?page=' + `${1}` + "&limit=" + `${limit}` + "&courseID=" + `${id == undefined ? alldata._id : id}`, 'get', { authtoken })
       .then(async (res) => {
         // setLoading(false)
         if (res.response_code === 200) {
@@ -72,6 +75,8 @@ function Details() {
     return ret;
   }
 
+  console.log(loadmore, limit);
+  
   return (
     <>
       <ScrollView>
@@ -132,6 +137,13 @@ function Details() {
               <CustomerRating
                 main={"Rating & Reviews :"}
                 data={review}
+                loadmore={loadmore}
+                endreached={info => {
+                  setloadmore(true)
+                  setlimit(limit+10)
+                  getReviews();
+                }}
+                throttle={200}
               />
             </View>
           </View>

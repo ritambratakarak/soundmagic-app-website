@@ -26,6 +26,7 @@ const Home = (props) => {
   const [modal, setModal] = React.useState(false);
   const [categorydata, setcategorydata] = React.useState([]);
   const [cousesdata, setcousesdata] = React.useState([]);
+  const [allcousesdata, setallcousesdata] = React.useState([]);
 
   useEffect(() => {
     // setTimeout(() => { setLoading(false) }, 2500)
@@ -43,6 +44,7 @@ const Home = (props) => {
     const data = JSON.parse(alldata);
     setUser(data)
     getCategory(data)
+    getAllCourses()
   }
 
   const changesecondTab = (tab, id) => {
@@ -58,30 +60,15 @@ const Home = (props) => {
   const Recentdata = [
     {
       _id: 1,
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4JDUINyMkunfue2_WCsmqFfdnywUMYmJr0Q&usqp=CAU"
+      banner: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4JDUINyMkunfue2_WCsmqFfdnywUMYmJr0Q&usqp=CAU"
     },
     {
       _id: 2,
-      image: "https://grazia.wwmindia.com/content/2020/dec/yoga71607321001.jpg"
+      banner: "https://grazia.wwmindia.com/content/2020/dec/yoga71607321001.jpg"
     },
     {
       _id: 3,
-      image: "https://img.freepik.com/free-photo/sporty-young-woman-doing-yoga-practice-isolated-concept-healthy-life-natural-balance-body-mental-development_231208-10353.jpg?size=626&ext=jpg"
-    }
-  ]
-
-  const Arrivaldata = [
-    {
-      _id: 1,
-      image: "https://us.123rf.com/450wm/fizkes/fizkes1710/fizkes171000616/87527966-young-attractive-woman-practicing-yoga-stretching-in-natarajasana-exercise-lord-of-the-dance-pose-wo.jpg?ver=6"
-    },
-    {
-      _id: 2,
-      image: "https://imgk.timesnownews.com/story/iStock-1076946698.jpg?tr=w-400,h-300,fo-auto"
-    },
-    {
-      _id: 3,
-      image: "https://www.adityabirlacapital.com/healthinsurance/active-together/wp-content/uploads/2020/04/Yogi-with-kids.jpg"
+      banner: "https://img.freepik.com/free-photo/sporty-young-woman-doing-yoga-practice-isolated-concept-healthy-life-natural-balance-body-mental-development_231208-10353.jpg?size=626&ext=jpg"
     }
   ]
 
@@ -125,6 +112,33 @@ const Home = (props) => {
         if (res.response_code === 200) {
           console.log("courses data", res.response_data.docs);
           setcousesdata(res.response_data.docs)
+          // Toast.show(res.response_message);
+        }
+        else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser())
+        }
+        else {
+          Toast.show(res.response_message);
+        }
+      }).catch(error => {
+        Toast.show(error)
+        setLoading(false)
+      })
+  }
+
+  const getAllCourses = async () => {
+    setLoading(true)
+    const alldata = await AsyncStorage.getItem("@user");
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    Network('/get-course?page=' + `${1}` + "&limit=" + `${100}`, 'get', { authtoken })
+      .then(async (res) => {
+        setLoading(false)
+        if (res.response_code === 200) {
+          console.log("courses data", res.response_data.docs);
+          setallcousesdata(res.response_data.docs)
           // Toast.show(res.response_message);
         }
         else if (res.response_code === 4000) {
@@ -257,10 +271,12 @@ const Home = (props) => {
           <ImageView
             name={"Recently Played"}
             data={Recentdata}
+            initialnumber={15}
           />
           <ImageView
             name={"New Addtion"}
-            data={Arrivaldata}
+            data={allcousesdata}
+            initialnumber={10}
           />
         </View>
       </ScrollView>

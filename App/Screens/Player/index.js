@@ -70,6 +70,8 @@ function Player() {
             Volume
             disableBack
             showOnStart={true}
+            poster={'https://nodeserver.mydevfactory.com:1449/uploads/dummy/audio_background.png'}
+            posterResizeMode={"cover"}
             onShowControls
             style={{ flex: 1 }}
           />
