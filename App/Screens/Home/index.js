@@ -13,6 +13,7 @@ import ImageView from '../../Components/Home/ImageView';
 import Category from '../../Components/Home/Category';
 import Filter from '../../Components/SearchComponent/Filter';
 import Toast from 'react-native-root-toast';
+import { category } from '../../Redux/Actions/Categoryaction';
 
 
 const Home = (props) => {
@@ -25,6 +26,7 @@ const Home = (props) => {
   const [modal, setModal] = React.useState(false);
   const [categorydata, setcategorydata] = React.useState([]);
   const [cousesdata, setcousesdata] = React.useState([]);
+  const [allcousesdata, setallcousesdata] = React.useState([]);
 
   useEffect(() => {
     // setTimeout(() => { setLoading(false) }, 2500)
@@ -42,6 +44,7 @@ const Home = (props) => {
     const data = JSON.parse(alldata);
     setUser(data)
     getCategory(data)
+    getAllCourses()
   }
 
   const changesecondTab = (tab, id) => {
@@ -57,30 +60,15 @@ const Home = (props) => {
   const Recentdata = [
     {
       _id: 1,
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4JDUINyMkunfue2_WCsmqFfdnywUMYmJr0Q&usqp=CAU"
+      banner: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4JDUINyMkunfue2_WCsmqFfdnywUMYmJr0Q&usqp=CAU"
     },
     {
       _id: 2,
-      image: "https://grazia.wwmindia.com/content/2020/dec/yoga71607321001.jpg"
+      banner: "https://grazia.wwmindia.com/content/2020/dec/yoga71607321001.jpg"
     },
     {
       _id: 3,
-      image: "https://img.freepik.com/free-photo/sporty-young-woman-doing-yoga-practice-isolated-concept-healthy-life-natural-balance-body-mental-development_231208-10353.jpg?size=626&ext=jpg"
-    }
-  ]
-
-  const Arrivaldata = [
-    {
-      _id: 1,
-      image: "https://us.123rf.com/450wm/fizkes/fizkes1710/fizkes171000616/87527966-young-attractive-woman-practicing-yoga-stretching-in-natarajasana-exercise-lord-of-the-dance-pose-wo.jpg?ver=6"
-    },
-    {
-      _id: 2,
-      image: "https://imgk.timesnownews.com/story/iStock-1076946698.jpg?tr=w-400,h-300,fo-auto"
-    },
-    {
-      _id: 3,
-      image: "https://www.adityabirlacapital.com/healthinsurance/active-together/wp-content/uploads/2020/04/Yogi-with-kids.jpg"
+      banner: "https://img.freepik.com/free-photo/sporty-young-woman-doing-yoga-practice-isolated-concept-healthy-life-natural-balance-body-mental-development_231208-10353.jpg?size=626&ext=jpg"
     }
   ]
 
@@ -92,6 +80,7 @@ const Home = (props) => {
         if (res.response_code === 200) {
           console.log("category data", res.response_data);
           setcategorydata(res.response_data)
+          dispatch(category(res.response_data))
           if(res.response_data.length != 0){
             console.log("courses default id", res.response_data[0]._id);
             getCourses(res.response_data[0]._id)
@@ -139,6 +128,33 @@ const Home = (props) => {
       })
   }
 
+  const getAllCourses = async () => {
+    setLoading(true)
+    const alldata = await AsyncStorage.getItem("@user");
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    Network('/get-course?page=' + `${1}` + "&limit=" + `${100}`, 'get', { authtoken })
+      .then(async (res) => {
+        setLoading(false)
+        if (res.response_code === 200) {
+          console.log("courses data", res.response_data.docs);
+          setallcousesdata(res.response_data.docs)
+          // Toast.show(res.response_message);
+        }
+        else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser())
+        }
+        else {
+          Toast.show(res.response_message);
+        }
+      }).catch(error => {
+        Toast.show(error)
+        setLoading(false)
+      })
+  }
+
   const gettime = () => {
     var curHr = new Date().getHours()
     if (curHr < 12) {
@@ -158,9 +174,6 @@ const Home = (props) => {
         <Filter
           modal={modal}
           close={() => setModal(!modal)}
-          caregory={() => console.log("aaa")}
-          classduration={() => console.log("bbb")}
-          rating={() => console.log("ccc")}
         />
         <View style={styles.container}>
           <AnimatedLoader loading={loading} />
@@ -258,10 +271,12 @@ const Home = (props) => {
           <ImageView
             name={"Recently Played"}
             data={Recentdata}
+            initialnumber={15}
           />
           <ImageView
             name={"New Addtion"}
-            data={Arrivaldata}
+            data={allcousesdata}
+            initialnumber={10}
           />
         </View>
       </ScrollView>

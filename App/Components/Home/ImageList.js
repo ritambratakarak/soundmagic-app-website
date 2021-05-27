@@ -4,8 +4,8 @@ import { COLORS, HEIGHT, FONT, GAP, WIDTH } from '../../Utils/constants';
 
 export default ImageList = ({ uri }) => {
     return (
-        <TouchableOpacity style={{ width: WIDTH * 0.30, height: HEIGHT * 0.15, marginRight: 10 }}>
-            <Image source={{ uri: uri }} style={{ width: "100%", height: "100%", borderRadius: 5 }} resizeMode={"stretch"} />
+        <TouchableOpacity style={{ width: WIDTH * 0.30, height: HEIGHT * 0.15, marginRight: 10, borderRadius: 10, overflow:"hidden" }}>
+            <Image source={{ uri: uri }} style={{ width: "100%", height: "100%" }} resizeMode={"cover"} />
         </TouchableOpacity>
     )
 

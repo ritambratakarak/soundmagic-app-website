@@ -3,28 +3,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Text, View, StyleSheet, TouchableHighlight, TouchableOpacity, FlatList } from 'react-native';
 import { FONT, GAP, HEIGHT, WIDTH } from '../../Utils/constants';
 import CourseItem from '../../Components/Details/CourseItem';
-import Toast from 'react-native-root-toast';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function AllCourses() {
   const route = useRoute();
+  const navigation = useNavigation();
   const [alldata, setalldata] = useState("");
-
-  const data = [
-    {
-      heading: "Regular Yoga",
-      image: require("../../Assets/Courses/Rectangle_2.png"),
-      text: "Video | 3 min 55 sec",
-      categoryname: "Admin"
-    },
-    {
-      heading: "Mind Meditition Tone",
-      image: require("../../Assets/Courses/Rectangle_1.png"),
-      text: "Video | 3 min 55 sec",
-      categoryname: "Admin"
-    },
-  ]
 
   useEffect(() => {
     console.log("details", route.params.item);
@@ -54,18 +38,20 @@ function AllCourses() {
           data={alldata}
           renderItem={({ item }) => (
             <CourseItem
-              heading={item.heading}
+              heading={item.name}
               image={item.type == "video" ? item.videoThumbnail : "https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg"}
               textsize={FONT.SIZE.SMALL}
               textcolor={"#909090"}
               text={item.type + " | " + format(item.duration)}
               categoryname={"Admin"}
-              onPress={() => navigation.navigate("Details",)}
+              onPress={()=> navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type })}
               showfavorite={false}
             />
           )}
           keyExtractor={item => item._id}
-          ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center", justifyContent:"center" }}>No data Found</Text>}
+          ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
+          <Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>
+        </View>}
         />
       </View>
     </View>

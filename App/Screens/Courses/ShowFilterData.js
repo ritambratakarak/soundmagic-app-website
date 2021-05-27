@@ -8,11 +8,9 @@ import CoursesItem from '../../Components/Courses/Courses';
 import Filter from '../../Components/SearchComponent/Filter';
 import Search from '../../Components/SearchComponent/Search';
 import { COLORS, FONT, GAP, HEIGHT, WIDTH } from '../../Utils/constants';
-import { logoutUser } from '../../Redux/Actions/authAction';
-import Toast from 'react-native-root-toast';
 
 
-function Courses() {
+function ShowFilterData() {
   const navigation = useNavigation();
   const [search, setsearch] = useState("");
   const [modal, setModal] = React.useState(false);
@@ -83,7 +81,7 @@ function Courses() {
                 categoryname={item.categoryDetails.name}
                 tutorname={"Admin"}
                 qty={item.totalAudio+" Audio" + " & " + item.totalVideo + " Video"}
-                rateingvalue={item.avgRating}
+                rateingvalue={4}
                 rating={() => console.log("")}
                 ratingcolor={"#ECECEC"}
                 price={"$"+item.price}
@@ -102,7 +100,7 @@ function Courses() {
   );
 }
 
-export default Courses;
+export default ShowFilterData;
 
 const styles = StyleSheet.create({
   container: {

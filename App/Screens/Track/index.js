@@ -77,9 +77,6 @@ function Track() {
       <Filter
         modal={modal}
         close={() => setModal(!modal)}
-        caregory={() => console.log("aaa")}
-        classduration={() => console.log("bbb")}
-        rating={() => console.log("ccc")}
       />
       <View style={styles.repeatContainer}>
         <Search
@@ -109,7 +106,9 @@ function Track() {
               />
             )}
             keyExtractor={item => item._id}
-            ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center" }}>No data Found</Text>}
+            ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
+            <Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>
+          </View>}
           />
         </View>
       </View>

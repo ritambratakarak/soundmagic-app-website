@@ -3,7 +3,7 @@ import { View, Modal, TextInput, TouchableOpacity, Image, StyleSheet, Text, Flat
 import { COLORS, HEIGHT, FONT, GAP, WIDTH } from '../../Utils/constants';
 import ImageList from './ImageList';
 
-export default ImageView = ({ name, data }) => {
+export default ImageView = ({ name, data, initialnumber }) => {
   return (
     <View style={[styles.repeatContainer, { marginBottom: HEIGHT * 0.04 }]}>
       <Text style={{ fontSize: FONT.SIZE.LARGE, fontFamily: FONT.FAMILY.HEAVY, marginBottom: HEIGHT * 0.02 }}>{name}</Text>
@@ -12,10 +12,13 @@ export default ImageView = ({ name, data }) => {
         horizontal={true}
         data={data}
         renderItem={({ item }) => (
-          <ImageList uri={item.image} />
+          <ImageList uri={item.banner} />
         )}
         keyExtractor={item => item._id}
-        ListEmptyComponent={<Text style={{ alignItems: "center", textAlign: "center" }}>No data Found</Text>}
+        ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
+        <Text style={{ alignItems: "center", textAlign: "center", fontSize:FONT.SIZE.MEDIUM, fontFamily:FONT.FAMILY.MEDIUM }}>No data found!</Text>
+      </View>}
+      initialNumToRender={initialnumber}
       />
     </View>
   )
