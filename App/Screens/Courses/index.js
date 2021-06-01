@@ -68,6 +68,8 @@ function Courses() {
           onChange={(text) => setsearch(text)}
           value={search}
           onPress={() => setModal(true)}
+          keypress={()=> navigation.navigate("Filter")}
+          onFocus={false}
         />
         <View style={{ marginVertical: GAP.MEDIUM }}>
           <Text style={styles.courses}>All Couses</Text>

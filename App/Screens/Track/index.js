@@ -83,6 +83,8 @@ function Track() {
           onChange={(text) => setsearch(text)}
           value={search}
           onPress={() => setModal(true)}
+          keypress={()=> navigation.navigate("Filter")}
+          onFocus={false}
         />
         <View style={{ marginVertical: GAP.MEDIUM }}>
           <Text style={styles.courses}>All Track</Text>

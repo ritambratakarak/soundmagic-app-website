@@ -185,6 +185,8 @@ const Home = (props) => {
               onChange={(text) => setsearch(text)}
               value={search}
               onPress={() => setModal(true)}
+              keypress={()=> navigation.navigate("Filter")}
+              onFocus={false}
             />
           </View>
           <View style={[styles.repeatContainer, { marginBottom: 0 }]}>
