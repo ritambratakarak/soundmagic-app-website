@@ -174,6 +174,7 @@ const Home = (props) => {
         <Filter
           modal={modal}
           close={() => setModal(!modal)}
+          applypress={(category, duration, rating)=> {console.log("category, duration, rating", category, duration, rating);}}
         />
         <View style={styles.container}>
           <AnimatedLoader loading={loading} />
@@ -185,6 +186,8 @@ const Home = (props) => {
               onChange={(text) => setsearch(text)}
               value={search}
               onPress={() => setModal(true)}
+              keypress={()=> navigation.navigate("Filter")}
+              onFocus={false}
             />
           </View>
           <View style={[styles.repeatContainer, { marginBottom: 0 }]}>

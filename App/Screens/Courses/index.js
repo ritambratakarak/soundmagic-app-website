@@ -62,12 +62,15 @@ function Courses() {
       <Filter
         modal={modal}
         close={() => setModal(!modal)}
+        applypress={(category, duration, rating)=> {console.log("category, duration, rating", category, duration, rating);}}
       />
       <View style={styles.repeatContainer}>
         <Search
           onChange={(text) => setsearch(text)}
           value={search}
           onPress={() => setModal(true)}
+          keypress={()=> navigation.navigate("Filter")}
+          onFocus={false}
         />
         <View style={{ marginVertical: GAP.MEDIUM }}>
           <Text style={styles.courses}>All Couses</Text>

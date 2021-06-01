@@ -22,8 +22,9 @@ function Details() {
   const [alldata, setalldata] = useState("");
   const [review, setreview] = useState([]);
   const [loadmore, setloadmore] = useState(false);
-  const [limit, setlimit] = useState(10);
-  const [onEndReachedCalledDuringMomentum, setonEndReachedCalledDuringMomentum] = useState(true);
+  const [limit, setlimit] = useState(5);
+  
+  let stopFetchMore = true;
 
   useEffect(() => {
     console.log("details", route.params.item);
@@ -77,14 +78,15 @@ function Details() {
   }
 
   const _loadMoreData = () => {
-    if (!onEndReachedCalledDuringMomentum) {
+    setloadmore(true)
+    if (!stopFetchMore) {
       console.log("call load more");
-      setloadmore(true)
-      setlimit(limit + 10)
+      setlimit(limit + 5)
       getReviews();
-      setonEndReachedCalledDuringMomentum(true)
+      stopFetchMore = true;
     }
   }
+
 
   return (
     <>
@@ -147,11 +149,9 @@ function Details() {
                 main={"Rating & Reviews :"}
                 data={review}
                 loadmore={loadmore}
-                endreached={info => {
-                  _loadMoreData()
-                }}
-                throttle={200}
-                scrollbegin={() => setonEndReachedCalledDuringMomentum(false)}
+                endreached={_loadMoreData}
+                // throttle={200}
+                scrollbegin={() => {stopFetchMore = false;}}
               />
             </View>
           </View>

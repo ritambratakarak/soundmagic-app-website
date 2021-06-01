@@ -23,6 +23,7 @@ import Payment from '../Screens/Payment';
 import AddPayment from '../Screens/Payment/Add';
 import AllCourses from '../Screens/Courses/AllCourses';
 import Player from '../Screens/Player';
+import ShowFilterData from '../Screens/Courses/ShowFilterData';
 
 
 
@@ -194,6 +195,16 @@ export default Navigation = () => {
             headerShown: true,
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Player"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
+          }}
+        />
+        <Stack.Screen
+          name="Filter"
+          component={ShowFilterData}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Filter"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
           }}
         />

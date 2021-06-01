@@ -48,9 +48,9 @@ export default CustomerRating = ({ main, data, loadmore, endreached, throttle, s
             }
           </View>
         }
-        scrollEventThrottle={throttle}
+        // scrollEventThrottle={throttle}
         onEndReached={endreached}
-        onEndReachedThreshold={0.01}
+        onEndReachedThreshold={0.05}
         onMomentumScrollBegin={scrollbegin}
       />
     </View>

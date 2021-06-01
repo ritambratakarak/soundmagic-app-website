@@ -5,16 +5,19 @@ import Ripple from 'react-native-material-ripple';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-export default Search = ({ value, onPress, onChange }) => {
+export default Search = ({ reffocus, value, onPress, onChange, keypress, onFocus }) => {
   return (
     <View style={{ flexDirection: "row", marginVertical: HEIGHT * 0.005, justifyContent: "space-between" }}>
       <View style={styles.InputContainer}>
         <TextInput
+          ref={reffocus}
           style={styles.textInput}
           placeholderTextColor={COLORS.GRAY}
           placeholder={"Search for Courses"}
           onChangeText={(text) => onChange(text)}
           value={value}
+          onTouchStart={keypress}
+          autofocus={onFocus}
         />
         <EvilIcons
           name="search"
