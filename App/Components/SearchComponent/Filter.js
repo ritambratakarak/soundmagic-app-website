@@ -264,7 +264,7 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Button onPress={applypress(mealtime, chekdata, ratingvalue)} gradient={true} title="Apply" />
+              <Button onPress={()=> applypress(mealtime, chekdata, ratingvalue)} gradient={true} title="Apply" />
             </View>
           </View>
         </View>

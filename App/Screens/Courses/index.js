@@ -62,6 +62,7 @@ function Courses() {
       <Filter
         modal={modal}
         close={() => setModal(!modal)}
+        applypress={(category, duration, rating)=> {console.log("category, duration, rating", category, duration, rating);}}
       />
       <View style={styles.repeatContainer}>
         <Search
