@@ -15,7 +15,6 @@ import {COLORS, HEIGHT, FONT, GAP, WIDTH} from '../../Utils/constants';
 import Ripple from 'react-native-material-ripple';
 import Button from '../../Components/Common/Button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import RatingComponent from '../Rating/Rating';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -25,56 +24,56 @@ import {useSelector} from 'react-redux';
 import Checkbox from './Checkbox';
 import CustomRadioButton from './RadioButton';
 
-let chekdata = []
+let chekdata = [];
 
 const checkboxdata = [
   {
     _id: 1,
-    value: "short",
-    name:"Short"
+    value: 'short',
+    name: 'Short',
   },
   {
     _id: 2,
-    value: "medium",
-    name:"Medium"
+    value: 'medium',
+    name: 'Medium',
   },
   {
     _id: 3,
-    value: "long",
-    name:"Long"
+    value: 'long',
+    name: 'Long',
   },
   {
     _id: 4,
-    value: "verylong",
-    name:"Very Long"
+    value: 'verylong',
+    name: 'Very Long',
   },
-]
+];
 
 const PROP = [
-	{
-		key: 1,
-		image: require('../../Assets/star/1star.png'),
-    text: "1 Star"
-	},
-	{
-		key: 2,
-		image: require('../../Assets/star/2star.png'),
-    text: "2 Star"
-	},
-	{
-		key: 3,
-		image: require('../../Assets/star/3star.png'),
-    text: "3 Star"
-	},
-	{
-		key: 4,
-		image: require('../../Assets/star/4star.png'),
-    text: "4 Star"
+  {
+    key: 1,
+    image: require('../../Assets/star/1star.png'),
+    text: '1 Star',
   },
-	{
-		key: 5,
-		image: require('../../Assets/star/5star.png'),
-    text: "5 Star"
+  {
+    key: 2,
+    image: require('../../Assets/star/2star.png'),
+    text: '2 Star',
+  },
+  {
+    key: 3,
+    image: require('../../Assets/star/3star.png'),
+    text: '3 Star',
+  },
+  {
+    key: 4,
+    image: require('../../Assets/star/4star.png'),
+    text: '4 Star',
+  },
+  {
+    key: 5,
+    image: require('../../Assets/star/5star.png'),
+    text: '5 Star',
   },
 ];
 
@@ -112,17 +111,17 @@ export default FilterModal = ({modal, category, close, applypress}) => {
 
   const checkboxArray = (value) => {
     console.log(value);
-    if(!chekdata.includes(value)){
-      chekdata.push(value)
-      console.log("checked chekdata", chekdata);
-    }else{
+    if (!chekdata.includes(value)) {
+      chekdata.push(value);
+      console.log('checked chekdata', chekdata);
+    } else {
       chekdata.splice(chekdata.indexOf(value), 1);
-      console.log("uncheked chekdata", chekdata);
+      console.log('uncheked chekdata', chekdata);
     }
-  }
+  };
 
-  console.log("mealtime", mealtime);
-  console.log("ratingvalue", ratingvalue);
+  console.log('mealtime', mealtime);
+  console.log('ratingvalue', ratingvalue);
 
   return (
     <Modal
@@ -219,15 +218,15 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                 </Ripple>
                 {expanded2 && (
                   <View>
-                    {
-                      checkboxdata.map((data, i)=>{
-                        return (<Checkbox
+                    {checkboxdata.map((data, i) => {
+                      return (
+                        <Checkbox
                           onPress={(value) => checkboxArray(data.value)}
                           checked={data.value}
                           name={data.name}
-                        />)
-                      })
-                    }
+                        />
+                      );
+                    })}
                   </View>
                 )}
 
@@ -253,8 +252,13 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                       justifyContent: 'flex-start',
                       alignItems: 'flex-start',
                     }}>
-                      <CustomRadioButton PROP={PROP} press={(val)=> {setratingvalue(val)}} />
-                    </View>
+                    <CustomRadioButton
+                      PROP={PROP}
+                      press={(val) => {
+                        setratingvalue(val);
+                      }}
+                    />
+                  </View>
                 )}
               </View>
             </ScrollView>
@@ -264,7 +268,11 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Button onPress={()=> applypress(mealtime, chekdata, ratingvalue)} gradient={true} title="Apply" />
+              <Button
+                onPress={() => applypress(mealtime, chekdata, ratingvalue)}
+                gradient={true}
+                title="Apply"
+              />
             </View>
           </View>
         </View>
@@ -333,7 +341,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     width: '100%',
   },
-  title:{
-    fontSize:FONT.SIZE.LARGE
-  }
+  title: {
+    fontSize: FONT.SIZE.LARGE,
+  },
 });

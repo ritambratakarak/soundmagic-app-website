@@ -1,7 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useFocusEffect, useNavigation} from '@react-navigation/core';
+import {useFocusEffect, useNavigation, useRoute} from '@react-navigation/core';
 import React, {useState, useEffect, useRef, useCallback} from 'react';
-import {View, Text, StyleSheet, Image, FlatList, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import Toast from 'react-native-root-toast';
 import AnimatedLoader from '../../Components/AnimatedLoader';
 import CategogyList from '../../Components/Common/CategogyList';
@@ -11,20 +18,32 @@ import Filterloader from '../../Components/SearchComponent/Filterloader';
 import Search from '../../Components/SearchComponent/Search';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
 
-
-
 function ShowFilterData() {
   const textfocus = useRef();
   const navigation = useNavigation();
+  const route = useRoute();
   const [search, setsearch] = useState('');
   const [modal, setModal] = useState(false);
   const [cousesdata, setcousesdata] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [category, setcategory] = useState(null);
+  const [duration, setduration] = useState([]);
+  const [rating, setrating] = useState(null);
 
   useEffect(() => {
     textfocus.current.focus();
-    // getCourses()
   }, []);
+
+  useEffect(() => {
+    setcategory(route.params.category);
+    setduration(route.params.duration);
+    setrating(route.params.rating);
+    console.log(
+      route.params.category,
+      route.params.duration,
+      route.params.rating,
+    );
+  }, [route]);
 
   useFocusEffect(
     useCallback(() => {
@@ -63,9 +82,20 @@ function ShowFilterData() {
       });
   };
 
+  
+
   return (
     <View style={styles.container}>
-      <Filter modal={modal} close={() => setModal(!modal)} applypress={(category, duration, rating)=> {console.log("category, duration, rating", category, duration, rating);}} />
+      <Filter
+        modal={modal}
+        close={() => setModal(!modal)}
+        applypress={(category, duration, rating) => {
+          setcategory(category);
+          setduration(duration);
+          setrating(rating);
+          setModal(false)
+        }}
+      />
       <View style={styles.repeatContainer}>
         <Search
           reffocus={textfocus}
