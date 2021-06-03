@@ -106,7 +106,7 @@ const Home = (props) => {
     const alldata = await AsyncStorage.getItem("@user");
     const data = JSON.parse(alldata);
     const authtoken = data.authtoken;
-    Network('/get-course?page=' + `${1}` + "&limit=" + `${100}` + "&categoryID=" + `${id}`, 'get', { authtoken })
+    Network(`/get-course?page=${1}&limit=${100}&categoryID=${id}`, 'get', { authtoken })
       .then(async (res) => {
         setLoading(false)
         if (res.response_code === 200) {
@@ -133,7 +133,7 @@ const Home = (props) => {
     const alldata = await AsyncStorage.getItem("@user");
     const data = JSON.parse(alldata);
     const authtoken = data.authtoken;
-    Network('/get-course?page=' + `${1}` + "&limit=" + `${100}`, 'get', { authtoken })
+    Network(`/get-course?page=${1}&limit=${100}`, 'get', { authtoken })
       .then(async (res) => {
         setLoading(false)
         if (res.response_code === 200) {

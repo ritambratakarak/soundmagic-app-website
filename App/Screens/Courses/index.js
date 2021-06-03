@@ -34,7 +34,7 @@ function Courses() {
     const alldata = await AsyncStorage.getItem("@user");
     const data = JSON.parse(alldata);
     const authtoken = data.authtoken;
-    Network('/get-course?page=' + `${1}` + "&limit=" + `${20}`, 'get', { authtoken })
+    Network(`/get-course?page=${1}&limit=${20}`, 'get', { authtoken })
       .then(async (res) => {
         setLoading(false)
         if (res.response_code === 200) {

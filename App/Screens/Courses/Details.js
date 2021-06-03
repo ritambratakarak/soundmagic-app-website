@@ -40,7 +40,7 @@ function Details() {
     const userdata = await AsyncStorage.getItem("@user");
     const data = JSON.parse(userdata);
     const authtoken = data.authtoken;
-    Network('/get-course-review-list?page=' + `${1}` + "&limit=" + `${limit}` + "&courseID=" + `${id == undefined ? alldata._id : id}`, 'get', { authtoken })
+    Network(`/get-course-review-list?page=${1}&limit=${limit}&courseID=${id == undefined ? alldata._id : id}`, 'get', { authtoken })
       .then(async (res) => {
         // setLoading(false)
         if (res.response_code === 200) {

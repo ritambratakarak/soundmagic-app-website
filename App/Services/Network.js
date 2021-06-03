@@ -5,6 +5,7 @@ import Toast from 'react-native-root-toast';
 
 
 export default Network = (endpoint, method, body) => {
+  console.log(`${base_url}${endpoint}`);
   return new Promise((resolve, reject) => {
     NetInfo.fetch().then(state => {
       if(state.isConnected) {

@@ -18,6 +18,8 @@ import Filterloader from '../../Components/SearchComponent/Filterloader';
 import Search from '../../Components/SearchComponent/Search';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
 
+
+
 function ShowFilterData() {
   const textfocus = useRef();
   const navigation = useNavigation();
@@ -34,16 +36,19 @@ function ShowFilterData() {
     textfocus.current.focus();
   }, []);
 
+  var arr = ""
+
   useEffect(() => {
-    setcategory(route.params.category);
-    setduration(route.params.duration);
-    setrating(route.params.rating);
-    console.log(
-      route.params.category,
-      route.params.duration,
-      route.params.rating,
-    );
+    const router = route.params;
+    const categorydata = router;
+    if(categorydata != undefined){
+      setcategory(route.params?.category)
+      setduration(route.params?.duration)
+      setrating(route.params?.rating);
+      getCourses(route.params?.category, route.params?.duration, route.params?.rating)
+    }
   }, [route]);
+
 
   useFocusEffect(
     useCallback(() => {
@@ -51,14 +56,48 @@ function ShowFilterData() {
       // getCourses()
     }, []),
   );
+  
+  const durationfilter = (duration) => {
+    for (var i = 0; i < duration.length; i++) {
+       arr += "&durationFilter="+ duration[i]
+    }
+    return arr
+  }
 
-  const getNameCourses = async (name) => {
-    setLoading(true);
+  const getCourses = async (category, duration, rating, name) => {
+    console.log("category, duration, rating", category, duration, rating);
+    setLoading(true)
     const alldata = await AsyncStorage.getItem('@user');
     const data = JSON.parse(alldata);
     const authtoken = data.authtoken;
+    let url = ""
+    if(name != undefined){
+      url = `/get-course?page=${1}&limit=${20}&name=${name}`
+    }
+    else if(category != null && duration.length == 0 && rating == null){
+      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}` // only category
+    }
+    else if(category == null && duration.length != 0 && rating == null){
+      url = `/get-course?page=${1}&limit=${20}${durationfilter(duration)}` // only duration
+    }
+    else if(category == null && duration.length == 0 && rating != null){
+      url = `/get-course?page=${1}&limit=${20}&ratingFilter=${rating}` // only rating
+    }
+    else if(category != null && duration.length != 0 && rating == null){
+      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}${durationfilter(duration)}` // category and duration
+    }
+    else if(category != null && duration.length == 0 && rating != null){
+      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}&ratingFilter=${rating}` // category and rating
+    }
+    else if(category == null && duration.length != 0 && rating != null){
+      url = `/get-course?page=${1}&limit=${20}&ratingFilter=${rating}${durationfilter(duration)}` // duration and rating
+    }
+    else if(category != null && duration.length != 0 && rating != null){
+      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}&ratingFilter=${rating}${durationfilter(duration)}` // all type here
+    }
+    console.log(url);
     Network(
-      '/get-course?name=' + `${name}` + '&page=' + `${1}` + '&limit=' + `${20}`,
+      url,
       'get',
       {authtoken},
     )
@@ -81,7 +120,6 @@ function ShowFilterData() {
         setLoading(false);
       });
   };
-
   
 
   return (
@@ -90,17 +128,20 @@ function ShowFilterData() {
         modal={modal}
         close={() => setModal(!modal)}
         applypress={(category, duration, rating) => {
+          console.log("category, duration, rating", category, duration, rating);
           setcategory(category);
           setduration(duration);
           setrating(rating);
           setModal(false)
+          getCourses(category, duration, rating)
+          // durationfilter(duration)
         }}
       />
       <View style={styles.repeatContainer}>
         <Search
           reffocus={textfocus}
           onChange={(text) => {
-            setsearch(text), getNameCourses(text);
+            setsearch(text), getCourses(category, duration, rating, text);
           }}
           value={search}
           onPress={() => setModal(true)}

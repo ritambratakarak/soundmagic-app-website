@@ -123,6 +123,18 @@ export default FilterModal = ({modal, category, close, applypress}) => {
   console.log('mealtime', mealtime);
   console.log('ratingvalue', ratingvalue);
 
+  const submit = () => {
+    if(mealtime == null && chekdata.length == 0 && ratingvalue == null){
+      alert("Filter data is empty!")
+    }
+    else{
+      applypress(mealtime, chekdata, ratingvalue)
+      setmealtime(null)
+      chekdata = []
+      setratingvalue(null)
+    }
+  }
+
   return (
     <Modal
       animationType="slide"
@@ -269,7 +281,7 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                 justifyContent: 'center',
               }}>
               <Button
-                onPress={() => applypress(mealtime, chekdata, ratingvalue)}
+                onPress={() => submit()}
                 gradient={true}
                 title="Apply"
               />
