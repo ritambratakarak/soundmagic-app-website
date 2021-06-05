@@ -3,13 +3,13 @@ import { View, Modal, TextInput, TouchableOpacity, Image, StyleSheet, Text, Flat
 import { COLORS, HEIGHT, FONT, GAP, WIDTH } from '../../Utils/constants';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 
-export default RatingItem = ({ value, backgroundColor, rate, disable }) => {
+export default RatingItem = ({ value, backgroundColor, rate, disable, imageSize }) => {
     return (
         <Rating
             type='custom'
             ratingCount={5}
             startingValue={value}
-            imageSize={18}
+            imageSize={imageSize}
             onFinishRating={rate}
             style={{ paddingVertical: 10, }}
             tintColor={backgroundColor}

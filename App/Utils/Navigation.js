@@ -24,6 +24,8 @@ import AddPayment from '../Screens/Payment/Add';
 import AllCourses from '../Screens/Courses/AllCourses';
 import Player from '../Screens/Player';
 import ShowFilterData from '../Screens/Courses/ShowFilterData';
+import MyCourses from '../Screens/MyCourses';
+import MycourseDetails from '../Screens/MyCourses/Details';
 
 
 
@@ -206,6 +208,27 @@ export default Navigation = () => {
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Filter"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
+          }}
+        />
+        <Stack.Screen
+          name="MyCourses"
+          component={MyCourses}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"My Courses"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
+          }}
+        />
+        <Stack.Screen
+          name="MycourseDetails"
+          component={MycourseDetails}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Courses Details"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("MyCourses")} />),
+            headerRight: (props) => (<Right/>)
           }}
         />
       </Stack.Navigator>

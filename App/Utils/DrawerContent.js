@@ -84,7 +84,7 @@ const DrawerContent = (props) => {
             />
 
             <DrawerMenuItem
-              onPress={() => console.log("aaa")}
+              onPress={() => props.navigation.navigate("MyCourses")}
               name={"My Courses"}
               icon={<SimpleLineIcons
                 name="graduation"

@@ -28,6 +28,7 @@ export default CustomerRating = ({ main, data, loadmore, endreached, throttle, s
                 rate={() => console.log()}
                 backgroundColor={"#fff"}
                 disable={true}
+                imageSize={18}
               />
             </View>
             <TextContainer
@@ -38,16 +39,16 @@ export default CustomerRating = ({ main, data, loadmore, endreached, throttle, s
           </View>
         )}
         keyExtractor={item => item._id}
-        ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
+        ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center",}}>
           <Text style={{ alignItems: "center", textAlign: "center", fontSize: FONT.SIZE.MEDIUM, fontFamily: FONT.FAMILY.MEDIUM }}>No data found!</Text>
         </View>}
-        ListFooterComponent={
-          <View style={styles.footer}>
-            {loadmore &&
-              <Text style={styles.footerText}>Loading More...</Text>
-            }
-          </View>
-        }
+        // ListFooterComponent={
+        //   <View style={styles.footer}>
+        //     {loadmore &&
+        //       <Text style={styles.footerText}>Loading More...</Text>
+        //     }
+        //   </View>
+        // }
         // scrollEventThrottle={throttle}
         onEndReached={endreached}
         onEndReachedThreshold={0.05}

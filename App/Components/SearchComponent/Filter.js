@@ -79,7 +79,7 @@ const PROP = [
 
 export default FilterModal = ({modal, category, close, applypress}) => {
   const allcategory = useSelector((state) => state.categorydata);
-  const [expanded, setexpanded] = useState(false);
+  const [expanded, setexpanded] = useState(true);
   const [expanded2, setexpanded2] = useState(false);
   const [expanded3, setexpanded3] = useState(false);
   const [mealtime, setmealtime] = useState(null);
@@ -120,8 +120,8 @@ export default FilterModal = ({modal, category, close, applypress}) => {
     }
   };
 
-  console.log('mealtime', mealtime);
-  console.log('ratingvalue', ratingvalue);
+  // console.log('mealtime', mealtime);
+  // console.log('ratingvalue', ratingvalue);
 
   const submit = () => {
     if(mealtime == null && chekdata.length == 0 && ratingvalue == null){
@@ -189,7 +189,7 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                 </Ripple>
                 <View style={styles.parentHr} />
                 {expanded && (
-                  <View>
+                  <View style={{padding:10}}>
                     <RadioForm
                       radio_props={radio_props}
                       initial={mealtime}
@@ -229,7 +229,7 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                   />
                 </Ripple>
                 {expanded2 && (
-                  <View>
+                  <View style={{padding:10}}>
                     {checkboxdata.map((data, i) => {
                       return (
                         <Checkbox
@@ -263,6 +263,7 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                     style={{
                       justifyContent: 'flex-start',
                       alignItems: 'flex-start',
+                      padding:10
                     }}>
                     <CustomRadioButton
                       PROP={PROP}
@@ -279,6 +280,7 @@ export default FilterModal = ({modal, category, close, applypress}) => {
                 width: '100%',
                 alignItems: 'center',
                 justifyContent: 'center',
+                marginBottom:GAP.MEDIUM
               }}>
               <Button
                 onPress={() => submit()}

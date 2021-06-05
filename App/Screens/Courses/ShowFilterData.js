@@ -65,7 +65,7 @@ function ShowFilterData() {
   }
 
   const getCourses = async (category, duration, rating, name) => {
-    console.log("category, duration, rating", category, duration, rating);
+    // console.log("category, duration, rating", category, duration, rating);
     setLoading(true)
     const alldata = await AsyncStorage.getItem('@user');
     const data = JSON.parse(alldata);
@@ -95,7 +95,7 @@ function ShowFilterData() {
     else if(category != null && duration.length != 0 && rating != null){
       url = `/get-course?categoryID=${category}&page=${1}&limit=${20}&ratingFilter=${rating}${durationfilter(duration)}` // all type here
     }
-    console.log(url);
+    // console.log(url);
     Network(
       url,
       'get',
@@ -106,6 +106,7 @@ function ShowFilterData() {
         if (res.response_code === 200) {
           console.log('courses data', res.response_data.docs);
           setcousesdata(res.response_data.docs);
+
           // Toast.show(res.response_message);
         } else if (res.response_code === 4000) {
           Toast.show(res.response_message);
@@ -128,7 +129,7 @@ function ShowFilterData() {
         modal={modal}
         close={() => setModal(!modal)}
         applypress={(category, duration, rating) => {
-          console.log("category, duration, rating", category, duration, rating);
+          // console.log("category, duration, rating", category, duration, rating);
           setcategory(category);
           setduration(duration);
           setrating(rating);
@@ -170,7 +171,7 @@ function ShowFilterData() {
                     item.totalVideo +
                     ' Video'
                   }
-                  rateingvalue={4}
+                  rateingvalue={item.avgRating}
                   rating={() => console.log('')}
                   ratingcolor={'#ECECEC'}
                   price={'$' + item.price}
