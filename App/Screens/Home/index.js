@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  RefreshControl,
 } from 'react-native';
 import {HEIGHT, GAP, COLORS, WIDTH, FONT} from '../../Utils/constants';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
@@ -39,6 +40,7 @@ const Home = (props) => {
   const [cousesdata, setcousesdata] = React.useState([]);
   const [allcousesdata, setallcousesdata] = React.useState([]);
   const [categoryloader, setcategoryloader] = React.useState(false);
+  const [refreash, setrefreash] = React.useState(false);
 
   useEffect(() => {
     // setTimeout(() => { setLoading(false) }, 2500)
@@ -92,6 +94,7 @@ const Home = (props) => {
     Network('/get-course-category', 'get', {authtoken: data.authtoken})
       .then(async (res) => {
         setLoading(false);
+        setrefreash(false);
         if (res.response_code === 200) {
           console.log('category data', res.response_data);
           setcategorydata(res.response_data);
@@ -112,6 +115,7 @@ const Home = (props) => {
       .catch((error) => {
         Toast.show(error);
         setLoading(false);
+        setrefreash(false);
       });
   };
 
@@ -125,6 +129,7 @@ const Home = (props) => {
     })
       .then(async (res) => {
         setLoading(false);
+        setrefreash(false);
         if (res.response_code === 200) {
           console.log('courses data', res.response_data.docs);
           setcousesdata(res.response_data.docs);
@@ -140,6 +145,7 @@ const Home = (props) => {
       .catch((error) => {
         Toast.show(error);
         setLoading(false);
+        setrefreash(false);
       });
   };
 
@@ -151,6 +157,7 @@ const Home = (props) => {
     Network(`/get-course?page=${1}&limit=${100}`, 'get', {authtoken})
       .then(async (res) => {
         setLoading(false);
+        setrefreash(false);
         if (res.response_code === 200) {
           console.log('courses data', res.response_data.docs);
           setallcousesdata(res.response_data.docs);
@@ -166,6 +173,7 @@ const Home = (props) => {
       .catch((error) => {
         Toast.show(error);
         setLoading(false);
+        setrefreash(false);
       });
   };
 
@@ -182,6 +190,11 @@ const Home = (props) => {
     }
   };
 
+  const onRefresh = React.useCallback(() => {
+    setrefreash(true)
+    getData()
+  }, []);
+
   return (
     <>
       {loading ? (
@@ -189,7 +202,15 @@ const Home = (props) => {
           <Homeloader />
         </View>
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            //refresh control used for the Pull to Refresh
+            refreshing={refreash}
+            onRefresh={() => { onRefresh() }}
+          />
+        }
+        >
           {/* <AnimatedLoader loading={loading} /> */}
           <Filter
             modal={modal}

@@ -26,6 +26,7 @@ import Player from '../Screens/Player';
 import ShowFilterData from '../Screens/Courses/ShowFilterData';
 import MyCourses from '../Screens/MyCourses';
 import MycourseDetails from '../Screens/MyCourses/Details';
+import Customplayer from '../Screens/Player/CustomPlayer';
 
 
 
@@ -227,6 +228,17 @@ export default Navigation = () => {
             headerShown: true,
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Courses Details"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("MyCourses")} />),
+            headerRight: (props) => (<Right/>)
+          }}
+        />
+        <Stack.Screen
+          name="CustomPlayer"
+          component={Customplayer}
+          options={{
+            headerShown: true,
+            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerTitle: (props) => (<Title title={"Player"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("MyCourses")} />),
             headerRight: (props) => (<Right/>)
           }}

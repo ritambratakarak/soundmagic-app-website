@@ -75,7 +75,7 @@ const DrawerContent = (props) => {
 
             <DrawerMenuItem
               onPress={() => props.navigation.navigate("Track")}
-              name={"Favorite"}
+              name={"Track"}
               icon={<Feather
                 name="bookmark"
                 size={25}
@@ -96,6 +96,16 @@ const DrawerContent = (props) => {
             <DrawerMenuItem
               onPress={() => props.navigation.navigate("Payment")}
               name={"Payment"}
+              icon={<Entypo
+                name="circle"
+                size={25}
+                color={'gray'}
+              />}
+            />
+
+            <DrawerMenuItem
+              onPress={() => props.navigation.navigate("CustomPlayer")}
+              name={"Player"}
               icon={<Entypo
                 name="circle"
                 size={25}
