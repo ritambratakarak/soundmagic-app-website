@@ -184,7 +184,7 @@ const Home = (props) => {
 
   return (
     <>
-      {loading == false ? (
+      {loading ? (
         <View style={styles.container}>
           <Homeloader />
         </View>

@@ -10,6 +10,7 @@ import Search from '../../Components/SearchComponent/Search';
 import { COLORS, FONT, GAP, HEIGHT, WIDTH } from '../../Utils/constants';
 import { logoutUser } from '../../Redux/Actions/authAction';
 import Toast from 'react-native-root-toast';
+import Coursesloader from '../../Components/Courses/Cousesloader';
 
 
 function Courses() {

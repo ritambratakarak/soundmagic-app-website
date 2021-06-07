@@ -76,7 +76,12 @@ const Homeloader = () => {
               <View style={{width: WIDTH / 2.5, height: HEIGHT * 0.15, marginRight:10, borderRadius:8}} />
               <View style={{width: WIDTH / 2.5, height: HEIGHT * 0.15, marginRight:10, borderRadius:8}} />
             </View>
-            
+            <View style={{width: WIDTH / 2.5, height: 15, marginBottom:HEIGHT * 0.02}} />
+            <View style={{flexDirection:"row", marginBottom:HEIGHT * 0.02}}>
+              <View style={{width: WIDTH / 2.8, height: HEIGHT * 0.15, marginRight:10, borderRadius:8}} />
+              <View style={{width: WIDTH / 2.8, height: HEIGHT * 0.15, marginRight:10, borderRadius:8}} />
+              <View style={{width: WIDTH / 2.8, height: HEIGHT * 0.15, marginRight:10, borderRadius:8}} />
+            </View>
           </SkeletonPlaceholder.Item>
         </SkeletonPlaceholder>
       </ScrollView>
