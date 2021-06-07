@@ -59,7 +59,7 @@ function Courses() {
 
   return (
     <View style={styles.container}>
-      <AnimatedLoader loading={loading} />
+      {/* <AnimatedLoader loading={loading} /> */}
       <Filter
         modal={modal}
         close={() => setModal(!modal)}
