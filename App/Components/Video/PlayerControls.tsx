@@ -47,7 +47,10 @@ export const PlayerControls: React.FC<Props> = ({
 
       {showSkip && (
         <TouchableOpacity style={[styles.touchable]} onPress={skipBackwards}>
-          <Image source={require('../../Assets/backward.png')} style={{width:35, height:35}} />
+          <Image
+            source={require('../../Assets/backward.png')}
+            style={{width: 35, height: 35}}
+          />
         </TouchableOpacity>
       )}
 
@@ -63,7 +66,10 @@ export const PlayerControls: React.FC<Props> = ({
 
       {showSkip && (
         <TouchableOpacity style={styles.touchable} onPress={skipForwards}>
-          <Image source={require('../../Assets/forward.png')} style={{width:35, height:35}} />
+          <Image
+            source={require('../../Assets/forward.png')}
+            style={{width: 35, height: 35}}
+          />
         </TouchableOpacity>
       )}
 

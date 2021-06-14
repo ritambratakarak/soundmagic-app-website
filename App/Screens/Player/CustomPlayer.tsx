@@ -151,6 +151,7 @@ const CustomPlayer: React.FC = () => {
     const time = await AsyncStorage.getItem('currenttime');
     const currenttime = JSON.parse(time);
     if (currenttime > 0) {
+      videoRef?.current.seek(currenttime);
       setState((s) => ({
         ...s,
         duration: data.duration,
@@ -158,24 +159,29 @@ const CustomPlayer: React.FC = () => {
         play: false,
         showControls: true
       }));
-      videoRef?.current.seek(currenttime);
       // setCurrentTime(currenttime);
       // videoPlayer?.current.seek(currenttime);
       // setPlayerState(PLAYER_STATES.PAUSED);
       // setPaused(true);
-      
+    } else {
+      setState((s) => ({
+        ...s,
+        duration: data.duration,
+        currentTime: data.currentTime,
+      }));
     }
   }
 
   async function onProgress(data: OnProgressData) {
-    setState((s) => ({
-      ...s,
-      currentTime: data.currentTime,
-    }));
+    console.log("current time", data.currentTime);
     await AsyncStorage.setItem(
       'currenttime',
       JSON.stringify(data.currentTime),
     );
+    setState((s) => ({
+      ...s,
+      currentTime: data.currentTime,
+    }));
   }
 
   function onEnd() {

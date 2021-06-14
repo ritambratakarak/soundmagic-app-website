@@ -299,10 +299,10 @@ function Details() {
                     text={item.type + ' | ' + format(item.duration)}
                     categoryname={'Admin'}
                     onPress={() =>
-                      navigation.navigate('Player', {
+                      navigation.navigate("Player", {
                         url:
                           item.type == 'video' ? item.videoURL : item.audioURL,
-                        type: item.type,
+                        type: item.type, trackID: item._id
                       })
                     }
                     showfavorite={false}

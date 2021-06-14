@@ -182,7 +182,7 @@ function Track() {
                     text={item.type + ' | ' + format(item.duration)}
                     categoryname={'Admin'}
                     onPress={() =>
-                      navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type })
+                      navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type, trackID: item._id })
                     }
                     showfavorite={true}
                     Pressfavorite={() => item.isFavorite == true ? RemoveFavorite(item._id) : AddFavorite(item._id)}
