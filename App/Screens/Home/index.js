@@ -28,6 +28,7 @@ import Toast from 'react-native-root-toast';
 import {category} from '../../Redux/Actions/Categoryaction';
 import Homeloader from '../../Components/Home/Homeloader';
 
+
 const Home = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -325,7 +326,7 @@ const Home = (props) => {
                     style={{
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: WIDTH,
+                      width: WIDTH
                     }}>
                     <Text
                       style={{

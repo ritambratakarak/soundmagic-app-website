@@ -69,12 +69,12 @@ function MyCourses() {
       {loading ? (
         <View style={styles.container}>
           <View style={styles.repeatContainer}>
-            <Coursesloader loading={loading} />
+            <Coursesloader />
           </View>
         </View>
       ) : (
         <View style={styles.container}>
-          <AnimatedLoader loading={loading} />
+          {/* <AnimatedLoader loading={loading} /> */}
           <Filter
             modal={modal}
             close={() => setModal(!modal)}

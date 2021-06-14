@@ -1,132 +1,213 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, Image, Dimensions, BackHandler, TouchableOpacity, SafeAreaView, StatusBar, Platform, ActivityIndicator, Text, DeviceEventEmitter, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useState, useRef, useEffect} from 'react';
+import {StyleSheet, View, Platform, Text, TouchableOpacity} from 'react-native';
+import MediaControls, {PLAYER_STATES} from 'react-native-media-controls';
 import Video from 'react-native-video';
+import {COLORS, HEIGHT} from '../../Utils/constants';
 import VideoPlayer from 'react-native-video-controls';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
-import Axios from 'axios';
-import Toast from 'react-native-root-toast';
-import Loader from '../../Components/Common/Loader';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { HEIGHT, WIDTH } from '../../Utils/constants';
+import {useFocusEffect, useRoute} from '@react-navigation/core';
 
+const Player = () => {
+  const route = useRoute();
+  // The video we will play on the player.
+  const video = require('../../Assets/demo2.mp4');
 
-
-function Player() {
-  const navigation = useNavigation()
-  const route = useRoute()
-  let playerref = useRef(null)
+  const videoPlayer = useRef(null);
+  const [duration, setDuration] = useState(0);
+  const [paused, setPaused] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [playerState, setPlayerState] = useState(PLAYER_STATES.PAUSED);
+  const [isLoading, setIsLoading] = useState(true);
   const [showVideo, setshowVideo] = useState(true);
-  const [videoUrl, setvideoUrl] = useState("");
-  const [loader, setloader] = useState(false);
-
+  const [videoUrl, setvideoUrl] = useState('');
+  const [rate, setrate] = useState(1);
+  const [volume, setvolume] = useState(1);
+  const [resizeMode, setresizeMode] = useState("");
 
 
   useEffect(() => {
     const url = route.params.url;
-    setvideoUrl(url),
-    setshowVideo(true)
-  }, [route])
+    setvideoUrl(url), setshowVideo(true);
+  }, [route]);
 
-  navigation.setOptions({
-    headerLeft: () => (
-      <TouchableOpacity style={{ paddingLeft: 15 }} onPress={() => {
-        navigation.goBack()
-      }}>
-        <Image source={require("../../Assets/Auths/arrow.png")} style={{ width: 15, height: 20 }} />
-      </TouchableOpacity>
-    ),
-  });
+  const onSeek = (seek) => {
+    console.log('seek', seek);
+    videoPlayer?.current.seek(seek);
+  };
 
+  const onSeeking = (currentVideoTime) => {
+    console.log('currentVideoTime', currentVideoTime);
+    setCurrentTime(currentVideoTime);
+  };
 
-  const handleBackButtonClick = () => {
-    // console.log("back");
-    navigation.goBack();
-  }
+  const onPaused = (newState) => {
+    setPaused(!paused);
+    setPlayerState(newState);
+  };
 
-  const onBuffer = (bufferObj) => {
-    // console.log('buffering', bufferObj.isBuffering);
-  }
+  const onReplay = () => {
+    console.log('reply');
+    // videoPlayer?.current.seek(0);
+    // setCurrentTime(0);
+    if (Platform.OS === 'android') {
+      setPlayerState(PLAYER_STATES.PAUSED);
+      setPaused(true);
+    } else {
+      setPlayerState(PLAYER_STATES.PLAYING);
+      setPaused(false);
+    }
+  };
 
-  const videoError = (error) => {
-    // console.log('video error:', error);
-  }
-
-
-
-
-  const renderVideo = () => {
-    if (showVideo) {
-      return (
-        <>
-          <VideoPlayer
-            ref={ref => {
-              playerref = ref;
-            }}
-            audioOnly={route.params.type == "video" ? false : true}
-            source={{ uri: route.params.url }}
-            navigator={navigation}
-            fullscreen={false}
-            Volume
-            disableBack
-            showOnStart={true}
-            poster={'https://nodeserver.mydevfactory.com:1449/uploads/dummy/audio_background.png'}
-            posterResizeMode={"cover"}
-            onShowControls
-            style={{ flex: 1 }}
-          />
-        </>
+  const onProgress = async (data) => {
+    console.log('current time', data.currentTime);
+    if (!isLoading) {
+      setCurrentTime(data.currentTime);
+      await AsyncStorage.setItem(
+        'currenttime',
+        JSON.stringify(data.currentTime),
       );
     }
+  };
+
+  const onLoad = async (data) => {
+    console.log('onload data', data);
+    const time = await AsyncStorage.getItem('currenttime');
+    const currenttime = JSON.parse(time);
+    if (currenttime > 0) {
+      setCurrentTime(currenttime);
+      videoPlayer?.current.seek(currenttime);
+      setPlayerState(PLAYER_STATES.PAUSED);
+      setPaused(true);
+    }
+    setDuration(Math.round(data.duration));
+    setIsLoading(false);
+  };
+
+  const onLoadStart = () => setIsLoading(true);
+
+  const onEnd = () => {
+    setPlayerState(PLAYER_STATES.ENDED);
+    setCurrentTime(duration);
+  };
+
+  const renderResizeModeControl = (resize) => {
+    const isSelected = (resizeMode === resize);
+
+    return (
+      <TouchableOpacity onPress={() => { setresizeMode(resize) }}>
+        <Text style={[styles.controlOption, { fontWeight: isSelected ? 'bold' : 'normal' }]}>
+          {resize}
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+
+  const renderVolumeControl = (vol) => {
+    const isSelected = (volume === vol);
+
+    return (
+      <TouchableOpacity onPress={() => { setvolume(vol) }}>
+        <Text style={[styles.controlOption, { fontWeight: isSelected ? 'bold' : 'normal' }]}>
+          {vol * 100}%
+        </Text>
+      </TouchableOpacity>
+    )
   }
 
   return (
-    <>
-      <Loader loading={loader} />
-      {
-        renderVideo()
-      }
-    </>
-  )
-}
-
-export default Player;
-
+    <View style={styles.container}>
+      <Video
+        volume={volume}
+        onEnd={onEnd}
+        onLoad={onLoad}
+        onLoadStart={onLoadStart}
+        posterResizeMode={'cover'}
+        onProgress={onProgress}
+        paused={paused}
+        ref={(ref) => (videoPlayer.current = ref)}
+        resizeMode={resizeMode}
+        source={{uri: route.params.url}}
+        audioOnly={route.params.type == 'video' ? false : true}
+        style={styles.backgroundVideo}
+      />
+      <View style={styles.controls}>
+        <View style={styles.generalControls}>
+          <View style={styles.volumeControl}>
+            {renderVolumeControl(0.5)}
+            {renderVolumeControl(1)}
+            {renderVolumeControl(1.5)}
+          </View>
+          <View style={styles.resizeModeControl}>
+            {renderResizeModeControl('cover')}
+            {renderResizeModeControl('contain')}
+            {renderResizeModeControl('stretch')}
+          </View>
+        </View>
+      </View>
+      <MediaControls
+        isFullScreen={false}
+        duration={duration}
+        isLoading={isLoading}
+        progress={currentTime}
+        onPaused={onPaused}
+        onReplay={onReplay}
+        onSeek={onSeek}
+        onSeeking={onSeeking}
+        mainColor={COLORS.PRIMARY}
+        playerState={playerState}
+        sliderStyle={{containerStyle: {}, thumbStyle: {}, trackStyle: {}}}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'black',
+      },
+  backgroundVideo: {
+    height: HEIGHT,
+    width: '100%',
+  },
+  mediaControls: {
+    height: '100%',
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
-    backgroundColor: '#F5FCFF',
-  },
-  toolbar: {
-    marginTop: 20,
-    margin: 20,
-    height: 30,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  castButton: {
-    height: 24,
-    width: 24,
-    marginRight: 10,
-    marginTop: 10,
-    tintColor: 'white',
-    position: 'absolute', top: 40, right: 20
-  },
-  midiaContainer: {
-    flexDirection: 'row',
-    padding: 10,
-  },
-  renderImg: {
-    width: 160,
-    height: 90,
-  },
-  textMidia: {
-    flex: 1,
-    marginLeft: 10,
     alignSelf: 'center',
   },
-})
+  controls: {
+    backgroundColor: 'transparent',
+    borderRadius: 5,
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+  },
+  generalControls: {
+    flex: 1,
+    flexDirection: 'row',
+    borderRadius: 4,
+    overflow: 'hidden',
+    paddingBottom: 10,
+  },
+  rateControl: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  volumeControl: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  resizeModeControl: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+export default Player;

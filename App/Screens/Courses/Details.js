@@ -335,13 +335,13 @@ function Details() {
                     gradient={true}
                     title="Enroll Now"
                   />
-                ) : (
+                ) : alldata.isReviewed == false ? (
                   <Button
                     onPress={() => setModal(true)}
                     gradient={true}
                     title="Rate now"
                   />
-                )}
+                ): null}
               </View>
               <CustomerRating
                 main={'Rating & Reviews :'}

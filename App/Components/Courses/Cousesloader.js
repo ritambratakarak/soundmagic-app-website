@@ -7,7 +7,6 @@ import { COLORS, FONT, HEIGHT, WIDTH } from '../../Utils/constants';
 const Coursesloader = ({loading}) => {
   return (
     <>
-    { loading &&
       <ScrollView showsVerticalScrollIndicator={false
       }>
         <SkeletonPlaceholder>
@@ -58,7 +57,6 @@ const Coursesloader = ({loading}) => {
           </SkeletonPlaceholder.Item>
         </SkeletonPlaceholder>
       </ScrollView>
-    }
     </>
   );
 };

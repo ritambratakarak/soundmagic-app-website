@@ -69,7 +69,7 @@ function Courses() {
       {loading ? (
         <View style={styles.container}>
           <View style={styles.repeatContainer}>
-            <Coursesloader loading={loading} />
+            <Coursesloader />
           </View>
         </View>
       ) : (

@@ -239,7 +239,7 @@ export default Navigation = () => {
             headerShown: true,
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Player"} />),
-            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("MyCourses")} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
             headerRight: (props) => (<Right/>)
           }}
         />

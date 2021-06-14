@@ -46,7 +46,7 @@ function Track() {
         setLoading(false);
         setrefreash(false);
         if (res.response_code === 200) {
-          console.log('track data', res.response_data.docs);
+          console.log('track data', res.response_data);
           setcousesdata(res.response_data.docs);
           // Toast.show(res.response_message);
         } else if (res.response_code === 4000) {
@@ -83,12 +83,66 @@ function Track() {
     return ret;
   }
 
+  const AddFavorite = async (id) => {
+    const userdata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(userdata);
+    const authtoken = data.authtoken;
+    setLoading(true);
+    const submitData = {
+      trackID: id,
+      authtoken,
+    };
+    Network('/add-favorite-track', 'post', submitData)
+      .then(async (res) => {
+        console.log(res);
+        setLoading(false);
+        if (res.response_code === 200) {
+          getTrack()
+          Toast.show(res.response_message);
+        } else {
+          Toast.show(res.response_message);
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        const Error = error.response.data;
+        Toast.show(Error.response_message);
+      });
+  };
+
+  const RemoveFavorite = async (id) => {
+    const userdata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(userdata);
+    const authtoken = data.authtoken;
+    setLoading(true);
+    const submitData = {
+      trackID: id,
+      authtoken,
+    };
+    Network('/remove-favorite-track', 'post', submitData)
+      .then(async (res) => {
+        console.log(res);
+        setLoading(false);
+        if (res.response_code === 200) {
+          getTrack()
+          Toast.show(res.response_message);
+        } else {
+          Toast.show(res.response_message);
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        const Error = error.response.data;
+        Toast.show(Error.response_message);
+      });
+  };
+
   return (
     <>
       {loading ? (
         <View style={styles.container}>
           <View style={styles.repeatContainer}>
-            <Trackloader loading={loading} />
+            <Trackloader />
           </View>
         </View>
       ) : (
@@ -128,13 +182,10 @@ function Track() {
                     text={item.type + ' | ' + format(item.duration)}
                     categoryname={'Admin'}
                     onPress={() =>
-                      navigation.navigate('Player', {
-                        url: item.audioURL,
-                        type: item.type,
-                      })
+                      navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type })
                     }
                     showfavorite={true}
-                    Pressfavorite={() => console.log()}
+                    Pressfavorite={() => item.isFavorite == true ? RemoveFavorite(item._id) : AddFavorite(item._id)}
                     favorite={item.isFavorite}
                   />
                 )}
