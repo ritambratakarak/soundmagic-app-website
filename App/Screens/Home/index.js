@@ -27,6 +27,7 @@ import Filter from '../../Components/SearchComponent/Filter';
 import Toast from 'react-native-root-toast';
 import {category} from '../../Redux/Actions/Categoryaction';
 import Homeloader from '../../Components/Home/Homeloader';
+import RecentPlayedView from '../../Components/Home/RecentPlayedView';
 
 
 const Home = (props) => {
@@ -42,6 +43,7 @@ const Home = (props) => {
   const [allcousesdata, setallcousesdata] = React.useState([]);
   const [categoryloader, setcategoryloader] = React.useState(false);
   const [refreash, setrefreash] = React.useState(false);
+  const [playedcourse, setplayedcourse] = React.useState(false);
 
   useEffect(() => {
     // setTimeout(() => { setLoading(false) }, 2500)
@@ -60,6 +62,7 @@ const Home = (props) => {
     setUser(data);
     getCategory(data);
     getAllCourses();
+    getRecentPlayedCourse()
   };
 
   const changesecondTab = (tab, id) => {
@@ -71,24 +74,6 @@ const Home = (props) => {
       }
     });
   };
-
-  const Recentdata = [
-    {
-      _id: 1,
-      banner:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4JDUINyMkunfue2_WCsmqFfdnywUMYmJr0Q&usqp=CAU',
-    },
-    {
-      _id: 2,
-      banner:
-        'https://grazia.wwmindia.com/content/2020/dec/yoga71607321001.jpg',
-    },
-    {
-      _id: 3,
-      banner:
-        'https://img.freepik.com/free-photo/sporty-young-woman-doing-yoga-practice-isolated-concept-healthy-life-natural-balance-body-mental-development_231208-10353.jpg?size=626&ext=jpg',
-    },
-  ];
 
   const getCategory = (data) => {
     setLoading(true);
@@ -162,6 +147,34 @@ const Home = (props) => {
         if (res.response_code === 200) {
           console.log('courses data', res.response_data.docs);
           setallcousesdata(res.response_data.docs);
+          // Toast.show(res.response_message);
+        } else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser());
+        } else {
+          Toast.show(res.response_message);
+        }
+      })
+      .catch((error) => {
+        Toast.show(error);
+        setLoading(false);
+        setrefreash(false);
+      });
+  };
+
+  const getRecentPlayedCourse = async () => {
+    setLoading(true);
+    const alldata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    Network(`/get-user-recent-play?page=${1}&limit=${100}`, 'get', {authtoken})
+      .then(async (res) => {
+        setLoading(false);
+        setrefreash(false);
+        if (res.response_code === 200) {
+          console.log('Played data', res.response_data.docs);
+          setplayedcourse(res.response_data.docs);
           // Toast.show(res.response_message);
         } else if (res.response_code === 4000) {
           Toast.show(res.response_message);
@@ -341,9 +354,9 @@ const Home = (props) => {
                 }
               />
             </View>
-            <ImageView
+            <RecentPlayedView
               name={'Recently Played'}
-              data={Recentdata}
+              data={playedcourse}
               initialnumber={15}
             />
             <ImageView
