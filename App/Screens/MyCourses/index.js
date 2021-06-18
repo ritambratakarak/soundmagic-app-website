@@ -111,6 +111,7 @@ function MyCourses() {
                       item.totalVideo +
                       ' Video'
                     }
+                    showrating={true}
                     rateingvalue={item.avgRating}
                     rating={() => console.log('')}
                     ratingcolor={'#ECECEC'}

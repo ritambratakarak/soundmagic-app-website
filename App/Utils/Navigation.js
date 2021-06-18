@@ -27,6 +27,7 @@ import ShowFilterData from '../Screens/Courses/ShowFilterData';
 import MyCourses from '../Screens/MyCourses';
 import MycourseDetails from '../Screens/MyCourses/Details';
 import Customplayer from '../Screens/Player/CustomPlayer';
+import TrackPlayer from '../Screens/Player/TrackPlayer';
 
 
 
@@ -225,6 +226,10 @@ export default Navigation = () => {
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("MyCourses")} />),
             headerRight: (props) => (<Right/>)
           }}
+        />
+        <Stack.Screen
+          name="TrackPlayer"
+          component={TrackPlayer}
         />
         <Stack.Screen
           name="CustomPlayer"

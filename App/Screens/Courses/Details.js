@@ -302,7 +302,7 @@ function Details() {
                       navigation.navigate("Player", {
                         url:
                           item.type == 'video' ? item.videoURL : item.audioURL,
-                        type: item.type, trackID: item._id
+                        type: item.type, trackID: item._id, name: item.name
                       })
                     }
                     showfavorite={false}

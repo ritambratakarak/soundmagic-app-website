@@ -28,64 +28,99 @@ export default Courses = ({
   price,
   ratingdisable,
   onPress,
+  showrating,
+  showfavorite,
+  Pressfavorite,
+  favorite,
+  suitble,
+  activity,
+  origin,
+  benefit,
+  hastag,
+  fortrackComponent
 }) => {
   return (
-    <Ripple
-      rippleDuration={1000}
-      rippleOpacity={0.3}
-      rippleColor={'#fff'}
-      rippleSize={'100%'}
-      style={{
-        width: '100%',
-        overflow: 'hidden',
-        borderRadius: 8,
-        backgroundColor: '#ECECEC',
-        marginBottom: HEIGHT * 0.02,
-      }}
-      onPress={onPress}>
-      <ProgressiveImage
-        defaultImageSource={require('../../Assets/defaultimg.png')}
-        source={{
-          uri:
-          image,
+    <>
+      <Ripple
+        rippleDuration={1000}
+        rippleOpacity={0.3}
+        rippleColor={'#fff'}
+        rippleSize={'100%'}
+        style={{
+          width: '100%',
+          overflow: 'hidden',
+          borderRadius: 8,
+          backgroundColor: '#ECECEC',
+          marginBottom: HEIGHT * 0.02,
         }}
-        style={{width: '100%', height: HEIGHT * 0.22}}
-        resizeMode="cover"
-      />
-      {/* <Image
+        onPress={onPress}>
+        <ProgressiveImage
+          defaultImageSource={require('../../Assets/defaultimg.png')}
+          source={{
+            uri: image,
+          }}
+          style={{width: '100%', height: HEIGHT * 0.22}}
+          resizeMode="cover"
+        />
+        {/* <Image
         source={{uri: image}}
         style={{width: '100%', height: HEIGHT * 0.22}}
         resizeMode={'cover'}
       /> */}
-      <View style={{padding: 15}}>
-        <Heading color={'#000'} name={heading} />
-        <CategogyList categoryname={'Category'} name={categoryname} />
-        <CategogyList categoryname={'Tutor'} name={tutorname} />
-        <Text
-          style={{
-            fontSize: FONT.SIZE.SMALL,
-            fontFamily: FONT.FAMILY.REGULAR,
-            color: '#909090',
-          }}>
-          {qty}
-        </Text>
+        <View style={{padding: 15}}>
+          <Heading color={'#000'} name={heading} />
+          <CategogyList categoryname={'Category'} name={categoryname} />
+          <CategogyList categoryname={'Tutor'} name={tutorname} />
+          <Text
+            style={{
+              fontSize: FONT.SIZE.SMALL,
+              fontFamily: FONT.FAMILY.REGULAR,
+              color: '#909090',
+            }}>
+            {qty}
+          </Text>
+          {fortrackComponent &&
+            <>
+              <CategogyList categoryname={'Suitable for'} name={suitble} />
+              <CategogyList categoryname={'Activity'} name={activity} />
+              <CategogyList categoryname={'Origins/influences'} name={origin} />
+              <CategogyList categoryname={'Benefits'} name={benefit} />
+              <CategogyList categoryname={'Hashtags'} name={hastag} />
+            </>
+          }
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            {showrating && (
+              <RatingComponent
+                value={rateingvalue}
+                rate={rating}
+                backgroundColor={ratingcolor}
+                disable={ratingdisable}
+                imageSize={18}
+              />
+            )}
+            {
+              fortrackComponent &&
+              <Heading color={COLORS.PRIMARY} name={price} />
+            }
+          </View>
+        </View>
+      </Ripple>
+      {showfavorite && (
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            position: 'absolute',
+            top: HEIGHT * 0.23,
+            right: WIDTH * 0.03,
           }}>
-          <RatingComponent
-            value={rateingvalue}
-            rate={rating}
-            backgroundColor={ratingcolor}
-            disable={ratingdisable}
-            imageSize={18}
-          />
-          <Heading color={COLORS.PRIMARY} name={price} />
+          <Favorite AddFav={Pressfavorite} fav={favorite} />
         </View>
-      </View>
-    </Ripple>
+      )}
+    </>
   );
 };
 

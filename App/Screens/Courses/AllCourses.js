@@ -44,7 +44,8 @@ function AllCourses() {
               textcolor={"#909090"}
               text={item.type + " | " + format(item.duration)}
               categoryname={"Admin"}
-              onPress={()=> navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type, trackID: item._id })}
+              onPress={()=> navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type, trackID: item._id, name: item.name, tutorialid: item._id, courseid: alldata.courseID,
+              complete: item.completed })}
               showfavorite={false}
             />
           )}

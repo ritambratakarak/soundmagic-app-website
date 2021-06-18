@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -11,10 +11,11 @@ import {
   Image,
   Platform,
   BackHandler,
-  ActivityIndicator,
-  ImageBackground
+  ActivityIndicator
 } from 'react-native';
 import Video from 'react-native-video';
+import Orientation from 'react-native-orientation-locker';
+import {FullscreenClose, FullscreenOpen} from '../../Assets/icons';
 import {ProgressBar, PlayerControls} from '../../Components/Video';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,11 +25,12 @@ import {useDispatch} from 'react-redux';
 import {logoutUser} from '../../Redux/Actions/authAction';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
 
-const Player = () => {
+
+const TrackPlayer = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const videoRef = React.createRef();
+  const videoRef = useRef(null);
   const [state, setState] = useState({
     fullscreen: false,
     play: false,
@@ -36,24 +38,20 @@ const Player = () => {
     duration: 0,
     showControls: true,
   });
-  const [videoUrl, setvideoUrl] = useState(null);
+  const [videoUrl, setvideoUrl] = useState('');
   const [trackId, settrackId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
-  const onLoadStart = () => setIsLoading(true);
+  const [c_time, setc_time] = useState(0);
 
   useEffect(() => {
     const url = route.params.url;
     setvideoUrl(url);
     settrackId(route.params.trackID);
-    console.log("complete", route?.params?.complete);
-    if(route?.params?.complete != undefined && route?.params?.complete == false){
-      CompleteCourse()
-    }
   }, [route]);
 
   useEffect(() => {
-    // Orientation.addOrientationListener(handleOrientation);
+    Orientation.addOrientationListener(handleOrientation);
+    // BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick());
     navigation.setOptions({
       headerShown: true,
       headerStyle: {
@@ -72,6 +70,7 @@ const Player = () => {
       headerLeft: (props) => (
         <TouchableOpacity
           onPress={() => {
+            SaveTrack();
             navigation.goBack();
           }}>
           <Image
@@ -83,20 +82,72 @@ const Player = () => {
       ),
     });
     return () => {
-      // Orientation.removeOrientationListener(handleOrientation);
+      Orientation.removeOrientationListener(handleOrientation);
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick(),
+      );
     };
   }, []);
 
-  const CompleteCourse = async () => {
+  const handleBackButtonClick = () => {
+    SaveTrack();
+  };
+
+  const getPlayer = async (playerdata) => {
+    console.log("playerdata", playerdata);
+    const alldata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    console.log(authtoken);
+    Network(`/get-track-play?trackID=${route?.params?.trackID}`, 'get', {
+      authtoken,
+    })
+      .then(async (res) => {
+        setIsLoading(false);
+        console.log('track data', res);
+        if (res.response_code === 200) {
+          if (res.response_data != null) {
+            setapiTime(res.response_data, playerdata.duration)
+            // setCurrentTime(currenttime);
+            // videoPlayer?.current.seek(currenttime);
+            // setPlayerState(PLAYER_STATES.PAUSED);
+            // setPaused(true);
+          } else {
+            setState((s) => ({
+              ...s,
+              duration: playerdata.duration,
+              currentTime: playerdata.currentTime,
+            }));
+          }
+        } else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser());
+        } else {
+          Toast.show(res.response_message);
+        }
+      })
+      .catch((error) => {
+        Toast.show(error);
+        setIsLoading(false);
+      });
+  };
+
+  const SaveTrack = async () => {
     const userdata = await AsyncStorage.getItem('@user');
     const data = JSON.parse(userdata);
     const authtoken = data.authtoken;
+    const time = await AsyncStorage.getItem('currenttime');
+    const currenttime = JSON.parse(time);
+    console.log("save track player call", currenttime);
     const submitData = {
-      courseID: route.params.courseid,
-      tutorialID: route.params.tutorialid,
+      trackID: route.params.trackID,
+      time: currenttime,
       authtoken,
     };
-    Network('/user-tutorial-completed', 'post', submitData)
+    console.log("submitData", submitData);
+    Network('/save-track-play', 'post', submitData)
       .then(async (res) => {
         console.log(res);
         if (res.response_code === 200) {
@@ -112,51 +163,63 @@ const Player = () => {
       });
   };
 
+  const onLoadStart = () => setIsLoading(true);
+
   return (
     <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={showControls}>
-          <View>
-            <Video
-              ref={videoRef}
-              source={{
-                uri: videoUrl,
-              }}
-              style={state.fullscreen ? styles.video : styles.fullscreenVideo}
-              controls={false}
-              resizeMode={state.fullscreen ? 'cover' : 'contain'}
-              onLoad={onLoadEnd}
-              onLoadStart={onLoadStart}
-              onProgress={onProgress}
-              onEnd={onEnd}
-              paused={!state.play}
-              fullscreen={state.fullscreen}
-              audioOnly={route.params.type == "video" ? false : true}
-              disableFocus={true}
-            />
-            {state.showControls && (
-              <View style={styles.controlOverlay}>
-                {route.params.type == "audio" &&
-                  <Image source={require('../../Assets/player_background.png')} style={{width:WIDTH, height:HEIGHT, position:"absolute", top:0, left:0}} resizeMode={'cover'}/>
-                }
-                <TouchableOpacity
-                  onPress={() => handleFullscreen()}
-                  hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
-                  style={styles.fullscreenButton}>
-                  {state.fullscreen ? (
-                    <MaterialCommunityIcons
-                      name="fullscreen-exit"
-                      size={25}
-                      color={'#fff'}
-                    />
-                  ) : (
-                    <MaterialCommunityIcons
-                      name="fullscreen"
-                      size={25}
-                      color={'#fff'}
-                    />
-                  )}
-                </TouchableOpacity>
-                {isLoading ? (
+      <TouchableWithoutFeedback onPress={showControls}>
+        <View>
+          <Video
+            ref={videoRef}
+            source={{
+              uri: videoUrl,
+            }}
+            style={state.fullscreen ? styles.video : styles.fullscreenVideo}
+            controls={false}
+            resizeMode={state.fullscreen ? 'cover' : 'contain'}
+            onLoad={onLoadEnd}
+            onLoadStart={onLoadStart}
+            onProgress={onProgress}
+            onEnd={onEnd}
+            paused={!state.play}
+            fullscreen={state.fullscreen}
+            audioOnly={route.params.type == 'video' ? false : true}
+            disableFocus={true}
+          />
+          {state.showControls && (
+            <View style={styles.controlOverlay}>
+              {route.params.type == 'audio' && (
+                <Image
+                  source={require('../../Assets/player_background.png')}
+                  style={{
+                    width: WIDTH,
+                    height: HEIGHT,
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                  }}
+                  resizeMode={'cover'}
+                />
+              )}
+              <TouchableOpacity
+                onPress={() => handleFullscreen()}
+                hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+                style={styles.fullscreenButton}>
+                {state.fullscreen ? (
+                  <MaterialCommunityIcons
+                    name="fullscreen-exit"
+                    size={25}
+                    color={'#fff'}
+                  />
+                ) : (
+                  <MaterialCommunityIcons
+                    name="fullscreen"
+                    size={25}
+                    color={'#fff'}
+                  />
+                )}
+              </TouchableOpacity>
+              {isLoading ? (
                   <View
                     style={{
                       width:WIDTH,
@@ -188,11 +251,10 @@ const Player = () => {
                     />
                   </>
                 )}
-                
-              </View>
-            )}
-          </View>
-        </TouchableWithoutFeedback>
+            </View>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 
@@ -204,7 +266,9 @@ const Player = () => {
   }
 
   function handleFullscreen() {
-    setState((s) => ({...s, fullscreen: !state.fullscreen}));
+    state.fullscreen
+      ? Orientation.unlockAllOrientations()
+      : Orientation.lockToLandscapeLeft();
   }
 
   function handlePlayPause() {
@@ -213,7 +277,7 @@ const Player = () => {
       setState({...state, play: false, showControls: true});
       return;
     }
-    // SaveTrack()
+    // SaveTrack();
     setState({...state, play: true});
     // setTimeout(() => setState((s) => ({...s, showControls: false})), 2000);
   }
@@ -234,19 +298,12 @@ const Player = () => {
   }
 
   async function onLoadEnd(data) {
-    // const time = await AsyncStorage.getItem('currenttime');
-    // const currenttime = JSON.parse(time);
-    setIsLoading(false);
-    setState((s) => ({
-      ...s,
-      duration: data.duration,
-      currentTime: data.currentTime,
-    }));
-    // getPlayer(data)
+    getPlayer(data);
   }
 
   async function onProgress(data) {
     console.log('current time', data.currentTime);
+    // setc_time(data.currentTime);
     await AsyncStorage.setItem('currenttime', JSON.stringify(data.currentTime));
     setState((s) => ({
       ...s,
@@ -264,6 +321,19 @@ const Player = () => {
       ? setState({...state, showControls: false})
       : setState({...state, showControls: true});
   }
+
+  function setapiTime(data, duration) {
+    videoRef.current.seek(data.time);
+    setState((s) => ({
+      ...s,
+      duration: duration,
+      currentTime: data.time,
+      play: false,
+      showControls: true,
+    }));
+  }
+
+
 };
 
 const styles = StyleSheet.create({
@@ -305,4 +375,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Player;
+export default TrackPlayer;

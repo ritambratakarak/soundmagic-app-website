@@ -103,7 +103,7 @@ const DrawerContent = (props) => {
               />}
             />
 
-            <DrawerMenuItem
+            {/* <DrawerMenuItem
               onPress={() => props.navigation.navigate("CustomPlayer")}
               name={"Player"}
               icon={<Entypo
@@ -111,7 +111,7 @@ const DrawerContent = (props) => {
                 size={25}
                 color={'gray'}
               />}
-            />
+            /> */}
 
             <DrawerMenuItem
               onPress={() => handleLogout()}

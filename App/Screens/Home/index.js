@@ -28,6 +28,7 @@ import Toast from 'react-native-root-toast';
 import {category} from '../../Redux/Actions/Categoryaction';
 import Homeloader from '../../Components/Home/Homeloader';
 import RecentPlayedView from '../../Components/Home/RecentPlayedView';
+import ImageList from '../../Components/Home/ImageList';
 
 
 const Home = (props) => {
@@ -36,7 +37,7 @@ const Home = (props) => {
   const [search, setsearch] = useState('');
   const [secondtab, setsecondtab] = useState('0');
   const [userMe, setUser] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [modal, setModal] = React.useState(false);
   const [categorydata, setcategorydata] = React.useState([]);
   const [cousesdata, setcousesdata] = React.useState([]);
@@ -62,7 +63,7 @@ const Home = (props) => {
     setUser(data);
     getCategory(data);
     getAllCourses();
-    getRecentPlayedCourse()
+    getRecentPlayedCourse();
   };
 
   const changesecondTab = (tab, id) => {
@@ -205,8 +206,8 @@ const Home = (props) => {
   };
 
   const onRefresh = React.useCallback(() => {
-    setrefreash(true)
-    getData()
+    setrefreash(true);
+    getData();
   }, []);
 
   return (
@@ -216,15 +217,17 @@ const Home = (props) => {
           <Homeloader />
         </View>
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            //refresh control used for the Pull to Refresh
-            refreshing={refreash}
-            onRefresh={() => { onRefresh() }}
-          />
-        }
-        >
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              //refresh control used for the Pull to Refresh
+              refreshing={refreash}
+              onRefresh={() => {
+                onRefresh();
+              }}
+            />
+          }>
           {/* <AnimatedLoader loading={loading} /> */}
           <Filter
             modal={modal}
@@ -339,7 +342,7 @@ const Home = (props) => {
                     style={{
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: WIDTH
+                      width: WIDTH,
                     }}>
                     <Text
                       style={{
@@ -354,11 +357,65 @@ const Home = (props) => {
                 }
               />
             </View>
-            <RecentPlayedView
+            <View
+              style={[styles.repeatContainer, {marginBottom: HEIGHT * 0.04}]}>
+              <Text
+                style={{
+                  fontSize: FONT.SIZE.LARGE,
+                  fontFamily: FONT.FAMILY.HEAVY,
+                  marginBottom: HEIGHT * 0.02,
+                }}>
+                {'Recently Played'}
+              </Text>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
+                data={playedcourse}
+                renderItem={({item}) => (
+                  <>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("TrackPlayer", {url: item.trackDetails.type == "video" ? item.trackDetails.videoURL : item.trackDetails.audioURL, type: item.trackDetails.type, trackID: item.trackID, name: item.trackDetails.name })
+                    }
+                    style={{width:200, height:200, position:"absolute", top:0, left:0, zIndex:9999}}
+                    />
+                    <ImageList
+                      uri={
+                        item.trackDetails.type == 'video'
+                          ? item.trackDetails.videoThumbnail
+                          : 'https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg'
+                      }
+                    />
+                 </>
+                )}
+                keyExtractor={(item) => item._id}
+                ListEmptyComponent={
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: (WIDTH * 9) / 8.8,
+                    }}>
+                    <Text
+                      style={{
+                        alignItems: 'center',
+                        textAlign: 'center',
+                        fontSize: FONT.SIZE.MEDIUM,
+                        fontFamily: FONT.FAMILY.MEDIUM,
+                      }}>
+                      No data found!
+                    </Text>
+                  </View>
+                }
+                initialNumToRender={15}
+              />
+            </View>
+            {/* <RecentPlayedView
               name={'Recently Played'}
               data={playedcourse}
               initialnumber={15}
-            />
+              
+            /> */}
             <ImageView
               name={'New Addtion'}
               data={allcousesdata}

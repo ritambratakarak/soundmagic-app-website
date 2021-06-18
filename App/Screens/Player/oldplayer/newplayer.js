@@ -3,7 +3,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {StyleSheet, View, Platform, Text, TouchableOpacity} from 'react-native';
 import MediaControls, {PLAYER_STATES} from 'react-native-media-controls';
 import Video from 'react-native-video';
-import {COLORS, HEIGHT} from '../../Utils/constants';
+import {COLORS, HEIGHT} from '../../../Utils/constants';
 import VideoPlayer from 'react-native-video-controls';
 import {useFocusEffect, useRoute} from '@react-navigation/core';
 
