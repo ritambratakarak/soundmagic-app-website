@@ -14,10 +14,10 @@ export default RecentPlayedView = ({ name, data, initialnumber, onPress }) => {
         horizontal={true}
         data={data}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() =>
-            navigation.navigate("TrackPlayer", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type, trackID: item._id })
-          }>
-            <ImageList uri={item.trackDetails.type == "video" ? item.trackDetails.videoThumbnail : 'https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg'} />
+          <TouchableOpacity onPress={onPress}>
+            <ImageList uri={item.trackDetails.type == 'video'
+                          ? item.trackDetails.videoThumbnail
+                          : item.trackDetails.audioThumbnail} />
           </TouchableOpacity>
         )}
         keyExtractor={item => item._id}

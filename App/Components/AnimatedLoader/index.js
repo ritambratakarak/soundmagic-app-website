@@ -12,9 +12,7 @@ export default class AnimatedLoader extends React.Component {
         animationType="fade"
         transparent={true}
         visible={this.props.loading}
-        onRequestClose={() => {
-          modalVisible(!this.props.modal)
-        }}>
+        >
         <View style={styles.modalContainer}>
           <View style={styles.modalBody}>
             <View style={styles.privacyContainer}>

@@ -39,11 +39,15 @@ function MycourseDetails() {
   let stopFetchMore = true;
 
   useEffect(() => {
-    console.log('details', route.params.item);
-    setalldata(route.params.item);
-    const coursedata = route.params.item;
-    const couseid = coursedata.courseID;
-    getReviews(couseid);
+    const router = route.params;
+    const categorydata = router;
+    if(categorydata != undefined){
+      console.log('details', route?.params?.item);
+      const coursedata = route?.params?.item;
+      const couseid = coursedata?.courseID;
+      setalldata(route?.params?.item);
+      getReviews(couseid);
+    }
   }, [route]);
 
   const getReviews = async (id) => {
@@ -254,7 +258,7 @@ function MycourseDetails() {
                 <Text
                   style={[styles.description, {color: COLORS.PRIMARY}]}
                   onPress={() =>
-                    navigation.navigate('AllCourses', {item: alldata.tutorials})
+                    navigation.navigate('AllCourses', {item: alldata.tutorials, type:"MycourseDetails"})
                   }>
                   {'View all'}
                 </Text>

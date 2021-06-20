@@ -26,8 +26,8 @@ import Player from '../Screens/Player';
 import ShowFilterData from '../Screens/Courses/ShowFilterData';
 import MyCourses from '../Screens/MyCourses';
 import MycourseDetails from '../Screens/MyCourses/Details';
-import Customplayer from '../Screens/Player/CustomPlayer';
 import TrackPlayer from '../Screens/Player/TrackPlayer';
+import TrackDetails from '../Screens/Track/Details';
 
 
 
@@ -189,7 +189,7 @@ export default Navigation = () => {
             headerShown: true,
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Course List"} />),
-            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Details")} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
           }}
         />
         <Stack.Screen
@@ -232,13 +232,13 @@ export default Navigation = () => {
           component={TrackPlayer}
         />
         <Stack.Screen
-          name="CustomPlayer"
-          component={Customplayer}
+          name="TrackDetails"
+          component={TrackDetails}
           options={{
             headerShown: true,
             headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
-            headerTitle: (props) => (<Title title={"Player"} />),
-            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
+            headerTitle: (props) => (<Title title={"Track Details"} />),
+            headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Track")} />),
             headerRight: (props) => (<Right/>)
           }}
         />

@@ -8,6 +8,7 @@ import {
   Image,
   FlatList,
   RefreshControl,
+  ImageBackground
 } from 'react-native';
 import Toast from 'react-native-root-toast';
 import AnimatedLoader from '../../Components/AnimatedLoader';
@@ -177,31 +178,18 @@ function Track() {
                     image={
                       item.type == 'video'
                         ? item.videoThumbnail
-                        : 'https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg'
+                        : item.audioThumbnail
                     }
                     heading={item.name}
                     categoryname={item.name}
-                    tutorname={'Admin'}
+                    tutorname={item.instructor}
                     qty={item.type + '  ' + format(item.duration)}
-                    onPress={() =>
-                      navigation.navigate('TrackPlayer', {
-                        url:
-                          item.type == 'video' ? item.videoURL : item.audioURL,
-                        type: item.type,
-                        trackID: item._id,
-                        name: item.name,
-                      })
-                    }
+                    onPress={()=> navigation.navigate("TrackDetails", {item: item})}
                     showrating={false}
                     showfavorite={true}
-                    fortrackComponent={true}
+                    fortrackComponent={false}
                     Pressfavorite={() => item.isFavorite == true ? RemoveFavorite(item._id) : AddFavorite(item._id)}
                     favorite={item.isFavorite}
-                    suitble={"Everyone"}
-                    activity={"mindfulness"}
-                    origin="secular"
-                    benefit="overcoming fear, dealing with grief"
-                    hastag={"stress management, grief, compassion"}
                   />
                 )}
                 refreshControl={
@@ -233,56 +221,7 @@ function Track() {
                   </View>
                 }
               />
-              {/* <FlatList
-                style={{marginBottom: HEIGHT * 0.18}}
-                showsVerticalScrollIndicator={false}
-                horizontal={false}
-                data={cousesdata}
-                renderItem={({item}) => (
-                  <CourseItem
-                    heading={item.name}
-                    image={
-                      item.type == 'video'
-                        ? item.videoThumbnail
-                        : 'https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg'
-                    }
-                    textsize={FONT.SIZE.SMALL}
-                    textcolor={'#909090'}
-                    text={item.type + ' | ' + format(item.duration)}
-                    categoryname={'Admin'}
-                    onPress={() =>
-                      navigation.navigate("TrackPlayer", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type, trackID: item._id, name: item.name })
-                    }
-                    showfavorite={true}
-                    Pressfavorite={() => item.isFavorite == true ? RemoveFavorite(item._id) : AddFavorite(item._id)}
-                    favorite={item.isFavorite}
-                  />
-                )}
-                refreshControl={
-                  <RefreshControl
-                    //refresh control used for the Pull to Refresh
-                    refreshing={refreash}
-                    onRefresh={() => {
-                      onRefresh();
-                    }}
-                  />
-                }
-                keyExtractor={(item) => item._id}
-                ListEmptyComponent={
-                  <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Text
-                      style={{
-                        alignItems: 'center',
-                        textAlign: 'center',
-                        fontSize: FONT.SIZE.MEDIUM,
-                        fontFamily: FONT.FAMILY.MEDIUM,
-                      }}>
-                      No data found!
-                    </Text>
-                  </View>
-                }
-              /> */}
+              
             </View>
           </View>
         </View>

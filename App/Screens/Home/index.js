@@ -210,6 +210,10 @@ const Home = (props) => {
     getData();
   }, []);
 
+  function gotoPlayedScreen(){
+    alert("aaaa")
+  }
+
   return (
     <>
       {loading ? (
@@ -260,56 +264,60 @@ const Home = (props) => {
               />
             </View>
             <View style={[styles.repeatContainer, {marginBottom: 0}]}>
-              <View style={styles.categorycontainer}>
-                <Category
-                  name={'Breath'}
-                  image={require('../../Assets/Home/breath.png')}
-                />
-                <Category
-                  name={'Timer'}
-                  image={require('../../Assets/Home/timer.png')}
-                />
-                <Category
-                  name={'Courses'}
-                  image={require('../../Assets/Home/courses.png')}
-                />
-                <Category
-                  name={'Talks'}
-                  image={require('../../Assets/Home/talks.png')}
-                />
-                <Category
-                  name={'Sounds'}
-                  image={require('../../Assets/Home/sound.png')}
-                />
-                <Category
-                  name={'Sleep'}
-                  image={require('../../Assets/Home/sleep.png')}
-                />
-                <Category
-                  name={'Children'}
-                  image={require('../../Assets/Home/children.png')}
-                />
-                <Category
-                  name={'Welness Mamas'}
-                  image={require('../../Assets/Home/welness.png')}
-                />
-                <Category
-                  name={'Guided Meditation'}
-                  image={require('../../Assets/Home/meditition.png')}
-                />
-                <Category
-                  name={'Movement'}
-                  image={require('../../Assets/Home/movement.png')}
-                />
-                <Category
-                  name={'Relaxation'}
-                  image={require('../../Assets/Home/relaxation.png')}
-                />
-                <Category
-                  name={'Work Well'}
-                  image={require('../../Assets/Home/work.png')}
-                />
-              </View>
+              <ScrollView contentContainerStyle={{flexDirection:"row"}} horizontal={true}>
+                  <View style={[styles.categorycontainer, {width:WIDTH / 1.1}]}>
+                    <Category
+                      name={'Breath'}
+                      image={require('../../Assets/Home/breath.png')}
+                    />
+                    <Category
+                      name={'Timer'}
+                      image={require('../../Assets/Home/timer.png')}
+                    />
+                    <Category
+                      name={'Courses'}
+                      image={require('../../Assets/Home/courses.png')}
+                    />
+                    <Category
+                      name={'Talks'}
+                      image={require('../../Assets/Home/talks.png')}
+                    />
+                    <Category
+                      name={'Sounds'}
+                      image={require('../../Assets/Home/sound.png')}
+                    />
+                    <Category
+                      name={'Sleep'}
+                      image={require('../../Assets/Home/sleep.png')}
+                    />
+                    <Category
+                      name={'Children'}
+                      image={require('../../Assets/Home/children.png')}
+                    />
+                    <Category
+                      name={'Welness Mamas'}
+                      image={require('../../Assets/Home/welness.png')}
+                    />
+                  </View>
+                  <View style={[styles.categorycontainer,{width:WIDTH / 1.8}]}>
+                    <Category
+                      name={'Guided Meditation'}
+                      image={require('../../Assets/Home/meditition.png')}
+                    />
+                    <Category
+                      name={'Movement'}
+                      image={require('../../Assets/Home/movement.png')}
+                    />
+                    <Category
+                      name={'Relaxation'}
+                      image={require('../../Assets/Home/relaxation.png')}
+                    />
+                    <Category
+                      name={'Work Well'}
+                      image={require('../../Assets/Home/work.png')}
+                    />
+                  </View>
+            </ScrollView>
             </View>
             <View style={[styles.repeatContainer]}>
               <WeightTab
@@ -373,20 +381,36 @@ const Home = (props) => {
                 data={playedcourse}
                 renderItem={({item}) => (
                   <>
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate("TrackPlayer", {url: item.trackDetails.type == "video" ? item.trackDetails.videoURL : item.trackDetails.audioURL, type: item.trackDetails.type, trackID: item.trackID, name: item.trackDetails.name })
-                    }
-                    style={{width:200, height:200, position:"absolute", top:0, left:0, zIndex:9999}}
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate('TrackPlayer', {
+                          url:
+                            item.trackDetails.type == 'video'
+                              ? item.trackDetails.videoURL
+                              : item.trackDetails.audioURL,
+                          type: item.trackDetails.type,
+                          trackID: item.trackID,
+                          name: item.trackDetails.name,
+                          image: item.trackDetails.audioThumbnail
+                        })
+                      }
+                      style={{
+                        width: 200,
+                        height: 200,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: 9999,
+                      }}
                     />
                     <ImageList
                       uri={
                         item.trackDetails.type == 'video'
                           ? item.trackDetails.videoThumbnail
-                          : 'https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg'
+                          : item.trackDetails.audioThumbnail
                       }
                     />
-                 </>
+                  </>
                 )}
                 keyExtractor={(item) => item._id}
                 ListEmptyComponent={
@@ -414,7 +438,7 @@ const Home = (props) => {
               name={'Recently Played'}
               data={playedcourse}
               initialnumber={15}
-              
+              onPress={()=> alert("aaa")}
             /> */}
             <ImageView
               name={'New Addtion'}
@@ -444,7 +468,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
-    justifyContent: 'space-between',
+    
   },
 });
 

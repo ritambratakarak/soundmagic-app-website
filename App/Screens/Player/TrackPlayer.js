@@ -24,7 +24,9 @@ import Toast from 'react-native-root-toast';
 import {useDispatch} from 'react-redux';
 import {logoutUser} from '../../Redux/Actions/authAction';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
-
+import Feather from 'react-native-vector-icons/Feather';
+import AnimatedLoader from '../../Components/AnimatedLoader';
+import KeepAwake from 'react-native-keep-awake';
 
 const TrackPlayer = () => {
   const route = useRoute();
@@ -50,45 +52,42 @@ const TrackPlayer = () => {
   }, [route]);
 
   useEffect(() => {
-    Orientation.addOrientationListener(handleOrientation);
+    // Orientation.addOrientationListener(handleOrientation);
     // BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick());
-    navigation.setOptions({
-      headerShown: true,
-      headerStyle: {
-        height: Platform.OS == 'ios' ? HEIGHT * 0.12 : 60,
-        backgroundColor: '#f4f4f4',
-      },
-      headerTitle: (props) => (
-        <Text
-          style={{
-            fontSize: FONT.SIZE.EXTRALARGE,
-            fontFamily: FONT.FAMILY.SEMI_BOLD,
-          }}>
-          Player
-        </Text>
-      ),
-      headerLeft: (props) => (
-        <TouchableOpacity
-          onPress={() => {
-            SaveTrack();
-            navigation.goBack();
-          }}>
-          <Image
-            source={require('../../Assets/Auths/arrow.png')}
-            resizeMode="contain"
-            style={{width: 12, HEIGHT: 18, marginLeft: WIDTH * 0.06}}
-          />
-        </TouchableOpacity>
-      ),
-    });
+    KeepAwake.activate();
+
     return () => {
-      Orientation.removeOrientationListener(handleOrientation);
+      KeepAwake.deactivate();
+      // Orientation.removeOrientationListener(handleOrientation);
       BackHandler.removeEventListener(
         'hardwareBackPress',
         handleBackButtonClick(),
       );
     };
   }, []);
+
+  navigation.setOptions({
+    headerShown: state.fullscreen ? false : true,
+    headerTransparent: true,
+    headerStyle: {
+      height: Platform.OS == 'ios' ? HEIGHT * 0.12 : 60,
+    },
+    headerTitle: null,
+    headerLeft: (props) => (
+      <TouchableOpacity
+        onPress={() => {
+          SaveTrack();
+          navigation.goBack();
+        }}>
+        <Feather
+          name="chevron-left"
+          size={30}
+          color={'white'}
+          style={{marginLeft: WIDTH * 0.04}}
+        />
+      </TouchableOpacity>
+    ),
+  });
 
   const handleBackButtonClick = () => {
     SaveTrack();
@@ -139,14 +138,12 @@ const TrackPlayer = () => {
     const data = JSON.parse(userdata);
     const authtoken = data.authtoken;
     const time = await AsyncStorage.getItem('currenttime');
-    const currenttime = JSON.parse(time);
-    console.log("save track player call", currenttime);
+    const currenttime = JSON.parse(time)
     const submitData = {
       trackID: route.params.trackID,
       time: currenttime,
       authtoken,
     };
-    console.log("submitData", submitData);
     Network('/save-track-play', 'post', submitData)
       .then(async (res) => {
         console.log(res);
@@ -190,7 +187,7 @@ const TrackPlayer = () => {
             <View style={styles.controlOverlay}>
               {route.params.type == 'audio' && (
                 <Image
-                  source={require('../../Assets/player_background.png')}
+                  source={{uri: route?.params?.image}}
                   style={{
                     width: WIDTH,
                     height: HEIGHT,
@@ -227,7 +224,7 @@ const TrackPlayer = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    <ActivityIndicator size="large" color="#fff" />
+                    <AnimatedLoader loading={isLoading} />
                   </View>
                 ) : (
                   <>
@@ -266,9 +263,7 @@ const TrackPlayer = () => {
   }
 
   function handleFullscreen() {
-    state.fullscreen
-      ? Orientation.unlockAllOrientations()
-      : Orientation.lockToLandscapeLeft();
+    setState((s) => ({...s, fullscreen: !state.fullscreen}));
   }
 
   function handlePlayPause() {

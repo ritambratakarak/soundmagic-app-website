@@ -12,7 +12,7 @@ import {
   Platform,
   BackHandler,
   ActivityIndicator,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import Video from 'react-native-video';
 import {ProgressBar, PlayerControls} from '../../Components/Video';
@@ -23,6 +23,9 @@ import Toast from 'react-native-root-toast';
 import {useDispatch} from 'react-redux';
 import {logoutUser} from '../../Redux/Actions/authAction';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
+import Feather from 'react-native-vector-icons/Feather';
+import AnimatedLoader from '../../Components/AnimatedLoader';
+import KeepAwake from 'react-native-keep-awake';
 
 const Player = () => {
   const route = useRoute();
@@ -46,9 +49,12 @@ const Player = () => {
     const url = route.params.url;
     setvideoUrl(url);
     settrackId(route.params.trackID);
-    console.log("complete", route?.params?.complete);
-    if(route?.params?.complete != undefined && route?.params?.complete == false){
-      CompleteCourse()
+    console.log('complete', route?.params?.complete);
+    if (
+      route?.params?.complete != undefined &&
+      route?.params?.complete == false
+    ) {
+      CompleteCourse();
     }
   }, [route]);
 
@@ -56,33 +62,28 @@ const Player = () => {
     // Orientation.addOrientationListener(handleOrientation);
     navigation.setOptions({
       headerShown: true,
+      headerTransparent: true,
       headerStyle: {
         height: Platform.OS == 'ios' ? HEIGHT * 0.12 : 60,
-        backgroundColor: '#f4f4f4',
       },
-      headerTitle: (props) => (
-        <Text
-          style={{
-            fontSize: FONT.SIZE.EXTRALARGE,
-            fontFamily: FONT.FAMILY.SEMI_BOLD,
-          }}>
-          Player
-        </Text>
-      ),
+      headerTitle: null,
       headerLeft: (props) => (
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
           }}>
-          <Image
-            source={require('../../Assets/Auths/arrow.png')}
-            resizeMode="contain"
-            style={{width: 12, HEIGHT: 18, marginLeft: WIDTH * 0.06}}
+          <Feather
+            name="chevron-left"
+            size={30}
+            color={'white'}
+            style={{marginLeft: WIDTH * 0.04}}
           />
         </TouchableOpacity>
       ),
     });
+    KeepAwake.activate();
     return () => {
+      KeepAwake.deactivate();
       // Orientation.removeOrientationListener(handleOrientation);
     };
   }, []);
@@ -114,85 +115,116 @@ const Player = () => {
 
   return (
     <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={showControls}>
-          <View>
-            <Video
-              ref={videoRef}
-              source={{
-                uri: videoUrl,
-              }}
-              style={state.fullscreen ? styles.video : styles.fullscreenVideo}
-              controls={false}
-              resizeMode={state.fullscreen ? 'cover' : 'contain'}
-              onLoad={onLoadEnd}
-              onLoadStart={onLoadStart}
-              onProgress={onProgress}
-              onEnd={onEnd}
-              paused={!state.play}
-              fullscreen={state.fullscreen}
-              audioOnly={route.params.type == "video" ? false : true}
-              disableFocus={true}
-            />
-            {state.showControls && (
-              <View style={styles.controlOverlay}>
-                {route.params.type == "audio" &&
-                  <Image source={require('../../Assets/player_background.png')} style={{width:WIDTH, height:HEIGHT, position:"absolute", top:0, left:0}} resizeMode={'cover'}/>
-                }
-                <TouchableOpacity
-                  onPress={() => handleFullscreen()}
-                  hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
-                  style={styles.fullscreenButton}>
-                  {state.fullscreen ? (
-                    <MaterialCommunityIcons
-                      name="fullscreen-exit"
-                      size={25}
-                      color={'#fff'}
-                    />
-                  ) : (
-                    <MaterialCommunityIcons
-                      name="fullscreen"
-                      size={25}
-                      color={'#fff'}
-                    />
-                  )}
-                </TouchableOpacity>
-                {isLoading ? (
-                  <View
+      <TouchableWithoutFeedback onPress={showControls}>
+        <View>
+          <Video
+            ref={videoRef}
+            source={{
+              uri: videoUrl,
+            }}
+            style={state.fullscreen ? styles.video : styles.fullscreenVideo}
+            controls={false}
+            resizeMode={state.fullscreen ? 'cover' : 'contain'}
+            onLoad={onLoadEnd}
+            onLoadStart={onLoadStart}
+            onProgress={onProgress}
+            onEnd={onEnd}
+            paused={!state.play}
+            fullscreen={state.fullscreen}
+            audioOnly={route.params.type == 'video' ? false : true}
+            disableFocus={true}
+          />
+          {state.showControls && (
+            <View style={styles.controlOverlay}>
+              {route.params.type == 'audio' && (
+                <Image
+                  source={require('../../Assets/player_background.png')}
+                  style={{
+                    width: WIDTH,
+                    height: HEIGHT,
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                  }}
+                  resizeMode={'cover'}
+                />
+              )}
+              {isLoading ? (
+                <View
+                  style={{
+                    width: WIDTH,
+                    height: HEIGHT / 1.1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AnimatedLoader loading={isLoading} />
+                </View>
+              ) : (
+                <>
+                  <TouchableOpacity
+                    onPress={() => handleFullscreen()}
+                    hitSlop={{
+                      top: 10,
+                      bottom: 10,
+                      left: 10,
+                      right: WIDTH * 0.1,
+                    }}
+                    style={styles.fullscreenButton}>
+                    {state.fullscreen ? (
+                      <MaterialCommunityIcons
+                        name="fullscreen-exit"
+                        size={25}
+                        color={'#fff'}
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name="fullscreen"
+                        size={25}
+                        color={'#fff'}
+                      />
+                    )}
+                  </TouchableOpacity>
+                  <PlayerControls
+                    onPlay={handlePlayPause}
+                    onPause={handlePlayPause}
+                    playing={state.play}
+                    showPreviousAndNext={false}
+                    showSkip={true}
+                    skipBackwards={skipBackward}
+                    skipForwards={skipForward}
+                  />
+                  <Text
                     style={{
-                      width:WIDTH,
-                      height:HEIGHT/1.1,
-                      justifyContent: 'center',
-                      alignItems: 'center',
+                      fontSize: 30,
+                      color: COLORS.WHITE,
+                      fontFamily: FONT.FAMILY.SEMI_BOLD,
+                      left: '3%',
+                      marginBottom: GAP.SMALL,
                     }}>
-                    <ActivityIndicator size="large" color="#fff" />
-                  </View>
-                ) : (
-                  <>
-                    <PlayerControls
-                      onPlay={handlePlayPause}
-                      onPause={handlePlayPause}
-                      playing={state.play}
-                      showPreviousAndNext={false}
-                      showSkip={true}
-                      skipBackwards={skipBackward}
-                      skipForwards={skipForward}
-                    />
-                    <Text style={{fontSize:30, color:COLORS.WHITE, fontFamily:FONT.FAMILY.SEMI_BOLD,left:"3%", marginBottom:GAP.SMALL}}>{route?.params?.name}</Text>
-                    <Text style={{color:COLORS.WHITE, left:"3%", fontFamily:FONT.FAMILY.REGULAR, marginBottom:GAP.MEDIUM}}>Upload By: Admin</Text>
-                    <ProgressBar
-                      currentTime={state.currentTime}
-                      duration={state.duration > 0 ? state.duration : 0}
-                      onSlideStart={handlePlayPause}
-                      onSlideComplete={handlePlayPause}
-                      onSlideCapture={onSeek}
-                    />
-                  </>
-                )}
-                
-              </View>
-            )}
-          </View>
-        </TouchableWithoutFeedback>
+                    {route?.params?.name}
+                  </Text>
+                  <Text
+                    style={{
+                      color: COLORS.WHITE,
+                      left: '3%',
+                      fontFamily: FONT.FAMILY.REGULAR,
+                      marginBottom: GAP.MEDIUM,
+                    }}>
+                    Upload By: Admin
+                  </Text>
+                  <ProgressBar
+                    currentTime={state.currentTime}
+                    duration={state.duration > 0 ? state.duration : 0}
+                    onSlideStart={handlePlayPause}
+                    onSlideComplete={handlePlayPause}
+                    onSlideCapture={onSeek}
+                  />
+                </>
+              )}
+            </View>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 

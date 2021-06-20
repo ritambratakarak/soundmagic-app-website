@@ -59,10 +59,10 @@ const Homeloader = () => {
               <View style={styles.caregory} />
               <View style={styles.caregory} />
               <View style={styles.caregory} />
+              {/* <View style={styles.caregory} />
               <View style={styles.caregory} />
               <View style={styles.caregory} />
-              <View style={styles.caregory} />
-              <View style={styles.caregory} />
+              <View style={styles.caregory} /> */}
             </View>
             <View style={{flexDirection: 'row', marginBottom:HEIGHT * 0.02}}>
               <View style={{width: 40, height: 15, marginRight:10}} />

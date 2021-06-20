@@ -14,7 +14,9 @@ import {COLORS, HEIGHT, FONT, GAP, WIDTH} from '../../Utils/constants';
 import CategogyList from '../Common/CategogyList';
 import Heading from '../Common/Heading';
 import ProgressiveImage from '../Common/PrograssiveImage';
+import Favorite from '../Favorite';
 import RatingComponent from '../Rating/Rating';
+
 
 export default Courses = ({
   image,

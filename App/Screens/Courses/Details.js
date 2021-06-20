@@ -39,12 +39,16 @@ function Details() {
   let stopFetchMore = true;
 
   useEffect(() => {
+    const router = route.params;
+    const categorydata = router;
+    if(categorydata != undefined){
     // input.current.focus()
-    console.log('details', route.params.item);
-    setalldata(route.params.item);
-    const coursedata = route.params.item;
-    const couseid = coursedata._id;
+    console.log('details', route?.params?.item);
+    setalldata(route?.params?.item);
+    const coursedata = route?.params?.item;
+    const couseid = coursedata?._id;
     getReviews(couseid);
+    }
   }, [route]);
 
   const getReviews = async (id) => {
@@ -277,7 +281,7 @@ function Details() {
                 <Text
                   style={[styles.description, {color: COLORS.PRIMARY}]}
                   onPress={() =>
-                    navigation.navigate('AllCourses', {item: alldata.tutorials})
+                    navigation.navigate('AllCourses', {item: alldata.tutorials, type: "Details"})
                   }>
                   {'View all'}
                 </Text>
