@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
     fontSize: FONT.SIZE.LARGE,
     color: "#FFF",
     textTransform: 'uppercase',
-    fontFamily: FONT.FAMILY.BOOK,
-    fontWeight: "bold",
-    letterSpacing: 1
+    fontFamily: FONT.FAMILY.HEAVY,
+    fontWeight: "900",
+    letterSpacing: 1,
   },
   buttonDark: {
     width: '100%',
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     fontSize: FONT.SIZE.MEDIUM,
     color: COLORS.WHITE,
     textTransform: 'uppercase',
-    fontFamily: FONT.FAMILY.SEMI_BOLD
+    // fontFamily: FONT.FAMILY.SEMI_BOLD
   },
 })

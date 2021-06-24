@@ -8,7 +8,7 @@ import {
   Image,
   FlatList,
   RefreshControl,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import Toast from 'react-native-root-toast';
 import AnimatedLoader from '../../Components/AnimatedLoader';
@@ -18,10 +18,15 @@ import Filter from '../../Components/SearchComponent/Filter';
 import Search from '../../Components/SearchComponent/Search';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
 import CoursesItem from '../../Components/Courses/Courses';
-import Coursesloader from '../../Components/Courses/Cousesloader';
+import {useDispatch, useSelector} from 'react-redux';
+import {logoutUser} from '../../Redux/Actions/authAction';
+import {addFavorite, removeFavorite} from '../../Redux/Actions/favoriteaction';
+import Filterloader from '../../Components/SearchComponent/Filterloader';
 
 function Track() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const favoritedata = useSelector((state) => state.favorite);
   const [search, setsearch] = useState('');
   const [modal, setModal] = React.useState(false);
   const [cousesdata, setcousesdata] = React.useState([]);
@@ -32,18 +37,33 @@ function Track() {
     getTrack();
   }, []);
 
+  useEffect(() => {
+    if (favoritedata != null) {
+      if (favoritedata?.favorite != null) {
+        getTrack();
+        dispatch(addFavorite(null));
+      }
+    }
+  }, [favoritedata]);
+
   useFocusEffect(
     useCallback(() => {
       getTrack();
     }, []),
   );
 
-  const getTrack = async () => {
+  const getTrack = async (name) => {
     setLoading(true);
     const alldata = await AsyncStorage.getItem('@user');
     const data = JSON.parse(alldata);
     const authtoken = data.authtoken;
-    Network(`/get-track-list?page=${1}&limit=${20}`, 'get', {authtoken})
+    let url = '';
+    if (name != undefined) {
+      url = `/get-track-list?page=${1}&limit=${20}&name=${name}`;
+    } else {
+      url = `/get-track-list?page=${1}&limit=${20}`;
+    }
+    Network(url, 'get', {authtoken})
       .then(async (res) => {
         setLoading(false);
         setrefreash(false);
@@ -89,27 +109,12 @@ function Track() {
     const userdata = await AsyncStorage.getItem('@user');
     const data = JSON.parse(userdata);
     const authtoken = data.authtoken;
-    setLoading(true);
     const submitData = {
       trackID: id,
       authtoken,
     };
-    Network('/add-favorite-track', 'post', submitData)
-      .then(async (res) => {
-        console.log(res);
-        setLoading(false);
-        if (res.response_code === 200) {
-          getTrack();
-          Toast.show(res.response_message);
-        } else {
-          Toast.show(res.response_message);
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-        const Error = error.response.data;
-        Toast.show(Error.response_message);
-      });
+    setLoading(true);
+    dispatch(addFavorite(submitData));
   };
 
   const RemoveFavorite = async (id) => {
@@ -121,55 +126,31 @@ function Track() {
       trackID: id,
       authtoken,
     };
-    Network('/remove-favorite-track', 'post', submitData)
-      .then(async (res) => {
-        console.log(res);
-        setLoading(false);
-        if (res.response_code === 200) {
-          getTrack();
-          Toast.show(res.response_message);
-        } else {
-          Toast.show(res.response_message);
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-        const Error = error.response.data;
-        Toast.show(Error.response_message);
-      });
+    dispatch(removeFavorite(submitData));
   };
 
   return (
     <>
-      {loading ? (
-        <View style={styles.container}>
-          <View style={styles.repeatContainer}>
-            <Coursesloader />
-          </View>
-        </View>
-      ) : (
-        <View style={styles.container}>
-          {/* <AnimatedLoader loading={loading} /> */}
-          <Filter
-            modal={modal}
-            close={() => setModal(!modal)}
-            applypress={(category, duration, rating) => {
-              navigation.navigate('Filter', {category, duration, rating}),
-                setModal(false);
+      <View style={styles.container}>
+        <View style={styles.repeatContainer}>
+          <Search
+            onChange={(text) => {
+              setsearch(text), getTrack(text);
             }}
+            value={search}
+            // keypress={() => navigation.navigate('Filter')}
+            onFocus={false}
+            placeholder={'Search for Track'}
+            inputwidth={'100%'}
+            showfilter={false}
           />
-          <View style={styles.repeatContainer}>
-            {/* <Search
-              onChange={(text) => setsearch(text)}
-              value={search}
-              onPress={() => setModal(true)}
-              keypress={() => navigation.navigate('Filter')}
-              onFocus={false}
-            /> */}
+          {loading ? (
+            <Filterloader />
+          ) : (
             <View style={{marginVertical: GAP.MEDIUM}}>
               <Text style={styles.courses}>All Track</Text>
               <FlatList
-                style={{marginBottom: HEIGHT * 0.05}}
+                style={{marginBottom: HEIGHT * 0.2}}
                 showsVerticalScrollIndicator={false}
                 horizontal={false}
                 data={cousesdata}
@@ -184,11 +165,17 @@ function Track() {
                     categoryname={item.name}
                     tutorname={item.instructor}
                     qty={item.type + '  ' + format(item.duration)}
-                    onPress={()=> navigation.navigate("TrackDetails", {item: item})}
+                    onPress={() =>
+                      navigation.navigate('TrackDetails', {item: item})
+                    }
                     showrating={false}
                     showfavorite={true}
                     fortrackComponent={false}
-                    Pressfavorite={() => item.isFavorite == true ? RemoveFavorite(item._id) : AddFavorite(item._id)}
+                    Pressfavorite={() =>
+                      item.isFavorite == true
+                        ? RemoveFavorite(item._id)
+                        : AddFavorite(item._id)
+                    }
                     favorite={item.isFavorite}
                   />
                 )}
@@ -207,7 +194,6 @@ function Track() {
                     style={{
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: WIDTH,
                     }}>
                     <Text
                       style={{
@@ -221,11 +207,10 @@ function Track() {
                   </View>
                 }
               />
-              
             </View>
-          </View>
+          )}
         </View>
-      )}
+      </View>
     </>
   );
 }

@@ -147,6 +147,9 @@ function ShowFilterData() {
           value={search}
           onPress={() => setModal(true)}
           onFocus={true}
+          placeholder={"Search for Courses"}
+          inputwidth={"85%"}
+          showfilter={true}
         />
         {loading ? (
           <Filterloader />

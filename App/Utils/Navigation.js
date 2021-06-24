@@ -71,7 +71,7 @@ export default Navigation = () => {
 
   const Title = (props) => {
     return (
-      <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.SEMI_BOLD }}>{props.title}</Text>
+      <Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.HEAVY }}>{props.title}</Text>
     )
   }
 
@@ -96,7 +96,7 @@ export default Navigation = () => {
             title: '',
             headerShown: true,
             headerTransparent: true,
-            headerTitle: (props) => (<Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.SEMI_BOLD, color: COLORS.WHITE }}>Profile</Text>),
+            headerTitle: (props) => (<Text style={{ fontSize: FONT.SIZE.EXTRALARGE, fontFamily: FONT.FAMILY.HEAVY, color: COLORS.WHITE }}>Profile</Text>),
             headerLeft: (props) => (<TouchableOpacity onPress={() => navigation.navigate("Home")}>
               <Feather
                 name="chevron-left"

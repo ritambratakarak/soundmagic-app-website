@@ -172,7 +172,9 @@ const styles = StyleSheet.create({
     width: "100%", height: HEIGHT * 0.38, alignItems: "center", justifyContent: "center"
   },
   profilename: {
-    fontSize: FONT.SIZE.VERYLARGE, color: COLORS.WHITE, textAlign: "center", fontFamily: FONT.FAMILY.SEMI_BOLD
+    fontSize: FONT.SIZE.VERYLARGE, color: COLORS.WHITE, textAlign: "center",
+    fontFamily: FONT.FAMILY.HEAVY,
+    fontWeight:"600"
   },
   email: {
     color: COLORS.WHITE, fontSize: FONT.SIZE.SMALL, fontFamily: FONT.FAMILY.REGULAR, textAlign: "center"

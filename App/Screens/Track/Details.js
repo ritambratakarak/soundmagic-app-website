@@ -12,19 +12,21 @@ import CategogyList from '../../Components/Common/CategogyList';
 import TextContainer from '../../Components/Common/Text';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {logoutUser} from '../../Redux/Actions/authAction';
 import Toast from 'react-native-root-toast';
 import AnimatedLoader from '../../Components/AnimatedLoader';
 import ProgressiveImage from '../../Components/Common/PrograssiveImage';
 import Favorite from '../../Components/Favorite';
 import Button from '../../Components/Common/Button';
+import { addFavorite, removeFavorite } from '../../Redux/Actions/favoriteaction';
 
 function TrackDetails() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const route = useRoute();
   const input = useRef(null);
+  const favoritedata = useSelector((state) => state.favorite);
   const [alldata, setalldata] = useState('');
   const [review, setreview] = useState([]);
   const [loadmore, setloadmore] = useState(false);
@@ -48,18 +50,42 @@ function TrackDetails() {
     }
   }, [route]);
 
-  function format(time) {
-    let hrs = ~~(time / 3600);
-    let mins = ~~((time % 3600) / 60);
-    let secs = ~~time % 60;
-
-    let ret = '';
-    if (hrs > 0) {
-      ret += '' + hrs + ' hours ' + (mins < 10 ? '0' : '');
+  useEffect(() => {
+    if(favoritedata != null){
+      if(favoritedata?.favorite != null){
+        console.log("favoritedata", favoritedata);
+        const spread = {...alldata, isFavorite: favoritedata.favorite};
+        // console.log("spread", spread);
+        setalldata(spread);
+        setLoading(false);
+        dispatch(addFavorite(null))
+      }
     }
-    ret += '' + mins + ' min ' + (secs < 10 ? '0' : '');
-    ret += '' + secs + ' sec ';
-    return ret;
+  }, [favoritedata]);
+
+
+  const AddFavorite = async (id) => {
+    const userdata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(userdata);
+    const authtoken = data.authtoken;
+    const submitData = {
+      trackID: id,
+      authtoken,
+    };
+    setLoading(true);
+    dispatch(addFavorite(submitData))
+  }
+
+  const RemoveFavorite = async (id) => {
+    const userdata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(userdata);
+    const authtoken = data.authtoken;
+    setLoading(true);
+    const submitData = {
+      trackID: id,
+      authtoken,
+    };
+    dispatch(removeFavorite(submitData))
   }
 
   return (
@@ -77,7 +103,8 @@ function TrackDetails() {
             <View style={{paddingHorizontal: 5, paddingVertical: 15}}>
               <View
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Heading color={'#000'} name={alldata.name} />
+                <Heading color={'#000'} name={alldata.name} />  
+                <Favorite AddFav={() => alldata.isFavorite ? RemoveFavorite(alldata._id) : AddFavorite(alldata._id)} fav={alldata.isFavorite} />     
               </View>
               <CategogyList
                 categoryname={'Activity'}

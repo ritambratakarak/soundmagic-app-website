@@ -250,7 +250,9 @@ const Home = (props) => {
                     fontFamily: FONT.FAMILY.MEDIUM,
                   }}>
                   {gettime() + ', '}{' '}
-                  <Text style={{fontFamily: FONT.FAMILY.BOLD}}>
+                  <Text style={{
+                      fontFamily: FONT.FAMILY.HEAVY
+                    }}>
                     {userMe != null ? userMe.fname : ''}
                   </Text>
                 </Text>
@@ -261,6 +263,9 @@ const Home = (props) => {
                 onPress={() => setModal(true)}
                 keypress={() => navigation.navigate('Filter')}
                 onFocus={false}
+                placeholder={"Search for Courses"}
+                inputwidth={"85%"}
+                showfilter={true}
               />
             </View>
             <View style={[styles.repeatContainer, {marginBottom: 0}]}>
@@ -444,6 +449,7 @@ const Home = (props) => {
               name={'New Addtion'}
               data={allcousesdata}
               initialnumber={10}
+              onPress={()=> alert("bbb")}
             />
           </View>
         </ScrollView>

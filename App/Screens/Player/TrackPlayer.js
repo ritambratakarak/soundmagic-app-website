@@ -182,6 +182,13 @@ const TrackPlayer = () => {
             fullscreen={state.fullscreen}
             audioOnly={route.params.type == 'video' ? false : true}
             disableFocus={true}
+            bufferConfig={{
+              minBufferMs: 15000,
+              maxBufferMs: 50000,
+              bufferForPlaybackMs: 2500,
+              bufferForPlaybackAfterRebufferMs: 5000
+            }}
+            onBuffer={()=> setIsLoading(true)} 
           />
           {state.showControls && (
             <View style={styles.controlOverlay}>
@@ -237,7 +244,7 @@ const TrackPlayer = () => {
                       skipBackwards={skipBackward}
                       skipForwards={skipForward}
                     />
-                    <Text style={{fontSize:30, color:COLORS.WHITE, fontFamily:FONT.FAMILY.SEMI_BOLD,left:"3%", marginBottom:GAP.SMALL}}>{route?.params?.name}</Text>
+                    <Text style={{fontSize:30, color:COLORS.WHITE, fontFamily:FONT.FAMILY.HEAVY,left:"3%", marginBottom:GAP.SMALL}}>{route?.params?.name}</Text>
                     <Text style={{color:COLORS.WHITE, left:"3%", fontFamily:FONT.FAMILY.REGULAR, marginBottom:GAP.MEDIUM}}>Upload By: Admin</Text>
                     <ProgressBar
                       currentTime={state.currentTime}

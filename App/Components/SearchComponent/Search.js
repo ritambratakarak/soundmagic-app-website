@@ -5,15 +5,15 @@ import Ripple from 'react-native-material-ripple';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-export default Search = ({ reffocus, value, onPress, onChange, keypress, onFocus }) => {
+export default Search = ({ reffocus, value, onPress, onChange, keypress, onFocus, placeholder, inputwidth, showfilter }) => {
   return (
     <View style={{ flexDirection: "row", marginVertical: HEIGHT * 0.005, justifyContent: "space-between" }}>
-      <View style={styles.InputContainer}>
+      <View style={[styles.InputContainer,{width: inputwidth}]}>
         <TextInput
           ref={reffocus}
           style={styles.textInput}
           placeholderTextColor={COLORS.GRAY}
-          placeholder={"Search for Courses"}
+          placeholder={placeholder}
           onChangeText={(text) => onChange(text)}
           value={value}
           onTouchStart={keypress}
@@ -26,13 +26,15 @@ export default Search = ({ reffocus, value, onPress, onChange, keypress, onFocus
           style={{ position: "absolute", right: 10, top: 10 }}
         />
       </View>
-      <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={{ backgroundColor: "#edeffc", height: HEIGHT * 0.06, width: WIDTH * 0.12, borderRadius: HEIGHT / 2, alignItems: "center", justifyContent: "center" }} onPress={onPress}>
-        <AntDesign
-          name="filter"
-          size={HEIGHT * 0.03}
-          color={'gray'}
-        />
-      </Ripple>
+      {showfilter &&
+        <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={{ backgroundColor: "#edeffc", height: HEIGHT * 0.06, width: WIDTH * 0.12, borderRadius: HEIGHT / 2, alignItems: "center", justifyContent: "center" }} onPress={onPress}>
+          <AntDesign
+            name="filter"
+            size={HEIGHT * 0.03}
+            color={'gray'}
+          />
+        </Ripple>
+      }
     </View>
   )
 

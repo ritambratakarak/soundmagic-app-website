@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     fontSize: FONT.SIZE.SMALL,
   },
   successMsg: {
-    fontFamily: FONT.FAMILY.SEMI_BOLD,
+    fontFamily:FONT.FAMILY.HEAVY,
+    // fontFamily: FONT.FAMILY.SEMI_BOLD,
     fontSize: FONT.SIZE.MEDIUM,
     color: COLORS.WHITE,
     textAlign: 'center',

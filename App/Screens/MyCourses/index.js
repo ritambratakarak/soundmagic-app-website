@@ -90,6 +90,9 @@ function MyCourses() {
               onPress={() => setModal(true)}
               keypress={() => navigation.navigate('Filter')}
               onFocus={false}
+              placeholder={"Search for Courses"}
+              inputwidth={"85%"}
+              showfilter={true}
             />
             <View style={{marginVertical: GAP.MEDIUM}}>
               <Text style={styles.courses}>All Couses</Text>

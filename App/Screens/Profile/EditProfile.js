@@ -91,6 +91,9 @@ function EditProfile(props) {
           setLoading(false);
           if (res.response_code === 200) {
             getData()
+            const sprate = {...data, fname: fname, lname: lname};
+            dispatch(loginUser(sprate))
+            await AsyncStorage.setItem('@user', JSON.stringify(sprate))
             Toast.show(res.response_message)
           } else {
             Toast.show('Wrong email or password !')

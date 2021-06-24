@@ -24,6 +24,7 @@ const LoginInput = (props) => {
         keyboardType={keyboard ? keyboard : 'default'}
         maxLength={max}
         onFocus={onFocus}
+        autoCapitalize='none'
       />
       <TouchableHighlight style={{position:"absolute", top:10, right:2}} onPress={rightpress}>
         <Entypo
