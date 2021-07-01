@@ -1,0 +1,56 @@
+/*category-section*/
+.category-section{
+    padding: 70px 0 60px;
+}
+
+.course-section{
+    padding: 70px 0 60px;
+}
+.course-slider{
+    margin-top: 22px;
+}
+.course-box-img{
+    border-radius: 20px;
+    overflow: hidden;
+}
+.course-box-img img{
+    display: block;
+}
+.course-box h4{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: #021B77;
+    text-align: center;
+    margin: 20px 0;
+    font-family: 'Philosopher', sans-serif;
+    }
+.course-slider{
+    display: block;
+}
+.course-slider .owl-nav.disabled{
+    display: block;
+}
+.course-slider .owl-nav .owl-prev{
+    background: url(./../../images/prev-slider.png) no-repeat center center!important;
+    width: 40px;
+    height: 40px;
+    outline: 0;
+    position: absolute;
+    left: -70px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.course-slider .owl-nav .owl-prev span, .course-slider .owl-nav .owl-next span{
+    display: none;
+}
+.course-slider .owl-nav .owl-next{
+    background: url(./../../images/next-slider.png) no-repeat center center!important;
+    width: 40px;
+    height: 40px;
+    outline: 0;
+    position: absolute;
+    right: -70px;
+    top: 50%;
+    transform: translate(0, -50%);
+}

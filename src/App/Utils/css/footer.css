@@ -1,0 +1,152 @@
+/*footer*/
+.footer{
+  margin-top: 80px;
+  padding: 70px 0 56px;
+  background: #F5F9FF;
+}
+.footer-box h4{
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #051445;
+  font-family: 'Philosopher', sans-serif;
+  margin: 0 0 25px 0;
+  padding: 0;
+}
+.footer-box ul{
+ margin: 0;
+  padding: 0;
+}
+.footer-box ul li{
+  list-style-type: none;
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+.footer-box ul li:last-child{
+  margin-bottom: 0;
+}
+.footer-box ul li a{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #6B6B6B;
+  text-decoration: none;
+}
+.footer-box ul li a:hover{
+  color: #000;
+}
+.footer-inner{
+  display: flex;
+}
+.footer-box{
+  margin-right: 85px;
+}
+.footer-box p{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #6B6B6B;
+  margin-bottom: 15px;
+}
+.footer-box p.location{
+  background: url(./../../images/location.svg) no-repeat left center;
+  padding-left: 25px;
+}
+.footer-box p.phone{
+  background: url(./../../images/phone.svg) no-repeat left center;
+  padding-left: 25px;
+}
+.footer-box p.email{
+  background: url(./../../images/email.svg) no-repeat left center;
+  padding-left: 25px;
+}
+.quick-footer{
+  width: 103px;
+}
+.legal-footer{
+  width: 141px;
+}
+.contact-footer{
+  width: 277px;
+}
+.subcribe-footer{
+  width: 370px;
+  margin-right: 0;
+}
+.subcription-section-footer{
+  position: relative;
+}
+.subcription-section-footer input[type="text"]{
+  height: 48px;
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.05);
+  padding: 0 120px 0 17px;
+  border: none;
+  border-radius: 24px;
+  outline: 0;
+  font-size: 14px;
+  color: #6B6B6B;
+}
+.subcription-section-footer button{
+  width: 113px;
+  height: 48px;
+  background: linear-gradient(95.04deg, #165CC2 6.03%, #021B77 96.11%);
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.app-store{
+  margin-top: 36px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.copy-right-section{
+  padding: 19px 0;
+  background: #fff;
+}
+.copy-right-section-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.copy-right-section-inner p{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 30px;
+  color: #9097A3;
+  margin: 0;
+  padding: 0;
+}
+.copy-right-section-inner p a{
+  text-decoration: none;
+  color: #9097A3;
+}
+
+.copy-right-section-inner ul{
+  margin: 0;
+  padding: 0;
+}
+.copy-right-section-inner ul li{
+  list-style-type: none;
+  display: inline-block;
+  margin-left: 19px;
+}
+.copy-right-section-inner ul li img{
+  transition: .5s;
+  
+}
+.copy-right-section-inner ul li img:hover{
+  transform: rotate(-360deg);
+}

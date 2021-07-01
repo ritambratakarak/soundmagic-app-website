@@ -1,0 +1,349 @@
+@media(min-width:1200px) and (max-width:1400px){
+    .banner-text{
+        top: 58%;
+    }
+    .banner-text h2 {
+        font-size: 32px;
+        line-height: 42px;
+    }
+    .banner-text h3{
+        font-size: 45px;
+        line-height: 40px;
+    }
+    .banner-text p{
+        font-size: 15px;
+        line-height: 22px;
+        margin-top: 15px;
+    }
+    .banner-text button.enroll-now{
+        margin-top: 25px;
+    }
+    .banner-text button.enroll-now {
+        width: 145px;
+        height: 45px;
+        font-size: 13px;
+    }
+    .about-text h2{
+        font-size: 16px;
+    }
+    .about-text h3{
+        font-size: 25px;
+        line-height: 28px;
+    }
+    .about-text p{
+        font-size: 15px;
+        line-height: 22px;
+        margin-top: 12px;
+    }
+    .about-text button.know-more{
+        width: 150px;
+        height: 45px;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+    
+    .about-section:before{
+        position: absolute;
+        right: 0;
+        bottom:-175px;
+        width: 350px;
+        height: 400px;
+        background-size: 100%;
+    }
+}
+
+
+
+@media(max-width:770px){
+   
+    .header{
+        position: relative;
+        padding: 10px 0 0;
+    }
+    .logo img{
+        max-width: 80px;
+    }
+    .header-inner{
+        flex-direction: column;
+    }
+    .header-right{
+        width: 100%;
+        position: relative;
+    }
+    .header-right{
+        flex-direction: column;
+      
+        padding: 0;
+        align-items: flex-start;
+    }
+    .navigation{
+        width: 100%;
+    }
+    .navigation .bg-light{
+        width: 100%;
+        background: #ddd!important;
+        padding: 8px 10px;
+
+        margin-top: 15px;
+    }
+    
+    .navigation .navbar-collapse{
+        position: absolute;
+        background: #fbf4f4;
+        width: 100%;
+        left: 0;
+        top: 51px;
+        z-index: 999;
+    }
+    .navigation .navbar-toggler{
+        padding: 2px 5px;
+        outline: 0;
+    }
+    .navigation .navbar-nav{
+        padding: 15px;
+    }
+    
+    .navigation .nav-link{
+        padding: 0 0 10px 0!important;
+    }
+    .navigation .nav-item:last-child .nav-link{
+        padding-bottom: 0!important;
+    }
+    .search-account{
+        position: absolute;
+        right: 16px;
+        top: 22px;
+    }
+    .header-search:hover .search-input{
+        width: 220px;
+    }
+    .header-search .search-btn{
+        width: 40px;
+        height: 40px;
+    }
+    .header-search .search-input{
+        height: 40px;
+    }
+    .header .container{
+        padding: 0;
+    }
+    
+    .banner-text h2{
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .banner-text h3{
+        font-size: 20px;
+        line-height: 26px;
+    }
+    .banner-text p{
+        display: none;
+    }
+    .banner-text button.enroll-now {
+        width: 125px;
+        height: 38px;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+    
+     
+    .banner-text-inner{
+        width: 95%;
+        text-align: center;
+    }
+    
+    .category-section{
+        padding: 25px 0 0 0;
+    }
+    .category-section h2.heading{
+        font-size: 22px;
+        line-height: 25px;
+    }
+    .category-section p.description{
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .category-box{
+        border: 1px solid #ccc;
+    }
+    .owl-theme .owl-nav{
+        display: none;
+    }
+    .main-plan-section{
+        margin-top: 30px;
+    }
+    .plan-box{
+        margin-bottom: 20px;
+    }
+   
+    .about-text{
+        position: relative;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        top: 0;
+        transform: inherit;
+    }
+    .about-text-inner{
+        width: 100%;
+        padding: 15px 10px;
+    }
+    .about-section:before{
+        display: none;
+    }
+    .about-text h3{
+        font-size: 22px;
+        line-height: 28px;
+        margin-top: 10px;
+    }
+    .video-pose{
+        margin-top: 20px;
+    }
+    
+    .video-track-section{
+        padding: 30px 0;
+        text-align: center;
+    }
+    .video-track-text{
+        padding-right: 0;
+    }
+    .video-track-text h3{
+        font-size: 22px; 
+        line-height: 28px;
+    }
+    .video-pose:before{
+        display: none;
+    }
+    .video-first{
+        width: 100%;
+    }
+    .video-first > img{
+        width: 100%;
+    }
+    .video-second{
+        position: relative;
+        top: 0;
+        margin-top: 15px;
+    }
+    .video-tag{
+        position: relative;
+        right: 0;
+        top: 0;
+        margin-top: 15px;
+        width: 100%;
+    }
+    .video-second .video-tag{
+        left: 0;
+        bottom: 0;
+    }
+    .footer-inner{
+        flex-direction: column;
+    }
+    .footer{
+        margin-top: 30px;
+        padding: 30px 0;
+    }
+    .footer-box{
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+    }
+    .footer-box:last-child{
+        margin-bottom: 0;
+    }
+    .footer-box ul li{
+        margin-bottom: 7px;
+    }
+    .footer-box h4{
+        margin-bottom: 15px;
+    }
+/*
+    .footer-box p{
+        text-align: left;
+    }
+*/
+    .footer-box p.location{
+        background-position: left 5px;
+    }
+    .app-store{
+        margin-top: 20px;
+    }
+    .app-store img{
+        max-width: 100%;
+        width: 140px;
+    }
+    .copy-right-section-inner{
+        flex-direction: column;
+        text-align: center;
+    }
+    .copy-right-section-inner ul{
+        margin-top: 10px;
+    }
+    .copy-right-section-inner ul li{
+        margin: 0 5px;
+    }
+    .copy-right-section-inner p{
+        line-height: 22px;
+    }
+    .copy-right-section{
+        padding: 12px 0;
+    }
+    .plan-box h5{
+        font-size: 25px;
+    }
+   
+}
+
+@media(min-width:992px) and (max-width:1199px){
+    .banner-text-inner{
+        width: 100%;
+        text-align: center;
+        
+    }
+    .banner-text{
+        top: 60%;
+    }
+    .banner-text h2{
+        font-size: 25px;
+        line-height: 32px;
+    }
+    .banner-text h3{
+        font-size: 30px;
+        line-height: 38px;
+    }
+    .about-text-inner{
+        text-align: center;
+        width: 100%;
+        padding: 0 15px;
+    }
+    .about-text p{
+        font-size: 14px;
+        margin-top: 7px;
+    }
+    .about-text h3{
+        font-size: 22px;
+        line-height: 26px;
+    }
+    .about-text button.know-more{
+        margin-top: 10px;
+    }
+    .owl-theme .owl-nav{
+        display: none!important;
+    }
+    .video-tag{
+        right: -117px;
+    }
+    .contact-footer{
+        width: 206px;
+    }
+    .footer-box p.location{
+        background-position: left 5px;
+    }
+    .subcribe-footer{
+        width: 295px;
+    }
+    .app-store img{
+        max-width: 100%;
+        width: 140px;
+    }
+}

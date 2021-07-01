@@ -1,0 +1,87 @@
+.experience-with-us{
+    padding-top: 20px;
+    padding-bottom: 0;
+}
+.main-plan-section{
+    margin-top: 70px;
+}
+
+.plan-box{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 30px 30px 42px;
+    text-align: center;
+    position: relative;
+    transition: .5s;
+    top:0;
+}
+.plan-box h3{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #051445;
+    margin: 0;
+    padding: 0;
+}
+.plan-box h4{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #7C88AF;
+    margin: 7px 0 0 0;
+    padding: 0;
+}
+
+.plan-box h5{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 32px;
+    text-align: center;
+    color: #021B77;
+    margin: 20px 0 0 0;
+    padding: 0;
+    font-family: 'Philosopher', sans-serif;
+}
+.plan-box h5 span{
+    font-size: 20px;
+    
+}
+.plan-box p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    color: #9EA1AC;
+    margin-top: 26px;
+}
+
+.plan-box button.get-started {
+    width: 165px;
+    height: 52px;
+    background: #FFFFFF;
+    border-radius: 26px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #051445;
+    border: 1px solid #165CC2;
+    margin-top: 30px;
+}
+.plan-box:hover{
+    background: #051445;
+    top: -30px;
+}
+.plan-box:hover h3, .plan-box:hover h5{
+    color: #fff;
+}

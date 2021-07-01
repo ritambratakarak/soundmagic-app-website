@@ -1,0 +1,101 @@
+/*video-track*/
+.video-track-section{
+    background: #051445;
+    padding: 75px 0 80px;
+    overflow: hidden;
+}
+.video-track-text{
+    padding-right: 40px;
+}
+.video-track-text h2{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #7F879E;
+    margin: 0 0 10px 0;
+    padding: 0;
+
+}
+
+.video-track-text h3{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 36px;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    font-family: 'Philosopher', sans-serif;
+}
+.video-track-text p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    color: #7F879E;
+    margin: 20px 0 0 0;
+    padding: 0;
+}
+.video-track-text button.get-started{
+    width: 165px;
+    height: 52px;
+    background: #FFFFFF;
+    border-radius: 26px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #051445;
+    border: none;
+    margin-top: 40px;
+
+}
+
+.video-pose{
+    position: relative;
+    
+    
+}
+.video-pose:before{
+    background: url(./../../images/video-bg.png) no-repeat center center;
+    position: absolute;
+    left: 40px;
+    top: -75px;
+    width: 603px;
+    height: 500px;
+    content: "";
+}
+.video-first{
+    width: 370px;
+    position: relative;
+    border-radius: 25px;
+}
+.video-tag{
+    width: 186px;
+    height: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 38px rgba(22, 92, 194, 0.2);
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 20px;
+    color: #051445;
+    line-height: 50px;
+    text-align: center;
+    position: absolute;
+    right: -166px;
+    top: 26px;
+}
+
+.video-second{
+    position: absolute;
+    right: 0;
+    top: 120px;
+}
+.video-second .video-tag{
+    right: auto;
+    left: -166px;
+    top: auto;
+    bottom: 26px;
+}

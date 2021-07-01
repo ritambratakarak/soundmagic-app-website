@@ -1,0 +1,84 @@
+.header {
+  padding: 20px 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.header-search {
+  margin-right: 20px;
+  position: relative;
+  border-radius: 50%;
+}
+.header-search .search-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #051445;
+  outline: 0;
+  position: relative;
+  z-index: 99;
+}
+.header-search .search-input {
+  width: 0;
+  height: 44px;
+  background: #051445;
+  border-radius: 25px;
+  position: absolute;
+  right: 5px;
+  top: 0;
+  outline: 0;
+  border: none;
+  padding: 0 20px;
+  transition: 0.5s;
+  color: #968d9e;
+  font-size: 16px;
+  opacity: 0;
+}
+.header-search:hover .search-input {
+  width: 350px;
+  opacity: 1;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.navigation .bg-light {
+  background: none;
+  padding: 0;
+  background: none !important;
+}
+.navigation .nav-link {
+  padding: 0 18px !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #000000 !important;
+  font-family: "Philosopher", sans-serif;
+  transition: 0.5s;
+}
+.navigation .navbar-light .navbar-nav .active > .nav-link,
+.navigation .navbar-light .navbar-nav .nav-link.active,
+.navigation .navbar-light .navbar-nav .nav-link.show,
+.navigation .navbar-light .navbar-nav .show > .nav-link {
+  color: #165cc2 !important;
+}
+.navigation .navbar-light .navbar-nav .nav-link:focus,
+.navigation .navbar-light .navbar-nav .nav-link:hover {
+  color: #165cc2 !important;
+}
+
+.search-account {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+}
