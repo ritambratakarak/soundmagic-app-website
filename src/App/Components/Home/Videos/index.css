@@ -50,16 +50,12 @@
     color: #051445;
     border: none;
     margin-top: 40px;
-
 }
-
 .video-pose{
-    position: relative;
-    
-    
+    position: relative;   
 }
 .video-pose:before{
-    background: url(./../../images/video-bg.png) no-repeat center center;
+    background: url(./../../../images/video-bg.png) no-repeat center center;
     position: absolute;
     left: 40px;
     top: -75px;

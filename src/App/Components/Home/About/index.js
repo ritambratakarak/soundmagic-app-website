@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "../../Utils/style.css";
-import "../About/about.css";
+import "../../../Utils/style.css";
+import "./about.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import about from './../../images/about-bg.png';
+import about from './../../../images/about-bg.png';
 
 
 function AboutComponents(props) {

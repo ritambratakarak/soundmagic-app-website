@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import "../../Utils/style.css";
+import "../../../Utils/style.css";
 import "../Banner/banner.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Banner from './../../images/banner.png';
-import Search from './../../images/header-search.png';
-import usersearch from './../../images/header-account.png';
+import Banner from './../../../images/banner.png';
 
 
 function BannerComponents(props) {

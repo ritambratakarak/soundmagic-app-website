@@ -1,13 +1,11 @@
 
 import axios from 'axios'
-var base_url = 'https://nodeserver.mydevfactory.com:1446/api/';
-export const image_url = 'https://nodeserver.mydevfactory.com:1446/';
+var base_url = 'https://nodeserver.mydevfactory.com:1449/api/';
+export const image_url = 'https://nodeserver.mydevfactory.com:1449/';
 var condition = navigator.onLine ? 'online' : 'offline';
 
 
 export const Network = (endpoint, method, body) => {
-
-
   return new Promise((resolve, reject) => {
     if (condition === 'online') {
       axios({
@@ -15,7 +13,7 @@ export const Network = (endpoint, method, body) => {
         url: `${base_url}${endpoint}`,
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': body ? body.authToken : ""
+          'x-access-token': body ? body.authtoken : ""
         },
         data: body
       })

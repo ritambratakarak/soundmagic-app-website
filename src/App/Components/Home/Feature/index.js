@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "../../Utils/style.css";
+import "../../../Utils/style.css";
 import "../Feature/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Featured1 from './../../images/featured1.png';
-import Featured2 from './../../images/featured2.png';
-import Featured3 from './../../images/featured3.png';
+import Featured1 from './../../../images/featured1.png';
+import Featured2 from './../../../images/featured2.png';
+import Featured3 from './../../../images/featured3.png';
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import OwlCarousel from "react-owl-carousel";

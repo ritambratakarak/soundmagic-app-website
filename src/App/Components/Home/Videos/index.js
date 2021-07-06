@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "../../Utils/style.css";
-import "../Videos/index.css";
+import "../../../Utils/style.css";
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import streach from './../../images/streach.png';
-import video2 from './../../images/video2.png';
-import video1 from './../../images/video1.png';
-import play from './../../images/play.png';
+import streach from './../../../images/streach.png';
+import video2 from './../../../images/video2.png';
+import video1 from './../../../images/video1.png';
+import play from './../../../images/play.png';
 
 
 function VideoComponents(props) {

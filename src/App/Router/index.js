@@ -4,13 +4,10 @@ import HomeScreen from './../Screens/Home';         //....Home components.....
 import NotFound from './../Error';
 import Dashboard from './../Screens/Dashboard/Home/index';
 import { useSelector } from 'react-redux';
-import ForgotComponent from './../Components/Comman/forgot';
-import ResetPassword from "./../Components/Comman/resetPass";
-import LoginScreen from "./../Components/Comman/login";
-import Signup from "./../Components/Comman/signup";
+import Forgotpassword from './../Screens/ForgotPassword/index';
+import LoginScreen from "./../Screens/Login/index";
+import Signup from "./../Screens/Register/index";
 
-
-export const currentURL = '/projects/suvendu/vivek/Fit4YourSports';
 
 
 function RouterScreen() {
@@ -18,7 +15,6 @@ function RouterScreen() {
     const [userMe, setUser] = useState(null);
     const [userType, setUserType] = useState(null)
 
-    
 
     useEffect(() => {
         let user = userdata && userdata._id ? true : false
@@ -38,27 +34,17 @@ function RouterScreen() {
             <div>
                 <Switch>
                     {
-                        userMe ?
-                            <>  
-                                <Route path='/' component={Dashboard} exact />
-                            </>
-                            :
-                            <>
-                                <Route path='/' component={HomeScreen} exact />
-                                <Route path='/login' component={LoginScreen} />
-                                <Route path='/signup' component={Signup} />
-                                <Route path='/resetPassword' component={ResetPassword} />
-                            </>
-
+                        <>
+                            <Route path='/' component={HomeScreen} exact />
+                            <Route path='/login' component={LoginScreen} />
+                            <Route path='/signup' component={Signup} />
+                            <Route path='/forgotpassword' component={Forgotpassword} />
+                        </>
                     }
                     <Route component={NotFound} />
-                </Switch >
-
+                </Switch>
             </div>
-        </Router >
-
-
-
+        </Router>
     );
 }
 

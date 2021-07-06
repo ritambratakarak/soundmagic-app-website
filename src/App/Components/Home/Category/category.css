@@ -65,7 +65,7 @@
     display: block;
 }
 .category-slider .owl-nav .owl-prev{
-    background: url(./../../images/prev-slider.png) no-repeat center center!important;
+    background: url(./../../../images/prev-slider.png) no-repeat center center!important;
     width: 40px;
     height: 40px;
     outline: 0;
@@ -78,7 +78,7 @@
     display: none;
 }
 .category-slider .owl-nav .owl-next{
-    background: url(./../../images/next-slider.png) no-repeat center center!important;
+    background: url(./../../../images/next-slider.png) no-repeat center center!important;
     width: 40px;
     height: 40px;
     outline: 0;

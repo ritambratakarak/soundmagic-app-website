@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "../../Utils/style.css";
-import "../Courses/index.css";
+import "../../../Utils/style.css";
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Course1 from './../../images/course1.png';
-import Course2 from './../../images/course2.png';
+import Course1 from './../../../images/course1.png';
+import Course2 from './../../../images/course2.png';
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import OwlCarousel from "react-owl-carousel";

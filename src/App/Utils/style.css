@@ -1,3 +1,73 @@
+a {
+    color: #747948;
+    text-decoration: none;
+   }
+   a:hover {
+    text-decoration: underline;
+    color: #747948;
+   }
+   a img {
+    border: 0;
+   }
+   h1, h1 a {
+    color: #260f02;
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+   }
+   h2, h2 a {
+    color: #260f02;
+    font-size: 26px;
+    font-weight: normal;
+    margin: 0;
+   }
+   h3, h3 a {
+    color: #260f02;
+    font-size: 22px;
+    font-weight: normal;
+    margin: 0;
+   }
+   h4, h4 a {
+    color: #767b49;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+   }
+   h5, h5 a {
+    color: #212121;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+   }
+   h6, h6 a {
+    color: #707445;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0;
+   }
+   p, ul, ol {
+    color: #212121;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+    line-height: 21px;
+   }
+   .container{
+       max-width: 1170px;
+   }
+
+.dropdown-position{
+    position: absolute !important;
+    transform: translate3d(1065px, 88px, 0px);
+    top: 0px !important;
+    left: 0px !important;
+    will-change: transform !important;
+}
+
+.navbar .nav-item .dropdown-menu{ display: none !important; }
+.navbar .nav-item:hover .dropdown-menu{ display: block !important; }
+.navbar .nav-item .dropdown-menu{ margin-top:0 !important; }
+
 @media(min-width:1200px) and (max-width:1400px){
     .banner-text{
         top: 58%;

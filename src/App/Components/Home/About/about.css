@@ -8,7 +8,7 @@
     width: 450px;
     height: 500px;
     content: "";
-    background: url(./../../images/design.png) no-repeat center center;
+    background: url(./../../../images/design.png) no-repeat center center;
 }
 .about-section > img{
     width: 100%;

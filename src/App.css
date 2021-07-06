@@ -61,4 +61,14 @@ p, ul, ol {
 .container{
     max-width: 1170px;
 }
+.dropdown-position{
+    position: absolute !important;
+    transform: translate3d(1065px, 88px, 0px);
+    top: 0px !important;
+    left: 0px !important;
+    will-change: transform !important;
+}
 
+.navbar .nav-item .dropdown-menu{ display: none !important; }
+.navbar .nav-item:hover .dropdown-menu{ display: block !important; }
+.navbar .nav-item .dropdown-menu{ margin-top:0 !important; }

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "../../Utils/style.css";
+import "../../../Utils/style.css";
 import "../Category/category.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Category1 from './../../images/category1.png';
-import Category2 from './../../images/category2.png';
-import Category3 from './../../images/category3.png';
-import Category4 from './../../images/category4.png';
+import Category1 from './../../../images/category1.png';
+import Category2 from './../../../images/category2.png';
+import Category3 from './../../../images/category3.png';
+import Category4 from './../../../images/category4.png';
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import OwlCarousel from "react-owl-carousel";
