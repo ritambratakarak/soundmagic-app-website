@@ -25,6 +25,7 @@ function HomeComponents(props) {
       <HeaderComponent
         show={show}
         onClick={onClick}
+        dashboard={true}
       />
       <BannerComponents />
       <CategoryComponents />

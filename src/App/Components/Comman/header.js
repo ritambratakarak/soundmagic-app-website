@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 
 
-function HeaderComponents({ show, onClick }) {
+function HeaderComponents({ show, onClick, dashboard }) {
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
 
@@ -23,14 +23,14 @@ function HeaderComponents({ show, onClick }) {
   }, []);
 
   const handleLogout = (event) => {
-      const userRemove = localStorage.removeItem("user");
-      console.log("userRemove", userRemove);
-      dispatch(logoutUser());
-      toast.success("Logout Sucessfully")
+    const userRemove = localStorage.removeItem("user");
+    console.log("userRemove", userRemove);
+    dispatch(logoutUser());
+    toast.success("Logout Sucessfully")
   };
 
   return (
-    <div className="header">
+    <div className={dashboard ? "header" : "header-all"}>
       <div className="container">
         <div className="header-inner">
           <div className="logo">

@@ -7,6 +7,12 @@
   z-index: 99;
 }
 
+.header-all{
+  position: relative;
+  background: url(./../../images/dashboard-header.png) no-repeat center top;
+  background-size: cover;
+}
+
 .header-search {
   margin-right: 20px;
   position: relative;

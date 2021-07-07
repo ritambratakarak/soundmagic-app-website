@@ -8,6 +8,7 @@ import Forgotpassword from './../Screens/ForgotPassword/index';
 import LoginScreen from "./../Screens/Login/index";
 import Signup from "./../Screens/Register/index";
 import { ToastBox } from '../Components/Toast';
+import Profile from '../Screens/Profile';
 
 
 
@@ -41,6 +42,7 @@ function RouterScreen() {
                             <Route path='/login' component={LoginScreen} />
                             <Route path='/signup' component={Signup} />
                             <Route path='/forgotpassword' component={Forgotpassword} />
+                            <Route path='/profile' component={Profile} />
                         </>
                     }
                     <Route component={NotFound} />

@@ -106,7 +106,7 @@ function HomeComponent(props) {
                 spinner
                 text='Loading your content...'
             >
-                <HeaderComponent />
+                <HeaderComponent dashboard={true} />
 
                 <ToastContainer />
 

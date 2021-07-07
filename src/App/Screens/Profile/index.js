@@ -13,8 +13,8 @@ export default function Profile() {
   };
   return (
     <>
-      <HeaderComponent show={show} onClick={onClick} />
-
+      <HeaderComponent show={show} onClick={onClick} dashboard={false} />
+        
       <FooterComponent />
     </>
   );
