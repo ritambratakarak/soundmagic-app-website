@@ -68,6 +68,20 @@ a {
 .navbar .nav-item:hover .dropdown-menu{ display: block !important; }
 .navbar .nav-item .dropdown-menu{ margin-top:0 !important; }
 
+.error-text{
+    color: red !important;
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
+    height: 15px !important;
+}
+
+.user{
+    font-size: 16px;
+    padding-top: 10px;
+    font-family: "Philosopher", sans-serif;
+    margin-right: 10px;
+}
+
 @media(min-width:1200px) and (max-width:1400px){
     .banner-text{
         top: 58%;

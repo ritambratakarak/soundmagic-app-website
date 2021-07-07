@@ -11,6 +11,7 @@
   margin-right: 20px;
   position: relative;
   border-radius: 50%;
+  z-index: 99999;
 }
 .header-search .search-btn {
   width: 44px;
@@ -20,7 +21,7 @@
   background: #051445;
   outline: 0;
   position: relative;
-  z-index: 99;
+  z-index: 999;
 }
 .header-search .search-input {
   width: 0;
@@ -48,6 +49,10 @@
   justify-content: space-between;
   align-items: center;
 }
+.header-account{
+  z-index: 999999;
+}
+
 .header-right {
   display: flex;
   align-items: center;

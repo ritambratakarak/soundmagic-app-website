@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import Forgotpassword from './../Screens/ForgotPassword/index';
 import LoginScreen from "./../Screens/Login/index";
 import Signup from "./../Screens/Register/index";
+import { ToastBox } from '../Components/Toast';
 
 
 
@@ -31,6 +32,7 @@ function RouterScreen() {
 
     return (
         <Router>
+            <ToastBox align="top-center" />
             <div>
                 <Switch>
                     {

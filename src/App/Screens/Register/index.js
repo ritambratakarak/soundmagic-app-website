@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../Utils/style.css";
 import "../Login/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
       outline: 0,
       backgroundColor: "transparent",
-      marginBottom: 20,
     },
   },
 }));
@@ -48,6 +47,12 @@ function Register(props) {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const dispatch= useDispatch();
+
+  useEffect(()=>{
+    if(JSON.parse(localStorage.getItem("user")) != null){
+      props.history.push("/")
+    }
+  }, [])
 
   const schema = yup.object().shape({
     firstname: yup.string().required("First Name is required!"),
@@ -86,16 +91,16 @@ function Register(props) {
       console.log("res success login--->", res);
       if (res.response_code == 200) {
         setLoading(false);
-        toast.success("Logged your account");
-        localStorage.setItem("user", JSON.stringify(res.response_data));
-        dispatch(loginUser(res.response_data));
-        props.history.replace("/");
+        toast.success(res.response_message);
+        // localStorage.setItem("user", JSON.stringify(res.response_data));
+        // dispatch(loginUser(res.response_data));
+        props.history.replace("login");
       } else if (res.response_code == 5010) {
         setLoading(false);
-        toast.warn("Something went wrong !");
+        toast.warn(res.response_message);
       } else {
         setLoading(false);
-        toast.error("Something went wrong !");
+        toast.error(res.response_message);
       }
     })
     .catch((error) => {
@@ -149,20 +154,7 @@ function Register(props) {
                 onChange={(e) => setFname(e.target.value)}
                 {...register("firstname")}
               />
-              {errors.firstname && (
-                <span
-                  style={{
-                    color: "red",
-                    fontSize: 12,
-                    marginBottom: 10,
-                    position: "relative",
-                    top: -10,
-                    left: 0,
-                  }}
-                >
-                  First Name is required
-                </span>
-              )}
+              <p className="error-text">{errors.firstname?.message}</p>
 
               <TextField
                 required
@@ -174,21 +166,7 @@ function Register(props) {
                 onChange={(e) => setLname(e.target.value)}
                 {...register("lastname")}
               />
-              {errors.lastname && (
-                <span
-                  style={{
-                    color: "red",
-                    fontSize: 12,
-                    marginBottom: 10,
-                    position: "relative",
-                    top: -10,
-                    left: 0,
-                  }}
-                >
-                  Last Name is required
-                </span>
-              )}
-
+              <p className="error-text">{errors.lastname?.message}</p>
               <TextField
                 required
                 id="filled-basic"
@@ -199,30 +177,14 @@ function Register(props) {
                 onChange={(e) => setEmail(e.target.value)}
                 {...register("email")}
               />
-              {errors.email && (
-                <span
-                  style={{
-                    color: "red",
-                    fontSize: 12,
-                    marginBottom: 10,
-                    position: "relative",
-                    top: -10,
-                    left: 0,
-                  }}
-                >
-                  Email is required
-                </span>
-              )}
+              <p className="error-text">{errors.email?.message}</p>
               <FormControl variant="filled">
                 <InputLabel required htmlFor="filled-adornment-password">
                   Password
                 </InputLabel>
                 <FilledInput
-                  required
                   id="filled-adornment-password"
                   label="Password"
-                  variant="filled"
-                  type={"password"}
                   disabled={false}
                   {...register("password")}
                   type={visable ? "text" : "password"}
@@ -242,21 +204,14 @@ function Register(props) {
                   }
                 />
               </FormControl>
-              {errors.password && (
-                <span style={{ color: "red", fontSize: 12 }}>
-                  Password is required
-                </span>
-              )}
+              <p className="error-text">{errors.password?.message}</p>
               <FormControl variant="filled">
                 <InputLabel required htmlFor="filled-adornment-password">
                   Confirm Password
                 </InputLabel>
                 <FilledInput
-                  required
                   id="filled-adornment-password"
                   label="Confirm Password"
-                  variant="filled"
-                  type={"password"}
                   disabled={false}
                   {...register("cpassword")}
                   type={visable2 ? "text" : "password"}
@@ -276,11 +231,7 @@ function Register(props) {
                   }
                 />
               </FormControl>
-              {errors.cpassword && (
-                <span style={{ color: "red", fontSize: 12 }}>
-                  Confirm Password is required
-                </span>
-              )}
+              <p className="error-text">{errors.cpassword?.message}</p>
               <div className="login-button-set">
                 <button type="submit">Sign Up</button>
               </div>

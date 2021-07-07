@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../Utils/style.css";
 import "../Login/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,20 +22,19 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { loginUser } from "./../../Redux/Actions/auth";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      width: "100%",
-      height: 55,
-      color: "#051445",
-      fontSize: 18,
-      padding: 0,
-      outline: 0,
-      backgroundColor: "transparent",
-      marginBottom: 20,
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        width: "100%",
+        height: 55,
+        color: "#051445",
+        fontSize: 18,
+        padding: 0,
+        outline: 0,
+        backgroundColor: "transparent",
+      },
     },
-  },
-}));
+  }));
 
 function Login(props) {
   const [email, setEmail] = useState("");
@@ -45,12 +44,19 @@ function Login(props) {
   const classes = useStyles();
   const dispatch= useDispatch();
 
+  useEffect(()=>{
+    if(JSON.parse(localStorage.getItem("user")) != null){
+      props.history.push("/")
+    }
+  }, [])
+
+
   const schema = yup.object().shape({
     email: yup
       .string()
       .email("Not a valid email !")
-      .required("Email is required!"),
-    password: yup.string().required("Password is required!"),
+      .required("Email is required !"),
+    password: yup.string().required("Password is required !"),
   });
 
   const {
@@ -73,16 +79,16 @@ function Login(props) {
       console.log("res success login--->", res);
       if (res.response_code == 200) {
         setLoading(false);
-        toast.success("Logged your account");
+        toast.success(res.response_message);
         localStorage.setItem("user", JSON.stringify(res.response_data));
         dispatch(loginUser(res.response_data));
         props.history.replace("/");
       } else if (res.response_code == 5010) {
         setLoading(false);
-        toast.warn("Something went wrong !");
+        toast.warn(res.response_message);
       } else {
         setLoading(false);
-        toast.warn("Something went wrong !");
+        toast.warn(res.response_message);
       }
     })
     .catch((error) => {
@@ -128,24 +134,11 @@ function Login(props) {
                 label="Email"
                 variant="filled"
                 type={"email"}
-                disabled={false}
+                disabled={loading}
                 onChange={(e) => setEmail(e.target.value)}
                 {...register("email")}
               />
-              {errors.email && (
-                <span
-                  style={{
-                    color: "red",
-                    fontSize: 12,
-                    marginBottom: 10,
-                    position: "relative",
-                    top: -10,
-                    left: 0,
-                  }}
-                >
-                  Email is required
-                </span>
-              )}
+              <p className="error-text">{errors.email?.message}</p>
               <FormControl variant="filled">
                 <InputLabel required htmlFor="filled-adornment-password">
                   Password
@@ -156,7 +149,7 @@ function Login(props) {
                   label="Password"
                   variant="filled"
                   type={"password"}
-                  disabled={false}
+                  disabled={loading}
                   {...register("password")}
                   type={visable ? "text" : "password"}
                   value={password}
@@ -175,11 +168,7 @@ function Login(props) {
                   }
                 />
               </FormControl>
-              {errors.password && (
-                <span style={{ color: "red", fontSize: 12 }}>
-                  Password is required
-                </span>
-              )}
+              <p className="error-text">{errors.password?.message}</p>
               <div className="login-button-set">
                 <button type="submit">Sign In</button>
               </div>
