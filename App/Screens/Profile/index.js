@@ -83,7 +83,7 @@ function Profile(props) {
           </View>
           <View style={{ marginVertical: HEIGHT * 0.06, width: "100%", }}>
             <View style={{ backgroundColor: "#fff", height: HEIGHT * 0.075, borderRadius: 10, marginBottom: 15 }}>
-              <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }}>
+              <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }} onPress={()=> navigation.navigate("MyCourses")}>
                 <Text style={[styles.whiteButtonText]}>
                   VIew my courses enrolled
                                 </Text>

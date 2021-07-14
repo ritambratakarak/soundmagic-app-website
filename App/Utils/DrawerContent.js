@@ -38,7 +38,6 @@ const DrawerContent = (props) => {
     <View style={styles.container}>
       <SafeAreaView style={{ flex: 1, backgroundColor: "gray", }} />
       <View style={{ height: screenheight }}>
-
         <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: 40 }}>
           <TouchableOpacity onPress={() => props.navigation.navigate("Profile")} activeOpacity={0.8}>
             <LinearGradient start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#A54729', '#2D4DBE']} style={styles.gradient}>
@@ -63,7 +62,7 @@ const DrawerContent = (props) => {
               />}
             />
 
-            <DrawerMenuItem
+            {/* <DrawerMenuItem
               onPress={() => props.navigation.navigate("Courses")}
               name={"All Course"}
               icon={<SimpleLineIcons
@@ -71,7 +70,7 @@ const DrawerContent = (props) => {
                 size={25}
                 color={'gray'}
               />}
-            />
+            /> */}
 
             <DrawerMenuItem
               onPress={() => props.navigation.navigate("Track")}
@@ -83,7 +82,7 @@ const DrawerContent = (props) => {
               />}
             />
 
-            <DrawerMenuItem
+            {/* <DrawerMenuItem
               onPress={() => props.navigation.navigate("MyCourses")}
               name={"My Courses"}
               icon={<SimpleLineIcons
@@ -91,7 +90,7 @@ const DrawerContent = (props) => {
                 size={25}
                 color={'gray'}
               />}
-            />
+            /> */}
 
             <DrawerMenuItem
               onPress={() => props.navigation.navigate("Payment")}

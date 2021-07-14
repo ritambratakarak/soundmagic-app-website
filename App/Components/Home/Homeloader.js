@@ -34,14 +34,14 @@ const Homeloader = () => {
               }}>
               <View
                 style={{
-                  width: WIDTH / 1.3,
+                  width: WIDTH / 1.1,
                   height: HEIGHT * 0.06,
                   borderRadius: 8,
                 }}
               />
-              <View
+              {/* <View
                 style={{width: 50, height: HEIGHT * 0.06, borderRadius: 100}}
-              />
+              /> */}
             </View>
             <View
               style={{
@@ -65,11 +65,11 @@ const Homeloader = () => {
               <View style={styles.caregory} /> */}
             </View>
             <View style={{flexDirection: 'row', marginBottom:HEIGHT * 0.02}}>
+              <View style={{width: 100, height: 15, marginRight:10}} />
+              {/* <View style={{width: 40, height: 15, marginRight:10}} />
               <View style={{width: 40, height: 15, marginRight:10}} />
               <View style={{width: 40, height: 15, marginRight:10}} />
-              <View style={{width: 40, height: 15, marginRight:10}} />
-              <View style={{width: 40, height: 15, marginRight:10}} />
-              <View style={{width: 40, height: 15, marginRight:10}} />
+              <View style={{width: 40, height: 15, marginRight:10}} /> */}
             </View>
             <View style={{flexDirection:"row", marginBottom:HEIGHT * 0.02}}>
               <View style={{width: WIDTH / 2.5, height: HEIGHT * 0.15, marginRight:10, borderRadius:8}} />

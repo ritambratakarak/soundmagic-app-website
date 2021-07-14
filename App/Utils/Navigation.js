@@ -84,7 +84,7 @@ export default Navigation = () => {
           options={{
             title: '',
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerLeft: (props) => (<Left menu={true} onPress={()=> navigation.openDrawer()} />),
             headerRight: (props) => (<Right/>)
           }}
@@ -112,7 +112,7 @@ export default Navigation = () => {
           component={EditProfile}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Edit Profile"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Profile")} />),
           }}
@@ -122,7 +122,7 @@ export default Navigation = () => {
           component={UpdatePassword}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Change Password"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Profile")} />),
           }}
@@ -132,7 +132,7 @@ export default Navigation = () => {
           component={Courses}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Courses"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
             headerRight: (props) => (<Right/>)
@@ -143,7 +143,7 @@ export default Navigation = () => {
           component={Details}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Courses Details"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Courses")} />),
             headerRight: (props) => (<Right/>)
@@ -154,7 +154,7 @@ export default Navigation = () => {
           component={Track}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Track"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
             headerRight: (props) => (<Right/>)
@@ -165,7 +165,7 @@ export default Navigation = () => {
           component={Payment}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Payment"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Home")} />),
             headerRight: (props) => (<Right/>)
@@ -176,7 +176,7 @@ export default Navigation = () => {
           component={AddPayment}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Add Debit / Credit Card"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Payment")} />),
             headerRight: (props) => (<Right/>)
@@ -187,7 +187,7 @@ export default Navigation = () => {
           component={AllCourses}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Course List"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
           }}
@@ -201,7 +201,7 @@ export default Navigation = () => {
           component={ShowFilterData}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Filter"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
           }}
@@ -211,7 +211,7 @@ export default Navigation = () => {
           component={MyCourses}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"My Courses"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.goBack()} />),
           }}
@@ -221,7 +221,7 @@ export default Navigation = () => {
           component={MycourseDetails}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Courses Details"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("MyCourses")} />),
             headerRight: (props) => (<Right/>)
@@ -236,7 +236,7 @@ export default Navigation = () => {
           component={TrackDetails}
           options={{
             headerShown: true,
-            headerStyle: { height: HEIGHT * 0.08, elevation: 0, shadowOpacity: 0 },
+            headerStyle: { height: Platform.OS == "android" ? HEIGHT * 0.08 : HEIGHT * 0.10, elevation: 0, shadowOpacity: 0 },
             headerTitle: (props) => (<Title title={"Track Details"} />),
             headerLeft: (props) => (<Left menu={false} onPress={() => navigation.navigate("Track")} />),
             headerRight: (props) => (<Right/>)

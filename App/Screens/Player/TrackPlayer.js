@@ -11,7 +11,7 @@ import {
   Image,
   Platform,
   BackHandler,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation-locker';
@@ -94,7 +94,7 @@ const TrackPlayer = () => {
   };
 
   const getPlayer = async (playerdata) => {
-    console.log("playerdata", playerdata);
+    console.log('playerdata', playerdata);
     const alldata = await AsyncStorage.getItem('@user');
     const data = JSON.parse(alldata);
     const authtoken = data.authtoken;
@@ -107,7 +107,7 @@ const TrackPlayer = () => {
         console.log('track data', res);
         if (res.response_code === 200) {
           if (res.response_data != null) {
-            setapiTime(res.response_data, playerdata.duration)
+            setapiTime(res.response_data, playerdata.duration);
             // setCurrentTime(currenttime);
             // videoPlayer?.current.seek(currenttime);
             // setPlayerState(PLAYER_STATES.PAUSED);
@@ -138,7 +138,7 @@ const TrackPlayer = () => {
     const data = JSON.parse(userdata);
     const authtoken = data.authtoken;
     const time = await AsyncStorage.getItem('currenttime');
-    const currenttime = JSON.parse(time)
+    const currenttime = JSON.parse(time);
     const submitData = {
       trackID: route.params.trackID,
       time: currenttime,
@@ -186,9 +186,9 @@ const TrackPlayer = () => {
               minBufferMs: 15000,
               maxBufferMs: 50000,
               bufferForPlaybackMs: 2500,
-              bufferForPlaybackAfterRebufferMs: 5000
+              bufferForPlaybackAfterRebufferMs: 5000,
             }}
-            onBuffer={()=> setIsLoading(true)} 
+            onBuffer={() => setIsLoading(true)}
           />
           {state.showControls && (
             <View style={styles.controlOverlay}>
@@ -224,37 +224,54 @@ const TrackPlayer = () => {
                 )}
               </TouchableOpacity>
               {isLoading ? (
-                  <View
+                <View
+                  style={{
+                    width: WIDTH,
+                    height: HEIGHT / 1.1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AnimatedLoader loading={isLoading} />
+                </View>
+              ) : (
+                <>
+                  <PlayerControls
+                    onPlay={handlePlayPause}
+                    onPause={handlePlayPause}
+                    playing={state.play}
+                    showPreviousAndNext={false}
+                    showSkip={true}
+                    skipBackwards={skipBackward}
+                    skipForwards={skipForward}
+                  />
+                  <Text
                     style={{
-                      width:WIDTH,
-                      height:HEIGHT/1.1,
-                      justifyContent: 'center',
-                      alignItems: 'center',
+                      fontSize: 30,
+                      color: COLORS.WHITE,
+                      fontFamily: FONT.FAMILY.HEAVY,
+                      left: '3%',
+                      marginBottom: GAP.SMALL,
                     }}>
-                    <AnimatedLoader loading={isLoading} />
-                  </View>
-                ) : (
-                  <>
-                    <PlayerControls
-                      onPlay={handlePlayPause}
-                      onPause={handlePlayPause}
-                      playing={state.play}
-                      showPreviousAndNext={false}
-                      showSkip={true}
-                      skipBackwards={skipBackward}
-                      skipForwards={skipForward}
-                    />
-                    <Text style={{fontSize:30, color:COLORS.WHITE, fontFamily:FONT.FAMILY.HEAVY,left:"3%", marginBottom:GAP.SMALL}}>{route?.params?.name}</Text>
-                    <Text style={{color:COLORS.WHITE, left:"3%", fontFamily:FONT.FAMILY.REGULAR, marginBottom:GAP.MEDIUM}}>Upload By: Admin</Text>
-                    <ProgressBar
-                      currentTime={state.currentTime}
-                      duration={state.duration > 0 ? state.duration : 0}
-                      onSlideStart={handlePlayPause}
-                      onSlideComplete={handlePlayPause}
-                      onSlideCapture={onSeek}
-                    />
-                  </>
-                )}
+                    {route?.params?.name}
+                  </Text>
+                  <Text
+                    style={{
+                      color: COLORS.WHITE,
+                      left: '3%',
+                      fontFamily: FONT.FAMILY.REGULAR,
+                      marginBottom: GAP.MEDIUM,
+                    }}>
+                    Upload By: Admin
+                  </Text>
+                  <ProgressBar
+                    currentTime={state.currentTime}
+                    duration={state.duration > 0 ? state.duration : 0}
+                    onSlideStart={handlePlayPause}
+                    onSlideComplete={handlePlayPause}
+                    onSlideCapture={onSeek}
+                  />
+                </>
+              )}
             </View>
           )}
         </View>
@@ -334,8 +351,6 @@ const TrackPlayer = () => {
       showControls: true,
     }));
   }
-
-
 };
 
 const styles = StyleSheet.create({

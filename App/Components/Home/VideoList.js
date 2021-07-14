@@ -14,7 +14,7 @@ const HomeList = (props) =>
         onLoadEnd={props.onLoadEnd}
         >
         <View style={{ alignItems: "flex-end", margin: 10 }}>
-          <Text style={{ fontSize: FONT.SIZE.MEDIUM, color: COLORS.WHITE, }}>{"$" + props.price}</Text>
+          <Text style={{ fontSize: FONT.SIZE.MEDIUM, color: COLORS.WHITE, }}>{props.price}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "flex-end", flex: .9, paddingHorizontal: 5 }}>
           <View>

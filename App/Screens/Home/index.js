@@ -28,8 +28,6 @@ import Toast from 'react-native-root-toast';
 import {category} from '../../Redux/Actions/Categoryaction';
 import Homeloader from '../../Components/Home/Homeloader';
 import RecentPlayedView from '../../Components/Home/RecentPlayedView';
-import ImageList from '../../Components/Home/ImageList';
-
 
 const Home = (props) => {
   const navigation = useNavigation();
@@ -42,12 +40,12 @@ const Home = (props) => {
   const [categorydata, setcategorydata] = React.useState([]);
   const [cousesdata, setcousesdata] = React.useState([]);
   const [allcousesdata, setallcousesdata] = React.useState([]);
+  const [trackdata, settrackdata] = React.useState([]);
   const [categoryloader, setcategoryloader] = React.useState(false);
   const [refreash, setrefreash] = React.useState(false);
   const [playedcourse, setplayedcourse] = React.useState(false);
 
   useEffect(() => {
-    // setTimeout(() => { setLoading(false) }, 2500)
     getData();
   }, []);
 
@@ -64,6 +62,7 @@ const Home = (props) => {
     getCategory(data);
     getAllCourses();
     getRecentPlayedCourse();
+    getTrack();
   };
 
   const changesecondTab = (tab, id) => {
@@ -90,7 +89,6 @@ const Home = (props) => {
             console.log('courses default id', res.response_data[0]._id);
             getCourses(res.response_data[0]._id);
           }
-          // Toast.show(res.response_message);
         } else if (res.response_code === 4000) {
           Toast.show(res.response_message);
           await AsyncStorage.removeItem('@user');
@@ -120,7 +118,6 @@ const Home = (props) => {
         if (res.response_code === 200) {
           console.log('courses data', res.response_data.docs);
           setcousesdata(res.response_data.docs);
-          // Toast.show(res.response_message);
         } else if (res.response_code === 4000) {
           Toast.show(res.response_message);
           await AsyncStorage.removeItem('@user');
@@ -148,7 +145,6 @@ const Home = (props) => {
         if (res.response_code === 200) {
           console.log('courses data', res.response_data.docs);
           setallcousesdata(res.response_data.docs);
-          // Toast.show(res.response_message);
         } else if (res.response_code === 4000) {
           Toast.show(res.response_message);
           await AsyncStorage.removeItem('@user');
@@ -210,8 +206,44 @@ const Home = (props) => {
     getData();
   }, []);
 
-  function gotoPlayedScreen(){
-    alert("aaaa")
+  const getTrack = async () => {
+    setLoading(true);
+    const alldata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(alldata);
+    const authtoken = data.authtoken;
+    Network(`/get-track-list?page=${1}&limit=${100}`, 'get', {authtoken})
+      .then(async (res) => {
+        setLoading(false);
+        setrefreash(false);
+        if (res.response_code === 200) {
+          console.log('track data', res.response_data.docs);
+          settrackdata(res.response_data.docs);
+        } else if (res.response_code === 4000) {
+          Toast.show(res.response_message);
+          await AsyncStorage.removeItem('@user');
+          dispatch(logoutUser());
+        } else {
+          Toast.show(res.response_message);
+        }
+      })
+      .catch((error) => {
+        Toast.show(error);
+        setLoading(false);
+        setrefreash(false);
+      });
+  };
+
+  function format(time) {
+    let hrs = ~~(time / 3600);
+    let mins = ~~((time % 3600) / 60);
+    let secs = ~~time % 60;
+    let ret = '';
+    if (hrs > 0) {
+      ret += '' + hrs + ' hours ' + (mins < 10 ? '0' : '');
+    }
+    ret += '' + mins + ' min ' + (secs < 10 ? '0' : '');
+    ret += '' + secs + ' sec ';
+    return ret;
   }
 
   return (
@@ -225,14 +257,12 @@ const Home = (props) => {
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
-              //refresh control used for the Pull to Refresh
               refreshing={refreash}
               onRefresh={() => {
                 onRefresh();
               }}
             />
           }>
-          {/* <AnimatedLoader loading={loading} /> */}
           <Filter
             modal={modal}
             close={() => setModal(!modal)}
@@ -249,7 +279,7 @@ const Home = (props) => {
                     fontSize: FONT.SIZE.EXTRALARGE,
                     fontFamily: FONT.FAMILY.MEDIUM,
                   }}>
-                  {gettime() + ', '}{' '}
+                  {gettime() + ', '}
                   <Text style={{
                       fontFamily: FONT.FAMILY.HEAVY
                     }}>
@@ -261,11 +291,11 @@ const Home = (props) => {
                 onChange={(text) => setsearch(text)}
                 value={search}
                 onPress={() => setModal(true)}
-                keypress={() => navigation.navigate('Filter')}
+                keypress={() => navigation.navigate('Track')}
                 onFocus={false}
-                placeholder={"Search for Courses"}
-                inputwidth={"85%"}
-                showfilter={true}
+                placeholder={"Search for Track"}
+                inputwidth={"100%"}
+                showfilter={false}
               />
             </View>
             <View style={[styles.repeatContainer, {marginBottom: 0}]}>
@@ -325,7 +355,7 @@ const Home = (props) => {
             </ScrollView>
             </View>
             <View style={[styles.repeatContainer]}>
-              <WeightTab
+              {/* <WeightTab
                 data={categorydata}
                 active={secondtab}
                 onPress={(tab, id) => changesecondTab(tab, id)}
@@ -345,7 +375,7 @@ const Home = (props) => {
                       onPress={() => {
                         navigation.navigate('Details', {item: item});
                       }}
-                      price={item.price}
+                      price={"$" + item.price}
                     />
                   </>
                 )}
@@ -368,52 +398,24 @@ const Home = (props) => {
                     </Text>
                   </View>
                 }
-              />
-            </View>
-            <View
-              style={[styles.repeatContainer, {marginBottom: HEIGHT * 0.04}]}>
-              <Text
-                style={{
-                  fontSize: FONT.SIZE.LARGE,
-                  fontFamily: FONT.FAMILY.HEAVY,
-                  marginBottom: HEIGHT * 0.02,
-                }}>
-                {'Recently Played'}
-              </Text>
+              /> */}
+              <Text style={{ fontSize: FONT.SIZE.LARGE, fontFamily: FONT.FAMILY.HEAVY, marginVertical: HEIGHT * 0.02 }}>{"Track "}</Text>
               <FlatList
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
-                data={playedcourse}
+                data={trackdata}
                 renderItem={({item}) => (
                   <>
-                    <TouchableOpacity
-                      onPress={() =>
-                        navigation.navigate('TrackPlayer', {
-                          url:
-                            item.trackDetails.type == 'video'
-                              ? item.trackDetails.videoURL
-                              : item.trackDetails.audioURL,
-                          type: item.trackDetails.type,
-                          trackID: item.trackID,
-                          name: item.trackDetails.name,
-                          image: item.trackDetails.audioThumbnail
-                        })
-                      }
-                      style={{
-                        width: 200,
-                        height: 200,
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        zIndex: 9999,
+                    <HomeList
+                      name={item.name}
+                      img={item.audioThumbnail}
+                      onLoadStart={() => setcategoryloader(true)}
+                      onLoadEnd={() => setcategoryloader(false)}
+                      author={'Admin'}
+                      onPress={() => {
+                        navigation.navigate('TrackDetails', {item: item});
                       }}
-                    />
-                    <ImageList
-                      uri={
-                        item.trackDetails.type == 'video'
-                          ? item.trackDetails.videoThumbnail
-                          : item.trackDetails.audioThumbnail
-                      }
+                      price={format(item.duration)}
                     />
                   </>
                 )}
@@ -423,7 +425,7 @@ const Home = (props) => {
                     style={{
                       alignItems: 'center',
                       justifyContent: 'center',
-                      width: (WIDTH * 9) / 8.8,
+                      width: WIDTH,
                     }}>
                     <Text
                       style={{
@@ -432,25 +434,33 @@ const Home = (props) => {
                         fontSize: FONT.SIZE.MEDIUM,
                         fontFamily: FONT.FAMILY.MEDIUM,
                       }}>
-                      No data found!
+                      Track have no data!
                     </Text>
                   </View>
                 }
-                initialNumToRender={15}
               />
             </View>
-            {/* <RecentPlayedView
+            <RecentPlayedView
               name={'Recently Played'}
               data={playedcourse}
               initialnumber={15}
-              onPress={()=> alert("aaa")}
-            /> */}
-            <ImageView
+              onPress={(item)=> navigation.navigate('TrackPlayer', {
+                url:
+                  item.trackDetails.type == 'video'
+                    ? item.trackDetails.videoURL
+                    : item.trackDetails.audioURL,
+                type: item.trackDetails.type,
+                trackID: item.trackID,
+                name: item.trackDetails.name,
+                image: item.trackDetails.audioThumbnail
+              })}
+            />
+            {/* <ImageView
               name={'New Addtion'}
               data={allcousesdata}
               initialnumber={10}
-              onPress={()=> alert("bbb")}
-            />
+              onPress={(item) => navigation.navigate('Details', {item: item})}
+            /> */}
           </View>
         </ScrollView>
       )}
@@ -462,7 +472,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    // paddingTop: GAP.MEDIUM,
     backgroundColor: COLORS.WHITE,
   },
   repeatContainer: {
@@ -474,7 +483,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
-    
   },
 });
 

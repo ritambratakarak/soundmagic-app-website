@@ -4,9 +4,9 @@ import { COLORS, HEIGHT, FONT, GAP, WIDTH } from '../../Utils/constants';
 import ProgressiveImage from '../Common/PrograssiveImage';
 
 
-export default ImageList = ({ uri }) => {
+export default ImageList = ({ uri, onPress }) => {
     return (
-        <TouchableOpacity style={{ width: WIDTH * 0.30, height: HEIGHT * 0.15, marginRight: 10, borderRadius: 10, overflow:"hidden" }}>
+        <TouchableOpacity style={{ width: WIDTH * 0.30, height: HEIGHT * 0.15, marginRight: 10, borderRadius: 10, overflow:"hidden" }} onPress={onPress}>
             <ProgressiveImage
               defaultImageSource={require('../../Assets/defaultimg.png')}
               source={{uri: uri}}

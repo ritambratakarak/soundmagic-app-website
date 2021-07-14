@@ -13,12 +13,12 @@ export default RecentPlayedView = ({ name, data, initialnumber, onPress }) => {
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         data={data}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={onPress}>
-            <ImageList uri={item.trackDetails.type == 'video'
-                          ? item.trackDetails.videoThumbnail
-                          : item.trackDetails.audioThumbnail} />
-          </TouchableOpacity>
+        renderItem={({ item }) => (  
+          <ImageList uri={item.trackDetails.type == 'video'
+                      ? item.trackDetails.videoThumbnail
+                      : item.trackDetails.audioThumbnail}
+                      onPress={()=> onPress(item)}
+          />
         )}
         keyExtractor={item => item._id}
         ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH * 9 / 8.8 }}>

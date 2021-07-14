@@ -12,9 +12,7 @@ export default ImageView = ({ name, data, initialnumber, onPress }) => {
         horizontal={true}
         data={data}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={()=> onPress(item)}>
-            <ImageList uri={item.banner} />
-          </TouchableOpacity>
+          <ImageList uri={item.banner} onPress={()=> onPress(item)} />
         )}
         keyExtractor={item => item._id}
         ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>
