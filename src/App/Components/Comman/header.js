@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../Utils/style.css";
 import "./../../Utils/css/header.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import Logo from "./../../images/Logo.png";
 import Search from "./../../images/header-search.png";
 import usersearch from "./../../images/header-account.png";
@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 function HeaderComponents({ show, onClick, dashboard }) {
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
+  const history = useHistory()
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -27,6 +28,7 @@ function HeaderComponents({ show, onClick, dashboard }) {
     console.log("userRemove", userRemove);
     dispatch(logoutUser());
     toast.success("Logout Sucessfully")
+    history.push("/")
   };
 
   return (
@@ -59,7 +61,7 @@ function HeaderComponents({ show, onClick, dashboard }) {
                 >
                   <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                      <Link to="/login" className="nav-link">
+                      <Link to="/" className="nav-link">
                         Home
                       </Link>
                     </li>
@@ -133,7 +135,7 @@ function HeaderComponents({ show, onClick, dashboard }) {
                         : "dropdown-menu dropdown-menu-right"
                     }
                   >
-                    <Link to="/" className="dropdown-item">
+                    <Link to="/profile" className="dropdown-item">
                       Profile
                     </Link>
                     <Link to="/" className="dropdown-item">
@@ -142,7 +144,7 @@ function HeaderComponents({ show, onClick, dashboard }) {
                     <Link to="/" className="dropdown-item">
                       My Subscription
                     </Link>
-                    <div class="dropdown-divider"></div>
+                    <div className="dropdown-divider"></div>
                     <div className="dropdown-item" onClick={(event)=> handleLogout(event)}>
                       Logout
                     </div>

@@ -1,0 +1,311 @@
+/* For dashboard common css*/
+
+
+
+.dash-board-main{
+    margin-top: 50px;
+}
+.dashboard-menu{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.dashboard-menu ul{
+    margin: 0;
+    padding: 0;
+}
+.dashboard-menu ul li{
+    list-style-type: none;
+}
+.dashboard-menu ul li a{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    color: #6B6B6B;
+    text-decoration: none;
+    font-family: 'Philosopher', sans-serif;
+    padding: 20px 20px 20px 66px;
+    display: block;
+    transition: .5s;
+}
+.dashboard-menu ul li a.menu1{
+    background: url(./../../images/menu1.png) no-repeat 35px center;
+  
+}
+.dashboard-menu ul li a.menu2{
+    background: url(./../../images/menu2.png) no-repeat 35px center;
+}
+.dashboard-menu ul li a.menu3{
+    background: url(./../../images/menu3.png) no-repeat 35px center;
+}
+.dashboard-menu ul li a.menu4{
+    background: url(./../../images/menu4.png) no-repeat 35px center;
+}
+.dashboard-menu ul li a.menu5{
+    background: url(./../../images/menu5.png) no-repeat 35px center;
+}
+.dashboard-menu ul li a.menu6{
+    background: url(./../../images/menu6.png) no-repeat 35px center;
+}
+.dashboard-menu ul li a.menu1.active, .dashboard-menu ul li a.menu1:hover{
+     background: url(./../../images/menu1_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li a.menu2.active, .dashboard-menu ul li a.menu2:hover{
+     background: url(./../../images/menu2_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li a.menu3.active, .dashboard-menu ul li a.menu3:hover{
+     background: url(./../../images/menu3_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li a.menu4.active, .dashboard-menu ul li a.menu4:hover{
+     background: url(./../../images/menu4_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li a.menu5.active, .dashboard-menu ul li a.menu5:hover{
+     background: url(./../../images/menu5_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li a.menu6.active, .dashboard-menu ul li a.menu6:hover{
+     background: url(./../../images/menu6_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+
+.dashboard-content-box{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 34px 40px 20px;
+}
+.page-title{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 36px;
+    color: #051445;
+    font-family: 'Philosopher', sans-serif;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #E5E8F1;
+}
+/* For dashboard common css*/
+
+
+
+.profile-section{
+    margin-top: 33px;
+    display: flex;
+    align-items: center;
+}
+.profile-img{
+    width: 73px;
+    height: 73px;
+    position: relative;
+}
+.profile-img img{
+    width: 73px;
+    height: 73px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.pencil-container{
+    background-color: whitesmoke;
+    border-radius: 100px;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.pencil-container img{
+    height: 25px;
+    width: 19px;
+    object-fit: contain;
+    background-image: coral;
+    background-size: contain;
+    margin: 0px auto;
+    text-align: center;
+    place-content: center;
+}
+.profile-name{
+    padding-left: 18px;
+}
+.profile-name h4{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 33px;
+    color: #051445;
+    margin: 0;
+    padding: 0;
+}
+.profile-name p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+    color: #9097A3;
+    margin: 0;
+    padding: 0;
+}
+.profile-button-section{
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+.profile-button-section button{
+    min-width: 165px;
+    height: 52px;
+    background: linear-gradient(95.04deg, #165CC2 6.03%, #021B77 96.11%);
+    border-radius: 26px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border: none;
+    padding: 0 19px;
+    margin-right: 10px;
+    outline: 0;
+}
+/* .profile-button-section button.view-course{
+    background: none;
+    border: 1px solid #165CC2;
+    color: #021B77;
+} */
+.profile-button-section button:hover, .profile-button-section .active{
+    background: none;
+    border: 1px solid #165CC2;
+    color: #021B77;
+}
+
+.profile-edit-section{
+    place-content: center;
+    width: 100%;
+    align-items: center;
+    margin: 0px auto;
+}
+
+.profile-edit-innersection{
+    width: 55%;
+    height: 65vh;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+    padding-top: 50px;
+}
+
+.watched-video-section{
+    margin-top: 60px;
+}
+.watched-video-section h4{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    color: #051445;
+    margin: 0;
+    padding: 0;
+    font-family: 'Philosopher', sans-serif;
+}
+.watched-video-list{
+    margin-top: 30px;
+}
+.watched-video-box{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+.watched-video-box-text{
+    padding: 12px 25px 12px 16px;
+    position: relative;
+}
+.whilist-icon{
+    position: absolute;
+    right: 10px;
+    top: 16px;
+}
+.watched-video-box-img img{
+    width: 100%;
+}
+.watched-video-box-text h5{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 32px;
+    color: #021B77;
+    margin: 0;
+    padding: 0;
+    font-family: 'Philosopher', sans-serif;
+}
+.watched-video-box-text p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 29px;
+    color: #051445;
+}
+.watched-video-box-text p span{
+    color: #9EA1AC;
+}
+
+
+
+@media(max-width:767px){
+    .dash-board-main{
+        margin-top: 30px;
+    }
+    .dashboard-menu{
+        margin-bottom: 20px;
+    }
+    .page-title{
+        font-size: 20px;
+        line-height: 22px;
+        padding-bottom: 10px;
+    }
+    .dashboard-content-box{
+        padding: 25px 10px;
+    }
+    .profile-button-section{
+        flex-direction: column;
+    }
+    .profile-section{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .profile-name{
+        padding-left: 0;
+        text-align: center;
+        margin: 10px 0 0 0;
+    }
+    .profile-name h4{
+        font-size: 18px;
+        line-height: 25px;
+    }
+    .profile-name p{
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .profile-button-section{
+        margin-top: 0;
+    }
+    .profile-button-section button{
+        margin-top: 10px;
+    }
+    .watched-video-box{
+        margin-bottom: 15px;
+    }
+    .watched-video-section{
+        margin-top: 30px;
+    }
+    
+}

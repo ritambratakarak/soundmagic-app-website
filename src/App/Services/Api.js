@@ -13,7 +13,7 @@ export const Network = (endpoint, method, body) => {
         url: `${base_url}${endpoint}`,
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': body ? body.authtoken : ""
+          'x-access-token': body.authtoken ? body.authtoken : null
         },
         data: body
       })

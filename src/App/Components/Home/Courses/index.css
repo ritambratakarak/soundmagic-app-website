@@ -15,6 +15,7 @@
 }
 .course-box-img img{
     display: block;
+    height: 40vh;
 }
 .course-box h4{
     font-style: normal;

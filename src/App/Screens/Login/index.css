@@ -77,4 +77,18 @@
     outline: 0;
     margin-top: 30px;
 }
+.register-now{
+    text-align: center;
+    margin-top: 15%;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 15px;
+}
+.forgot-password{
+    font-size: 15px !important;
+    text-align: right;
+    height: 0px !important;
+    font-family: 'Philosopher', sans-serif;
+    color: #051445 !important
+}
+
 /*login-page*/

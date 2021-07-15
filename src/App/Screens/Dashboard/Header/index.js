@@ -39,35 +39,35 @@ function HeaderComponents(props) {
 
 
     return (
-        <header id="home-menu" class="admin-menu">
-            <div class="container" id="navv">
-                <div class="row">
-                    <div class="col-lg-3 col-md-10 col-10" id="bannar-logo">
+        <header id="home-menu" className="admin-menu">
+            <div className="container" id="navv">
+                <div className="row">
+                    <div className="col-lg-3 col-md-10 col-10" id="bannar-logo">
                         <a href="index.html">
-                            <img src={Logo} class="img-fluid" />
+                            <img src={Logo} className="img-fluid" />
                         </a>
                     </div>
 
 
-                    <div class="col-2 col-md-2 text-right show--mobile--only">
+                    <div className="col-2 col-md-2 text-right show--mobile--only">
                         <ul>
-                            <li class="mob-only-menu text-right">
+                            <li className="mob-only-menu text-right">
                                 <a href="#">
-                                    <i class="fa fa-bars mob-menu threebar"></i>
+                                    <i className="fa fa-bars mob-menu threebar"></i>
                                 </a>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="col-lg-9 col-md-12 col-12 mob-manubarr">
-                        <ul class="ulone">
+                    <div className="col-lg-9 col-md-12 col-12 mob-manubarr">
+                        <ul className="ulone">
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/workout">Workout Programs</Link></li>
                             <li><Link to="/subscription">Subscribe</Link></li>
                             <li>
                                 <figure style={{ marginLeft: 200 }}>
                                     
-                                    <img src={"./../../../images/header-account.png"} class="img-fluid" alt="" />                                    
+                                    <img src={"./../../../images/header-account.png"} className="img-fluid" alt="" />                                    
                                 </figure>
                             </li>
                             <li id="sign-btn">

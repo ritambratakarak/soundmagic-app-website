@@ -21,6 +21,10 @@ import { Network } from "../../Services/Api";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { loginUser } from "./../../Redux/Actions/auth";
+import { Link } from "react-router-dom";
+import LoadingOverlay from "react-loading-overlay";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -123,6 +127,7 @@ function Register(props) {
   };
 
   return (
+    <LoadingOverlay active={loading} spinner text="Loading your content...">
     <div className="login-page">
       <div className="login-page-inner">
         <div className="login-inner-left">
@@ -236,10 +241,12 @@ function Register(props) {
                 <button type="submit">Sign Up</button>
               </div>
             </form>
+            <p className="register-now">Already have an account? <Link to="/login"><b>Sign in</b></Link></p>
           </div>
         </div>
       </div>
     </div>
+    </LoadingOverlay>
   );
 }
 

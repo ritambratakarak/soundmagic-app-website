@@ -10,7 +10,7 @@ import Signup from "./../Screens/Register/index";
 import { ToastBox } from '../Components/Toast';
 import Profile from '../Screens/Profile';
 
-
+export const currentURL = '/projects/suvendu/ritam/soundmagic';
 
 function RouterScreen() {
     const userdata = useSelector((state) => state.userdata);
@@ -32,7 +32,7 @@ function RouterScreen() {
     //basename={currentURL}
 
     return (
-        <Router>
+        <Router basename={currentURL}>
             <ToastBox align="top-center" />
             <div>
                 <Switch>

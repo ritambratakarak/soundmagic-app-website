@@ -12,10 +12,10 @@ function FooterComponents() {
 
   return (
     <>
-      <div class="footer">
-        <div class="container">
-          <div class="footer-inner">
-            <div class="footer-box quick-footer">
+      <div className="footer">
+        <div className="container">
+          <div className="footer-inner">
+            <div className="footer-box quick-footer">
               <h4>QUICK LINKS</h4>
               <ul>
                 <li>
@@ -35,7 +35,7 @@ function FooterComponents() {
                 </li>
               </ul>
             </div>
-            <div class="footer-box legal-footer">
+            <div className="footer-box legal-footer">
               <h4>Legal</h4>
               <ul>
                 <li>
@@ -50,22 +50,22 @@ function FooterComponents() {
               </ul>
             </div>
 
-            <div class="footer-box contact-footer">
+            <div className="footer-box contact-footer">
               <h4>Contact</h4>
-              <p class="location">
+              <p className="location">
                 Mindfulness Haven Drumsheel Lower, Cong, Co. Mayo Ireland
               </p>
-              <p class="phone">+353 851 386537</p>
-              <p class="email">contact@mindfulnesshaven.academy</p>
+              <p className="phone">+353 851 386537</p>
+              <p className="email">contact@mindfulnesshaven.academy</p>
             </div>
 
-            <div class="footer-box subcribe-footer">
+            <div className="footer-box subcribe-footer">
               <h4>Subscribe</h4>
-              <div class="subcription-section-footer">
+              <div className="subcription-section-footer">
                 <input type="text" placeholder="Enter your email" />
-                <button class="subcribe">Subscribe</button>
+                <button className="subcribe">Subscribe</button>
               </div>
-              <div class="app-store">
+              <div className="app-store">
                 <a href="#">
                   <img src={AppStore} alt="" />
                 </a>
@@ -78,9 +78,9 @@ function FooterComponents() {
         </div>
       </div>
 
-      <div class="copy-right-section">
-        <div class="container">
-          <div class="copy-right-section-inner">
+      <div className="copy-right-section">
+        <div className="container">
+          <div className="copy-right-section-inner">
             <p>
               © 2021 <a href="#">MindfulnessHaven</a>. All Rights Reserved.
             </p>

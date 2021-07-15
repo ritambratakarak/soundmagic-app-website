@@ -1,0 +1,77 @@
+.dash-board-main{
+    margin-top: 50px;
+}
+.dashboard-menu{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.dashboard-menu ul{
+    margin: 0;
+    padding: 0;
+}
+.dashboard-menu ul li{
+    list-style-type: none;
+}
+.dashboard-menu ul li a{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    color: #6B6B6B;
+    text-decoration: none;
+    font-family: 'Philosopher', sans-serif;
+    padding: 20px 20px 20px 66px;
+    display: block;
+    transition: .5s;
+}
+
+.dashboard-menu ul li Link.menu1{
+    background: url(./../../images/menu1.png) no-repeat 35px center;
+  
+}
+.dashboard-menu ul li Link.menu2{
+    background: url(./../../images/menu2.png) no-repeat 35px center;
+}
+.dashboard-menu ul li Link.menu3{
+    background: url(./../../images/menu3.png) no-repeat 35px center;
+}
+.dashboard-menu ul li Link.menu4{
+    background: url(./../../images/menu4.png) no-repeat 35px center;
+}
+.dashboard-menu ul li Link.menu5{
+    background: url(./../../images/menu5.png) no-repeat 35px center;
+}
+.dashboard-menu ul li Link.menu6{
+    background: url(./../../images/menu6.png) no-repeat 35px center;
+}
+.dashboard-menu ul li Link.menu1.active, .dashboard-menu ul li Link.menu1:hover{
+     background: url(./../../images/menu1_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li Link.menu2.active, .dashboard-menu ul li Link.menu2:hover{
+     background: url(./../../images/menu2_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li Link.menu3.active, .dashboard-menu ul li Link.menu3:hover{
+     background: url(./../../images/menu3_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li Link.menu4.active, .dashboard-menu ul li Link.menu4:hover{
+     background: url(./../../images/menu4_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li Link.menu5.active, .dashboard-menu ul li Link.menu5:hover{
+     background: url(./../../images/menu5_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}
+.dashboard-menu ul li Link.menu6.active, .dashboard-menu ul li Link.menu6:hover{
+     background: url(./../../images/menu6_h.png) no-repeat 35px center, linear-gradient(92.62deg, #165CC2 0.33%, #021B77 100%);
+    color: #fff;
+    
+}

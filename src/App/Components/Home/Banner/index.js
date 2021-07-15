@@ -3,14 +3,14 @@ import "../../../Utils/style.css";
 import "../Banner/banner.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Banner from './../../../images/banner.png';
+import banner from '../../../images/banner.png';
 
 
 function BannerComponents(props) {
 
   return (
     <div className="banner">
-      <img src={Banner} alt="" />
+      <img src={banner} alt="" />
       <div className="banner-text">
         <div className="container">
           <div className="banner-text-inner">
