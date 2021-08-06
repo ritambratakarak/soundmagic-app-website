@@ -69,7 +69,7 @@ function Courses() {
       {loading ? (
         <View style={styles.container}>
           <View style={styles.repeatContainer}>
-            <Coursesloader loading={loading} />
+            <Coursesloader />
           </View>
         </View>
       ) : (
@@ -90,6 +90,9 @@ function Courses() {
               onPress={() => setModal(true)}
               keypress={() => navigation.navigate('Filter')}
               onFocus={false}
+              placeholder={"Search for Courses"}
+              inputwidth={"85%"}
+              showfilter={true}
             />
             <View style={{marginVertical: GAP.MEDIUM}}>
               <Text style={styles.courses}>All Couses</Text>
@@ -111,6 +114,7 @@ function Courses() {
                       item.totalVideo +
                       ' Video'
                     }
+                    showrating={true}
                     rateingvalue={item.avgRating}
                     rating={() => console.log('')}
                     ratingcolor={'#ECECEC'}

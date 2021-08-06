@@ -1,6 +1,6 @@
 import {Dimensions} from 'react-native';
 
-export const base_url = 'https://nodeserver.mydevfactory.com:1449/api'
+export const base_url = 'https://nodeserver.mydevfactory.com:1449/api';
 
 export const FONT = {
   SIZE: {
@@ -13,16 +13,15 @@ export const FONT = {
     VERYLARGE: 25
   },
   FAMILY: {
-    ROMAN: 'AvenirLTStd-Roman',
-    BOOK: 'AvenirBook',
-    BLACK: 'AvenirBlack',
-    LIGHT: 'AvenirLight',
-    REGULAR: 'AvenirRegular',
-    SEMI_BOLD: 'AvenirSemiBold',
-    BOLD: 'AvenirBold',
-    HEAVY: 'AvenirHeavy',
-    MEDIUM: 'AvenirMedium',
-    MEDIUMITALIC: 'AvenirMediumItalic'
+    BOOK: 'Avenir-Book',
+    BLACK: 'Avenir-Black',
+    LIGHT: 'Avenir-Light',
+    REGULAR: 'Avenir-Regular',
+    SEMI_BOLD: 'Avenir-SemiBold',
+    BOLD: 'Avenir-Bold',
+    HEAVY: 'Avenir-Heavy',
+    MEDIUM: 'Avenir-Medium',
+    MEDIUMITALIC: 'Avenir-MediumItalic'
   },
 };
 

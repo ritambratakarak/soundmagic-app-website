@@ -11,8 +11,40 @@ function AllCourses() {
   const [alldata, setalldata] = useState("");
 
   useEffect(() => {
-    console.log("details", route.params.item);
-    setalldata(route.params.item)
+    // navigation.setOptions({
+    //   headerShown: true,
+    //   headerStyle: {
+    //     height: Platform.OS == 'ios' ? HEIGHT * 0.12 : 60,
+    //     backgroundColor: '#f4f4f4',
+    //   },
+    //   headerTitle: (props) => (
+    //     <Text
+    //       style={{
+    //         fontSize: FONT.SIZE.EXTRALARGE,
+    //         fontFamily: FONT.FAMILY.SEMI_BOLD,
+    //       }}>
+    //       Course List
+    //     </Text>
+    //   ),
+    //   headerLeft: (props) => (
+    //     <TouchableOpacity
+    //       onPress={() => {
+    //         navigation.goBack();
+    //       }}>
+    //       <Image
+    //         source={require('../../Assets/Auths/arrow.png')}
+    //         resizeMode="contain"
+    //         style={{width: 12, HEIGHT: 18, marginLeft: WIDTH * 0.06}}
+    //       />
+    //     </TouchableOpacity>
+    //   ),
+    // });
+    const router = route.params;
+    const categorydata = router;
+    if(categorydata != undefined){
+    console.log("details", route?.params?.item);
+    setalldata(route?.params?.item)
+    }
   }, [route])
 
   function format(time) {   
@@ -44,7 +76,8 @@ function AllCourses() {
               textcolor={"#909090"}
               text={item.type + " | " + format(item.duration)}
               categoryname={"Admin"}
-              onPress={()=> navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type })}
+              onPress={()=> navigation.navigate("Player", {url: item.type == "video" ? item.videoURL : item.audioURL, type: item.type, trackID: item._id, name: item.name, tutorialid: item._id, courseid: alldata.courseID,
+              complete: item.completed })}
               showfavorite={false}
             />
           )}

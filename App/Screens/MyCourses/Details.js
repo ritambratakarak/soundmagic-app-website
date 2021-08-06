@@ -39,11 +39,15 @@ function MycourseDetails() {
   let stopFetchMore = true;
 
   useEffect(() => {
-    console.log('details', route.params.item);
-    setalldata(route.params.item);
-    const coursedata = route.params.item;
-    const couseid = coursedata.courseID;
-    getReviews(couseid);
+    const router = route.params;
+    const categorydata = router;
+    if(categorydata != undefined){
+      console.log('details', route?.params?.item);
+      const coursedata = route?.params?.item;
+      const couseid = coursedata?.courseID;
+      setalldata(route?.params?.item);
+      getReviews(couseid);
+    }
   }, [route]);
 
   const getReviews = async (id) => {
@@ -207,16 +211,6 @@ function MycourseDetails() {
               style={{width: '100%', height: HEIGHT * 0.26, borderRadius: 10}}
               resizeMode="cover"
             />
-            {/* <Image
-              source={{
-                uri:
-                  alldata.courseDetails != undefined
-                    ? alldata.courseDetails.banner
-                    : '',
-              }}
-              style={{width: '100%', height: HEIGHT * 0.26, borderRadius: 10}}
-              resizeMode={'cover'}
-            /> */}
             <View style={{paddingHorizontal: 5, paddingVertical: 15}}>
               <View
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -239,6 +233,7 @@ function MycourseDetails() {
                 }
               />
               <CategogyList categoryname={'Tutor'} name={'Admin'} />
+              <CategogyList categoryname={'Complete'} name={parseInt(alldata.completePercent)+" %"} />
               <View
                 style={{borderBottomColor: '#E5E5E5', borderBottomWidth: 0.5}}>
                 <TextContainer
@@ -263,7 +258,7 @@ function MycourseDetails() {
                 <Text
                   style={[styles.description, {color: COLORS.PRIMARY}]}
                   onPress={() =>
-                    navigation.navigate('AllCourses', {item: alldata.tutorials})
+                    navigation.navigate('AllCourses', {item: alldata.tutorials, type:"MycourseDetails"})
                   }>
                   {'View all'}
                 </Text>
@@ -285,13 +280,18 @@ function MycourseDetails() {
                     text={item.type + ' | ' + format(item.duration)}
                     categoryname={'Admin'}
                     onPress={() =>
-                      navigation.navigate('Player', {
+                      navigation.navigate("Player", {
                         url:
                           item.type == 'video' ? item.videoURL : item.audioURL,
                         type: item.type,
+                        name: item.name,
+                        tutorialid: item._id,
+                        courseid: alldata.courseID,
+                        complete: item.completed
                       })
                     }
                     showfavorite={false}
+                    showcomplete={item.completed}
                   />
                 )}
                 keyExtractor={(item) => item._id}

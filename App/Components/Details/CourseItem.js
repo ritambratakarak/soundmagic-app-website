@@ -15,6 +15,8 @@ import TextContainer from '../Common/Text';
 import {COLORS, HEIGHT, FONT, GAP, WIDTH} from '../../Utils/constants';
 import Favorite from '../Favorite';
 import ProgressiveImage from '../Common/PrograssiveImage';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 export default CourseItem = ({
   heading,
@@ -27,6 +29,7 @@ export default CourseItem = ({
   showfavorite,
   Pressfavorite,
   favorite,
+  showcomplete
 }) => {
   return (
     <TouchableOpacity
@@ -73,6 +76,7 @@ export default CourseItem = ({
             <CategogyList categoryname={'Upload By'} name={categoryname} />
           </View>
           {showfavorite && <Favorite AddFav={Pressfavorite} fav={favorite} />}
+          {showcomplete && <Icon name={'ios-checkmark-circle'} color={"green"} size={30}/>}
         </View>
       </View>
     </TouchableOpacity>

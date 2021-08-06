@@ -147,6 +147,9 @@ function ShowFilterData() {
           value={search}
           onPress={() => setModal(true)}
           onFocus={true}
+          placeholder={"Search for Courses"}
+          inputwidth={"85%"}
+          showfilter={true}
         />
         {loading ? (
           <Filterloader />
@@ -171,6 +174,7 @@ function ShowFilterData() {
                     item.totalVideo +
                     ' Video'
                   }
+                  showrating={true}
                   rateingvalue={item.avgRating}
                   rating={() => console.log('')}
                   ratingcolor={'#ECECEC'}

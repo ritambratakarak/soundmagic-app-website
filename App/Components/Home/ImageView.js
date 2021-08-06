@@ -3,7 +3,7 @@ import { View, Modal, TextInput, TouchableOpacity, Image, StyleSheet, Text, Flat
 import { COLORS, HEIGHT, FONT, GAP, WIDTH } from '../../Utils/constants';
 import ImageList from './ImageList';
 
-export default ImageView = ({ name, data, initialnumber }) => {
+export default ImageView = ({ name, data, initialnumber, onPress }) => {
   return (
     <View style={[styles.repeatContainer, { marginBottom: HEIGHT * 0.04 }]}>
       <Text style={{ fontSize: FONT.SIZE.LARGE, fontFamily: FONT.FAMILY.HEAVY, marginBottom: HEIGHT * 0.02 }}>{name}</Text>
@@ -12,7 +12,7 @@ export default ImageView = ({ name, data, initialnumber }) => {
         horizontal={true}
         data={data}
         renderItem={({ item }) => (
-          <ImageList uri={item.banner} />
+          <ImageList uri={item.banner} onPress={()=> onPress(item)} />
         )}
         keyExtractor={item => item._id}
         ListEmptyComponent={<View style={{ alignItems: "center", justifyContent: "center", width: WIDTH }}>

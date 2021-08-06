@@ -39,6 +39,10 @@ function Profile(props) {
         if (res.response_code === 200) {
           console.log(res.response_data);
           setUser(res.response_data)
+          // const userdata = res.response_data;
+          // const sprate = {...data, fname: userdata.fname, lname: userdata.lname};
+          // dispatch(loginUser(sprate))
+          // await AsyncStorage.setItem('@user', JSON.stringify(sprate))
           // Toast.show(res.response_message);
         }
         else if (res.response_code === 4000) {
@@ -64,7 +68,10 @@ function Profile(props) {
             <Image source={userMe && userMe.image == '' ? require('../../Assets/Home/image.png') : { uri: userMe && userMe.profile_image }} style={{ borderRadius: HEIGHT / 2, width: WIDTH * 0.25, height: WIDTH * 0.25, }} />
           </ImageBackground>
           <View style={{ marginTop: 15 }}>
-            <Text style={{ fontSize: 30, color: COLORS.WHITE, textAlign: "center", fontFamily: FONT.FAMILY.BOLD }}>{`${userMe != null ? userMe.fname + ' ' + userMe.lname : ""}`}</Text>
+            <Text style={{ fontSize: 30, color: COLORS.WHITE, textAlign: "center",
+            fontFamily: FONT.FAMILY.HEAVY,
+            fontWeight:"600"
+            }}>{`${userMe != null ? userMe.fname + ' ' + userMe.lname : ""}`}</Text>
             <Text style={{ color: COLORS.WHITE, fontSize: FONT.SIZE.MEDIUM, fontFamily: FONT.FAMILY.REGULAR, textAlign: "center" }}>{`${userMe != null ? userMe.email : ""}`}</Text>
           </View>
           <View style={{ width: "80%", alignItems: "center", marginVertical: HEIGHT * 0.05, borderRadius: HEIGHT / 2, }}>
@@ -76,7 +83,7 @@ function Profile(props) {
           </View>
           <View style={{ marginVertical: HEIGHT * 0.06, width: "100%", }}>
             <View style={{ backgroundColor: "#fff", height: HEIGHT * 0.075, borderRadius: 10, marginBottom: 15 }}>
-              <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }}>
+              <Ripple rippleDuration={1000} rippleOpacity={0.87} rippleColor={"gray"} rippleSize={"100%"} style={{ width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }} onPress={()=> navigation.navigate("MyCourses")}>
                 <Text style={[styles.whiteButtonText]}>
                   VIew my courses enrolled
                                 </Text>
@@ -108,7 +115,7 @@ const styles = StyleSheet.create({
     color: COLORS.BLACK,
     textTransform: 'uppercase',
     fontFamily: FONT.FAMILY.BOOK,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     letterSpacing: 0.6
   },
 });

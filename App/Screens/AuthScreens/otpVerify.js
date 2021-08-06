@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: COLORS.GRAY,
     textAlign: 'center',
-    fontFamily: FONT.FAMILY.SEMI_BOLD,
+    fontFamily: FONT.FAMILY.BOOK,
     color: COLORS.SECONDARY,
     fontSize: FONT.SIZE.LARGE,
   },

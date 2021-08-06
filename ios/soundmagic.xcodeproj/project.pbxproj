@@ -22,10 +22,18 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* soundmagicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* soundmagicTests.m */; };
 		3D55B0472649457C008A2F23 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D55B0462649457C008A2F23 /* File.swift */; };
+		3DC0374526808DB70071ED9C /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC0374426808DAD0071ED9C /* assets */; };
 		440E448A98B5A619AA361EB1 /* libPods-soundmagic-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64C008D75E4932C3DFC79E9 /* libPods-soundmagic-tvOS.a */; };
+<<<<<<< HEAD
 		500DE964BFBF431586BABEEC /* AvenirRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBC28CB0C1B74A91B50B1034 /* AvenirRegular.ttf */; };
+=======
+		4551A6FFA2A64709B95E2A6C /* Avenir-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46AC33802E704F89808AFBEE /* Avenir-MediumItalic.ttf */; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		53B4BDC34717933A1E599A59 /* libPods-soundmagic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF087ED2DC965342C11A6C6A /* libPods-soundmagic.a */; };
+		754CF03A287840259EE8D9C3 /* Avenir-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A40D28E4B7A4CBFB8E38140 /* Avenir-Medium.ttf */; };
+		8023B0706C1344EC92175A07 /* Avenir-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D54BBABFF4CB781DB0C98 /* Avenir-Black.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+<<<<<<< HEAD
 		B2E5F46A82F74F87B242E82B /* AvenirMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E13B66304114517A5F91863 /* AvenirMedium.ttf */; };
 		C3258F442B184ED9B0422564 /* AvenirMediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A585EB3A23234BA9B6AEF3CA /* AvenirMediumItalic.ttf */; };
 		CA63655AD2D2F8BD368D3B2E /* libPods-soundmagic-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E27F960B6B0B04AEBBEF6BA7 /* libPods-soundmagic-tvOSTests.a */; };
@@ -33,6 +41,15 @@
 		DCE815FA1E63406097755BFB /* AvenirBook.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 285EBAD6224843EA8943B3DF /* AvenirBook.ttf */; };
 		EB2C1DC3334B423CB48E0E55 /* AvenirBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 224C02D42A0349A5A1F9A6C5 /* AvenirBold.ttf */; };
 		F21320A7F4194DE3BB208013 /* AvenirLTStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6BFCB4D351F44F2999A21D6D /* AvenirLTStd-Book.otf */; };
+=======
+		A8AF2E4C08EA470E94CA3CAA /* Avenir-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC1659E678C844F79FE2F87C /* Avenir-Regular.ttf */; };
+		C5AF056CC88445FFB7F72F1E /* Avenir-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 249A6407A92C427390F5B750 /* Avenir-Bold.ttf */; };
+		CA63655AD2D2F8BD368D3B2E /* libPods-soundmagic-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E27F960B6B0B04AEBBEF6BA7 /* libPods-soundmagic-tvOSTests.a */; };
+		CB37485CEEED405D854F782A /* Avenir-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEB8F6C80B4B4AD8B94559C7 /* Avenir-Heavy.ttf */; };
+		DADD7290AF2A4BF9A97F2275 /* Avenir-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E13AEC4681140EA8E8326F1 /* Avenir-Light.ttf */; };
+		E85D943431FD4F5793A406A6 /* Avenir-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5B8C83F1D654FF69A5CB51D /* Avenir-SemiBold.ttf */; };
+		F192AAC687B34576B76E400B /* Avenir-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABF84991EDD649A78E143333 /* Avenir-Book.ttf */; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +74,10 @@
 		00E356EE1AD99517003FC87E /* soundmagicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = soundmagicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* soundmagicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = soundmagicTests.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		0EF9B52392A944DD8047798A /* AvenirLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirLight.ttf; path = ../App/Assets/Fonts/AvenirLight.ttf; sourceTree = "<group>"; };
+=======
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		10091E31E8A7485FAF384F08 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* soundmagic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = soundmagic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = soundmagic/AppDelegate.h; sourceTree = "<group>"; };
@@ -65,25 +85,40 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = soundmagic/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = soundmagic/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = soundmagic/main.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		224C02D42A0349A5A1F9A6C5 /* AvenirBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirBold.ttf; path = ../App/Assets/Fonts/AvenirBold.ttf; sourceTree = "<group>"; };
 		2274335D4CB74413BDE344BB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		23575D0C1760445883156609 /* AvenirLTStd-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirLTStd-Light.otf"; path = "../App/Assets/Fonts/AvenirLTStd-Light.otf"; sourceTree = "<group>"; };
+=======
+		2274335D4CB74413BDE344BB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		2371322037445C1A0A71A359 /* Pods-soundmagic-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic-tvOS.release.xcconfig"; path = "Target Support Files/Pods-soundmagic-tvOS/Pods-soundmagic-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		249A6407A92C427390F5B750 /* Avenir-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Bold.ttf"; path = "../App/Assets/Fonts/Avenir-Bold.ttf"; sourceTree = "<group>"; };
 		262C3A544D70B1093B510A95 /* Pods-soundmagic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic.debug.xcconfig"; path = "Target Support Files/Pods-soundmagic/Pods-soundmagic.debug.xcconfig"; sourceTree = "<group>"; };
 		285EBAD6224843EA8943B3DF /* AvenirBook.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirBook.ttf; path = ../App/Assets/Fonts/AvenirBook.ttf; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* soundmagic-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "soundmagic-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* soundmagic-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "soundmagic-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+<<<<<<< HEAD
 		2E40B0BA8F7F4D13B96D6D4A /* AvenirBlack.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirBlack.ttf; path = ../App/Assets/Fonts/AvenirBlack.ttf; sourceTree = "<group>"; };
 		2E6AB7F8E99B4CA3B66A3A30 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		346480F253CB4BFB817294E8 /* AvenirLTStd-Roman.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirLTStd-Roman.otf"; path = "../App/Assets/Fonts/AvenirLTStd-Roman.otf"; sourceTree = "<group>"; };
+=======
+		2E6AB7F8E99B4CA3B66A3A30 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		3A5C3F6E2844CF6438F53FF2 /* Pods-soundmagic-soundmagicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic-soundmagicTests.debug.xcconfig"; path = "Target Support Files/Pods-soundmagic-soundmagicTests/Pods-soundmagic-soundmagicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3AECC8395A1846CEA4474D5A /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		3D55B0452649457C008A2F23 /* soundmagic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "soundmagic-Bridging-Header.h"; sourceTree = "<group>"; };
 		3D55B0462649457C008A2F23 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		3DC0374426808DAD0071ED9C /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		3F5D54BBABFF4CB781DB0C98 /* Avenir-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Black.ttf"; path = "../App/Assets/Fonts/Avenir-Black.ttf"; sourceTree = "<group>"; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		3F92F0E7268B45BDBBEEE929 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		40D33A10441F4652859D4149 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		411AB79AA4068035C68EC455 /* Pods-soundmagic-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-soundmagic-tvOSTests/Pods-soundmagic-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		44FFA31FC4411DF4E63A6670 /* libPods-soundmagic-soundmagicTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-soundmagic-soundmagicTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+<<<<<<< HEAD
 		4D1C66C430D04A2285F33DA8 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		52E632A9556F4587AE2702B6 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		5A06300776974326B6FDCD68 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -91,18 +126,37 @@
 		68674297248F4C43A71546FB /* AvenirHeavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirHeavy.ttf; path = ../App/Assets/Fonts/AvenirHeavy.ttf; sourceTree = "<group>"; };
 		6BB3C817CD604E988C3DAF3E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		6BFCB4D351F44F2999A21D6D /* AvenirLTStd-Book.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "AvenirLTStd-Book.otf"; path = "../App/Assets/Fonts/AvenirLTStd-Book.otf"; sourceTree = "<group>"; };
+=======
+		46AC33802E704F89808AFBEE /* Avenir-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-MediumItalic.ttf"; path = "../App/Assets/Fonts/Avenir-MediumItalic.ttf"; sourceTree = "<group>"; };
+		4D1C66C430D04A2285F33DA8 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		52E632A9556F4587AE2702B6 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		5A06300776974326B6FDCD68 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		6BB3C817CD604E988C3DAF3E /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		6E13AEC4681140EA8E8326F1 /* Avenir-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Light.ttf"; path = "../App/Assets/Fonts/Avenir-Light.ttf"; sourceTree = "<group>"; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		72BBAB3801BC407183174B18 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = soundmagic/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		848263AC9413AF219FB0BD2F /* Pods-soundmagic-soundmagicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic-soundmagicTests.release.xcconfig"; path = "Target Support Files/Pods-soundmagic-soundmagicTests/Pods-soundmagic-soundmagicTests.release.xcconfig"; sourceTree = "<group>"; };
+		8A40D28E4B7A4CBFB8E38140 /* Avenir-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Medium.ttf"; path = "../App/Assets/Fonts/Avenir-Medium.ttf"; sourceTree = "<group>"; };
 		931FF637C3FE140EA72EAF59 /* Pods-soundmagic-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-soundmagic-tvOSTests/Pods-soundmagic-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		95C806704A9F42B38F04B289 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		9B1C3D122BDB6661F1EB0F72 /* Pods-soundmagic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic.release.xcconfig"; path = "Target Support Files/Pods-soundmagic/Pods-soundmagic.release.xcconfig"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		A585EB3A23234BA9B6AEF3CA /* AvenirMediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirMediumItalic.ttf; path = ../App/Assets/Fonts/AvenirMediumItalic.ttf; sourceTree = "<group>"; };
 		B94AD1B680A347C6BB7CE97A /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+=======
+		ABF84991EDD649A78E143333 /* Avenir-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Book.ttf"; path = "../App/Assets/Fonts/Avenir-Book.ttf"; sourceTree = "<group>"; };
+		B94AD1B680A347C6BB7CE97A /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		BC1659E678C844F79FE2F87C /* Avenir-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Regular.ttf"; path = "../App/Assets/Fonts/Avenir-Regular.ttf"; sourceTree = "<group>"; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		C420974B47E24913A4A0A9A2 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		C4645AD670EA40DCA8591302 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		C64C008D75E4932C3DFC79E9 /* libPods-soundmagic-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-soundmagic-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B1F118D7FF47C5A3E838A0 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		DEB8F6C80B4B4AD8B94559C7 /* Avenir-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Heavy.ttf"; path = "../App/Assets/Fonts/Avenir-Heavy.ttf"; sourceTree = "<group>"; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 		DF087ED2DC965342C11A6C6A /* libPods-soundmagic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-soundmagic.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27F960B6B0B04AEBBEF6BA7 /* libPods-soundmagic-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-soundmagic-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E507040FF58292CFC8053C80 /* Pods-soundmagic-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-soundmagic-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-soundmagic-tvOS/Pods-soundmagic-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +164,10 @@
 		EBC28CB0C1B74A91B50B1034 /* AvenirRegular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AvenirRegular.ttf; path = ../App/Assets/Fonts/AvenirRegular.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+<<<<<<< HEAD
+=======
+		F5B8C83F1D654FF69A5CB51D /* Avenir-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-SemiBold.ttf"; path = "../App/Assets/Fonts/Avenir-SemiBold.ttf"; sourceTree = "<group>"; };
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +241,7 @@
 		13B07FAE1A68108700A75B9A /* soundmagic */ = {
 			isa = PBXGroup;
 			children = (
+				3DC0374426808DAD0071ED9C /* assets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -246,18 +305,6 @@
 		D892E74B75534F80A3A0D658 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6BFCB4D351F44F2999A21D6D /* AvenirLTStd-Book.otf */,
-				23575D0C1760445883156609 /* AvenirLTStd-Light.otf */,
-				346480F253CB4BFB817294E8 /* AvenirLTStd-Roman.otf */,
-				2E40B0BA8F7F4D13B96D6D4A /* AvenirBlack.ttf */,
-				224C02D42A0349A5A1F9A6C5 /* AvenirBold.ttf */,
-				285EBAD6224843EA8943B3DF /* AvenirBook.ttf */,
-				68674297248F4C43A71546FB /* AvenirHeavy.ttf */,
-				0EF9B52392A944DD8047798A /* AvenirLight.ttf */,
-				5E13B66304114517A5F91863 /* AvenirMedium.ttf */,
-				A585EB3A23234BA9B6AEF3CA /* AvenirMediumItalic.ttf */,
-				EBC28CB0C1B74A91B50B1034 /* AvenirRegular.ttf */,
-				E927F8FD9B6E4A7C8B220287 /* AvenirSemiBold.ttf */,
 				D3B1F118D7FF47C5A3E838A0 /* AntDesign.ttf */,
 				C4645AD670EA40DCA8591302 /* Entypo.ttf */,
 				C420974B47E24913A4A0A9A2 /* EvilIcons.ttf */,
@@ -274,6 +321,15 @@
 				3AECC8395A1846CEA4474D5A /* Octicons.ttf */,
 				2E6AB7F8E99B4CA3B66A3A30 /* SimpleLineIcons.ttf */,
 				10091E31E8A7485FAF384F08 /* Zocial.ttf */,
+				3F5D54BBABFF4CB781DB0C98 /* Avenir-Black.ttf */,
+				249A6407A92C427390F5B750 /* Avenir-Bold.ttf */,
+				ABF84991EDD649A78E143333 /* Avenir-Book.ttf */,
+				DEB8F6C80B4B4AD8B94559C7 /* Avenir-Heavy.ttf */,
+				6E13AEC4681140EA8E8326F1 /* Avenir-Light.ttf */,
+				8A40D28E4B7A4CBFB8E38140 /* Avenir-Medium.ttf */,
+				46AC33802E704F89808AFBEE /* Avenir-MediumItalic.ttf */,
+				BC1659E678C844F79FE2F87C /* Avenir-Regular.ttf */,
+				F5B8C83F1D654FF69A5CB51D /* Avenir-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -422,6 +478,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+<<<<<<< HEAD
 				F21320A7F4194DE3BB208013 /* AvenirLTStd-Book.otf in Resources */,
 				2BDE44D7EB91438EB3DC5B58 /* AvenirLTStd-Light.otf in Resources */,
 				2569EA07C855463F846117FC /* AvenirLTStd-Roman.otf in Resources */,
@@ -434,6 +491,18 @@
 				C3258F442B184ED9B0422564 /* AvenirMediumItalic.ttf in Resources */,
 				500DE964BFBF431586BABEEC /* AvenirRegular.ttf in Resources */,
 				CEE7324260EC4435A348D118 /* AvenirSemiBold.ttf in Resources */,
+=======
+				3DC0374526808DB70071ED9C /* assets in Resources */,
+				8023B0706C1344EC92175A07 /* Avenir-Black.ttf in Resources */,
+				C5AF056CC88445FFB7F72F1E /* Avenir-Bold.ttf in Resources */,
+				F192AAC687B34576B76E400B /* Avenir-Book.ttf in Resources */,
+				CB37485CEEED405D854F782A /* Avenir-Heavy.ttf in Resources */,
+				DADD7290AF2A4BF9A97F2275 /* Avenir-Light.ttf in Resources */,
+				754CF03A287840259EE8D9C3 /* Avenir-Medium.ttf in Resources */,
+				4551A6FFA2A64709B95E2A6C /* Avenir-MediumItalic.ttf in Resources */,
+				A8AF2E4C08EA470E94CA3CAA /* Avenir-Regular.ttf in Resources */,
+				E85D943431FD4F5793A406A6 /* Avenir-SemiBold.ttf in Resources */,
+>>>>>>> 1e1490502fd676a12849fb82a460e40f0118a244
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +536,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		0C9BCEFF7436064FED6D2FB8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -62,7 +62,7 @@ function MyTabBar({ state, descriptors, navigation }) {
               style={{  height: HEIGHT * 0.03, alignItems: 'center', flexDirection: 'row', justifyContent:'center' }}
             >
               <Animatable.Image animation="rubberBand" source={iconName} resizeMode="contain" style={{width: WIDTH * 0.09, height: HEIGHT * 0.03}} color={isFocused ? COLORS.PRIMARY : '#222'} />
-              {isFocused && <Animatable.Text animation="rubberBand" style={{ color: isFocused ? COLORS.PRIMARY : '#222', fontFamily: FONT.FAMILY.SEMI_BOLD, fontSize: FONT.SIZE.SMALL }}> 
+              {isFocused && <Animatable.Text animation="rubberBand" style={{ color: isFocused ? COLORS.PRIMARY : '#222', fontFamily: FONT.FAMILY.HEAVY, fontStyle:"normal", fontWeight:"400", fontSize: FONT.SIZE.SMALL }}> 
                 {label}
               </Animatable.Text> }
             </TouchableOpacity>

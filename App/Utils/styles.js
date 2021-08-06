@@ -5,11 +5,10 @@ export const globalStyle = StyleSheet.create({
   boldMedium: {
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: FONT.FAMILY.BOLD,
+    fontFamily: FONT.FAMILY.HEAVY,
   },
   SemiboldMedium: {
     fontSize: 25,
-    fontFamily: FONT.FAMILY.SEMI_BOLD,
   },
   cardBox: {
     padding: GAP.MEDIUM,

@@ -8,6 +8,7 @@ import {
   Image,
   FlatList,
   RefreshControl,
+  ImageBackground,
 } from 'react-native';
 import Toast from 'react-native-root-toast';
 import AnimatedLoader from '../../Components/AnimatedLoader';
@@ -15,11 +16,17 @@ import CategogyList from '../../Components/Common/CategogyList';
 import CourseItem from '../../Components/Details/CourseItem';
 import Filter from '../../Components/SearchComponent/Filter';
 import Search from '../../Components/SearchComponent/Search';
-import Trackloader from '../../Components/Track/Trackloader';
 import {COLORS, FONT, GAP, HEIGHT, WIDTH} from '../../Utils/constants';
+import CoursesItem from '../../Components/Courses/Courses';
+import {useDispatch, useSelector} from 'react-redux';
+import {logoutUser} from '../../Redux/Actions/authAction';
+import {addFavorite, removeFavorite} from '../../Redux/Actions/favoriteaction';
+import Filterloader from '../../Components/SearchComponent/Filterloader';
 
 function Track() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const favoritedata = useSelector((state) => state.favorite);
   const [search, setsearch] = useState('');
   const [modal, setModal] = React.useState(false);
   const [cousesdata, setcousesdata] = React.useState([]);
@@ -30,23 +37,38 @@ function Track() {
     getTrack();
   }, []);
 
+  useEffect(() => {
+    if (favoritedata != null) {
+      if (favoritedata?.favorite != null) {
+        getTrack();
+        dispatch(addFavorite(null));
+      }
+    }
+  }, [favoritedata]);
+
   useFocusEffect(
     useCallback(() => {
       getTrack();
     }, []),
   );
 
-  const getTrack = async () => {
+  const getTrack = async (name) => {
     setLoading(true);
     const alldata = await AsyncStorage.getItem('@user');
     const data = JSON.parse(alldata);
     const authtoken = data.authtoken;
-    Network(`/get-track-list?page=${1}&limit=${20}`, 'get', {authtoken})
+    let url = '';
+    if (name != undefined) {
+      url = `/get-track-list?page=${1}&limit=${20}&name=${name}`;
+    } else {
+      url = `/get-track-list?page=${1}&limit=${20}`;
+    }
+    Network(url, 'get', {authtoken})
       .then(async (res) => {
         setLoading(false);
         setrefreash(false);
         if (res.response_code === 200) {
-          console.log('track data', res.response_data.docs);
+          console.log('track data', res.response_data);
           setcousesdata(res.response_data.docs);
           // Toast.show(res.response_message);
         } else if (res.response_code === 4000) {
@@ -73,7 +95,6 @@ function Track() {
     let hrs = ~~(time / 3600);
     let mins = ~~((time % 3600) / 60);
     let secs = ~~time % 60;
-
     let ret = '';
     if (hrs > 0) {
       ret += '' + hrs + ' hours ' + (mins < 10 ? '0' : '');
@@ -83,58 +104,77 @@ function Track() {
     return ret;
   }
 
+  const AddFavorite = async (id) => {
+    const userdata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(userdata);
+    const authtoken = data.authtoken;
+    const submitData = {
+      trackID: id,
+      authtoken,
+    };
+    setLoading(true);
+    dispatch(addFavorite(submitData));
+  };
+
+  const RemoveFavorite = async (id) => {
+    const userdata = await AsyncStorage.getItem('@user');
+    const data = JSON.parse(userdata);
+    const authtoken = data.authtoken;
+    setLoading(true);
+    const submitData = {
+      trackID: id,
+      authtoken,
+    };
+    dispatch(removeFavorite(submitData));
+  };
+
   return (
     <>
-      {loading ? (
-        <View style={styles.container}>
-          <View style={styles.repeatContainer}>
-            <Trackloader loading={loading} />
-          </View>
-        </View>
-      ) : (
-        <View style={styles.container}>
-          {/* <AnimatedLoader loading={loading} /> */}
-          <Filter
-            modal={modal}
-            close={() => setModal(!modal)}
-            applypress={(category, duration, rating) => {
-              navigation.navigate('Filter', {category, duration, rating}),
-                setModal(false);
+      <View style={styles.container}>
+        <View style={styles.repeatContainer}>
+          <Search
+            onChange={(text) => {
+              setsearch(text), getTrack(text);
             }}
+            value={search}
+            // keypress={() => navigation.navigate('Filter')}
+            onFocus={false}
+            placeholder={'Search for Track'}
+            inputwidth={'100%'}
+            showfilter={false}
           />
-          <View style={styles.repeatContainer}>
-            <Search
-              onChange={(text) => setsearch(text)}
-              value={search}
-              onPress={() => setModal(true)}
-              keypress={() => navigation.navigate('Filter')}
-              onFocus={false}
-            />
+          {loading ? (
+            <Filterloader />
+          ) : (
             <View style={{marginVertical: GAP.MEDIUM}}>
               <Text style={styles.courses}>All Track</Text>
               <FlatList
-                style={{marginBottom: HEIGHT * 0.18}}
+                style={{marginBottom: HEIGHT * 0.2}}
                 showsVerticalScrollIndicator={false}
                 horizontal={false}
                 data={cousesdata}
                 renderItem={({item}) => (
-                  <CourseItem
-                    heading={item.name}
+                  <CoursesItem
                     image={
-                      'https://image.shutterstock.com/mosaic_250/4082746/408292723/stock-vector-white-play-button-vector-icon-gray-background-408292723.jpg'
+                      item.type == 'video'
+                        ? item.videoThumbnail
+                        : item.audioThumbnail
                     }
-                    textsize={FONT.SIZE.SMALL}
-                    textcolor={'#909090'}
-                    text={item.type + ' | ' + format(item.duration)}
-                    categoryname={'Admin'}
+                    heading={item.name}
+                    categoryname={item.name}
+                    tutorname={item.instructor}
+                    qty={item.type + '  ' + format(item.duration)}
                     onPress={() =>
-                      navigation.navigate('Player', {
-                        url: item.audioURL,
-                        type: item.type,
-                      })
+                      navigation.navigate('TrackDetails', {item: item})
                     }
+                    showrating={false}
                     showfavorite={true}
-                    Pressfavorite={() => console.log()}
+                    fortrackComponent={false}
+                    Pressfavorite={() =>
+                      item.isFavorite == true
+                        ? RemoveFavorite(item._id)
+                        : AddFavorite(item._id)
+                    }
                     favorite={item.isFavorite}
                   />
                 )}
@@ -150,7 +190,10 @@ function Track() {
                 keyExtractor={(item) => item._id}
                 ListEmptyComponent={
                   <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
                     <Text
                       style={{
                         alignItems: 'center',
@@ -164,9 +207,9 @@ function Track() {
                 }
               />
             </View>
-          </View>
+          )}
         </View>
-      )}
+      </View>
     </>
   );
 }

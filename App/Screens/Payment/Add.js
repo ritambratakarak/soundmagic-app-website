@@ -34,7 +34,7 @@ function AddPayment() {
                 checked={savecard}
                 onPress={() => setsavecard(!savecard)}
                 containerStyle={{ backgroundColor: COLORS.TRANSPARENT, borderWidth: 0, width: "80%" }}
-                textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.SEMI_BOLD, fontWeight: "100" }}
+                textStyle={{ color: COLORS.BLACK, fontSize: FONT.SIZE.BIG, fontFamily: FONT.FAMILY.HEAVY, fontWeight: "100" }}
               />
             </View>
             : null
