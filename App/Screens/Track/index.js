@@ -130,6 +130,14 @@ function Track() {
 
   return (
     <>
+      <Filter
+        modal={modal}
+        close={() => setModal(!modal)}
+        applypress={(activity, benefit, hastag) => {
+          navigation.navigate('Filter', {activity, benefit, hastag}),
+            setModal(false);
+        }}
+      />
       <View style={styles.container}>
         <View style={styles.repeatContainer}>
           <Search
@@ -137,11 +145,12 @@ function Track() {
               setsearch(text), getTrack(text);
             }}
             value={search}
-            // keypress={() => navigation.navigate('Filter')}
+            keypress={() => navigation.navigate('Filter')}
             onFocus={false}
             placeholder={'Search for Track'}
             inputwidth={'100%'}
-            showfilter={false}
+            inputwidth={'85%'}
+            showfilter={true}
           />
           {loading ? (
             <Filterloader />
@@ -155,6 +164,8 @@ function Track() {
                 data={cousesdata}
                 renderItem={({item}) => (
                   <CoursesItem
+                    category={"Activity"}
+                    tutor={"Instractor"}
                     image={
                       item.type == 'video'
                         ? item.videoThumbnail

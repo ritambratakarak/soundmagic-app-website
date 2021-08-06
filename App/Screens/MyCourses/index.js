@@ -103,6 +103,8 @@ function MyCourses() {
                 data={cousesdata}
                 renderItem={({item}) => (
                   <CoursesItem
+                  category={"Category"}
+                  tutor={"Tutor"}
                     image={item.courseDetails.banner}
                     heading={item.courseDetails.name}
                     categoryname={item.categoryDetails.name}

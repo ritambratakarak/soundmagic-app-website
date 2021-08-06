@@ -34,14 +34,14 @@ const Homeloader = () => {
               }}>
               <View
                 style={{
-                  width: WIDTH / 1.1,
+                  width: WIDTH / 1.3,
                   height: HEIGHT * 0.06,
                   borderRadius: 8,
                 }}
               />
-              {/* <View
+              <View
                 style={{width: 50, height: HEIGHT * 0.06, borderRadius: 100}}
-              /> */}
+              />
             </View>
             <View
               style={{
