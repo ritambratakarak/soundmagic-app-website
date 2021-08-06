@@ -8,6 +8,7 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import Toast from 'react-native-root-toast';
 import AnimatedLoader from '../../Components/AnimatedLoader';
@@ -30,22 +31,25 @@ function ShowFilterData() {
   const [loading, setLoading] = useState(false);
   const [category, setcategory] = useState(null);
   const [duration, setduration] = useState([]);
-  const [rating, setrating] = useState(null);
+  const [rating, setrating] = useState([]);
 
   useEffect(() => {
     textfocus.current.focus();
   }, []);
 
   var arr = ""
+  var arr2 = ""
 
   useEffect(() => {
     const router = route.params;
     const categorydata = router;
     if(categorydata != undefined){
-      setcategory(route.params?.category)
-      setduration(route.params?.duration)
-      setrating(route.params?.rating);
-      getCourses(route.params?.category, route.params?.duration, route.params?.rating)
+      console.log("categorydata", categorydata);
+      setcategory(route.params?.activity)
+      setduration(route.params?.benefit)
+      setrating(route.params?.hastag);
+      // hastagfilter(route.params?.hastag)
+      getCourses(route.params?.activity, route.params?.benefit, route.params?.hastag)
     }
   }, [route]);
 
@@ -59,12 +63,21 @@ function ShowFilterData() {
   
   const durationfilter = (duration) => {
     for (var i = 0; i < duration.length; i++) {
-       arr += "&durationFilter="+ duration[i]
+       arr += "&benefit="+ duration[i].item
     }
+    console.log("arr", arr);
     return arr
   }
 
-  const getCourses = async (category, duration, rating, name) => {
+  const hastagfilter = (hashtag) => {
+    for (var i = 0; i < hashtag.length; i++) {
+       arr2 += "&hashtag="+ hashtag[i].item
+    }
+    console.log("arr2", arr2);
+    return arr2
+  }
+
+  const getCourses = async (activity, benefit, hastag, name) => {
     // console.log("category, duration, rating", category, duration, rating);
     setLoading(true)
     const alldata = await AsyncStorage.getItem('@user');
@@ -72,28 +85,28 @@ function ShowFilterData() {
     const authtoken = data.authtoken;
     let url = ""
     if(name != undefined){
-      url = `/get-course?page=${1}&limit=${20}&name=${name}`
+      url = `/get-track-list?page=${1}&limit=${20}&name=${name}`
     }
-    else if(category != null && duration.length == 0 && rating == null){
-      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}` // only category
+    else if(activity != null && benefit.length == 0 && hastag.length == 0){
+      url = `/get-track-list?activity=${activity}&page=${1}&limit=${20}` // only category
     }
-    else if(category == null && duration.length != 0 && rating == null){
-      url = `/get-course?page=${1}&limit=${20}${durationfilter(duration)}` // only duration
+    else if(activity == null && benefit.length != 0 && hastag.length == 0){
+      url = `/get-track-list?page=${1}&limit=${20}${durationfilter(benefit)}` // only duration
     }
-    else if(category == null && duration.length == 0 && rating != null){
-      url = `/get-course?page=${1}&limit=${20}&ratingFilter=${rating}` // only rating
+    else if(activity == null && benefit.length == 0 && hastag.length != 0){
+      url = `/get-track-list?page=${1}&limit=${20}${hastagfilter(hastag)}` // only rating
     }
-    else if(category != null && duration.length != 0 && rating == null){
-      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}${durationfilter(duration)}` // category and duration
+    else if(activity != null && benefit.length != 0 && hastag.length == 0){
+      url = `/get-track-list?activity=${activity}&page=${1}&limit=${20}${durationfilter(benefit)}` // category and duration
     }
-    else if(category != null && duration.length == 0 && rating != null){
-      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}&ratingFilter=${rating}` // category and rating
+    else if(activity != null && benefit.length == 0 && hastag.length != 0){
+      url = `/get-track-list?activity=${activity}&page=${1}&limit=${20}${hastagfilter(hastag)}` // category and rating
     }
-    else if(category == null && duration.length != 0 && rating != null){
-      url = `/get-course?page=${1}&limit=${20}&ratingFilter=${rating}${durationfilter(duration)}` // duration and rating
+    else if(activity == null && benefit.length != 0 && hastag.length != 0){
+      url = `/get-track-list?page=${1}&limit=${20}${hastagfilter(hastag)}${durationfilter(benefit)}` // duration and rating
     }
-    else if(category != null && duration.length != 0 && rating != null){
-      url = `/get-course?categoryID=${category}&page=${1}&limit=${20}&ratingFilter=${rating}${durationfilter(duration)}` // all type here
+    else if(activity != null && benefit.length != 0 && hastag.length != 0){
+      url = `/get-track-list?activity=${activity}&page=${1}&limit=${20}${hastagfilter(hastag)}${durationfilter(benefit)}` // all type here
     }
     // console.log(url);
     Network(
@@ -104,7 +117,7 @@ function ShowFilterData() {
       .then(async (res) => {
         setLoading(false);
         if (res.response_code === 200) {
-          console.log('courses data', res.response_data.docs);
+          console.log('Track data', res.response_data.docs);
           setcousesdata(res.response_data.docs);
 
           // Toast.show(res.response_message);
@@ -147,7 +160,7 @@ function ShowFilterData() {
           value={search}
           onPress={() => setModal(true)}
           onFocus={true}
-          placeholder={"Search for Courses"}
+          placeholder={"Search for Tracks"}
           inputwidth={"85%"}
           showfilter={true}
         />
@@ -155,7 +168,42 @@ function ShowFilterData() {
           <Filterloader />
         ) : (
           <View style={{marginVertical: GAP.MEDIUM}}>
-            <Text style={styles.courses}>Filter Couses</Text>
+            <View style={{flexDirection:"row",}}>
+              <ScrollView horizontal={true} style={{marginBottom:20, width:"80%"}} showsHorizontalScrollIndicator={false}>
+                {category != null &&
+                  <View style={{flexDirection:"row", marginRight:5}}>
+                    <Text style={{fontWeight:"bold"}}>Activity: </Text>
+                    <View style={{borderColor:COLORS.PRIMARY, borderWidth:1, borderRadius:HEIGHT/2, paddingHorizontal:10,}}>
+                      <Text style={{color:COLORS.BLACK}}>{category}</Text>
+                    </View>
+                  </View>}
+                  {duration.length != 0 &&
+                    <View style={{flexDirection:"row", marginRight:5}}>
+                    <Text style={{fontWeight:"bold"}}>Benefit: </Text>
+                    {duration.map((data, i)=>{
+                      return(
+                        <View style={{borderColor:COLORS.PRIMARY, borderWidth:0.5, borderRadius:HEIGHT/2, paddingHorizontal:10, marginRight:2}} key={i}>
+                          <Text style={{color:COLORS.BLACK, }}>{data.item}</Text>
+                        </View>
+                      )})}
+                  </View>}
+                  {rating.length != 0 &&
+                    <View style={{flexDirection:"row", marginRight:5}}>
+                    <Text style={{fontWeight:"bold"}}>Hastag: </Text>
+                    {rating.map((data, i)=>{
+                      return(
+                        <View style={{borderColor:COLORS.PRIMARY, borderWidth:0.5, borderRadius:HEIGHT/2, paddingHorizontal:10, marginRight:2}} key={i}>
+                          <Text style={{color:COLORS.BLACK}}>{data.item}</Text>
+                        </View>
+                      )})}
+                  </View>}
+              </ScrollView>
+              { category != null || rating.length != 0 || duration.length != 0 ?
+                <Text style={{color:COLORS.PRIMARY, fontWeight:"bold", marginLeft:10}} onPress={()=> {setcategory(null), setcousesdata([]), setduration([]), setrating([])}}>Reset</Text>
+                : null}
+            </View>
+            
+
             <FlatList
               style={{marginBottom: HEIGHT * 0.18}}
               showsVerticalScrollIndicator={false}
@@ -163,29 +211,24 @@ function ShowFilterData() {
               data={cousesdata}
               renderItem={({item}) => (
                 <CoursesItem
-                  image={item.banner}
+                  category={"Activity"}
+                  tutor={"Instractor"}
+                  image={item.audioThumbnail}
                   heading={item.name}
-                  categoryname={item.categoryDetails.name}
+                  categoryname={item.activity}
                   tutorname={'Admin'}
                   qty={
-                    item.totalAudio +
-                    ' Audio' +
-                    ' & ' +
-                    item.totalVideo +
-                    ' Video'
+                    item.type
                   }
-                  showrating={true}
-                  rateingvalue={item.avgRating}
-                  rating={() => console.log('')}
-                  ratingcolor={'#ECECEC'}
+                  showrating={false}
                   price={'$' + item.price}
                   ratingdisable={true}
-                  onPress={() => navigation.navigate('Details', {item: item})}
+                  onPress={() => navigation.navigate('TrackDetails', {item: item})}
                 />
               )}
               keyExtractor={(item) => item._id}
               ListEmptyComponent={
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{alignItems: 'center', justifyContent: 'center', marginTop:HEIGHT * 0.30}}>
                   <Text
                     style={{
                       alignItems: 'center',

@@ -266,8 +266,8 @@ const Home = (props) => {
           <Filter
             modal={modal}
             close={() => setModal(!modal)}
-            applypress={(category, duration, rating) => {
-              navigation.navigate('Filter', {category, duration, rating}),
+            applypress={(activity, benefit, hastag) => {
+              navigation.navigate('Filter', {activity, benefit, hastag}),
                 setModal(false);
             }}
           />
@@ -291,11 +291,11 @@ const Home = (props) => {
                 onChange={(text) => setsearch(text)}
                 value={search}
                 onPress={() => setModal(true)}
-                keypress={() => navigation.navigate('Track')}
+                keypress={() => navigation.navigate('Filter')}
                 onFocus={false}
                 placeholder={"Search for Track"}
-                inputwidth={"100%"}
-                showfilter={false}
+                inputwidth={"85%"}
+                showfilter={true}
               />
             </View>
             <View style={[styles.repeatContainer, {marginBottom: 0}]}>

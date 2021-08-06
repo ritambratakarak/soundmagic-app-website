@@ -39,7 +39,9 @@ export default Courses = ({
   origin,
   benefit,
   hastag,
-  fortrackComponent
+  fortrackComponent,
+  category,
+  tutor
 }) => {
   return (
     <>
@@ -71,8 +73,8 @@ export default Courses = ({
       /> */}
         <View style={{padding: 15}}>
           <Heading color={'#000'} name={heading} />
-          <CategogyList categoryname={'Category'} name={categoryname} />
-          <CategogyList categoryname={'Tutor'} name={tutorname} />
+          <CategogyList categoryname={category} name={categoryname} />
+          <CategogyList categoryname={tutor} name={tutorname} />
           <Text
             style={{
               fontSize: FONT.SIZE.SMALL,
