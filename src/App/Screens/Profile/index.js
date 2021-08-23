@@ -191,7 +191,6 @@ export default function Profile(props) {
     };
     Network("update-password", "post", obj)
       .then(async (res) => {
-        console.log("res success login--->", res);
         if (res.response_code == 200) {
           setLoading(false);
           toast.success(res.response_message);

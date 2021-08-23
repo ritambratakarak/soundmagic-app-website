@@ -1,0 +1,71 @@
+.details-container{
+    position: relative;
+    padding: 15px 0 20px 0;
+}
+.banner-Image{
+    width: 100%;
+    overflow: hidden;
+}
+.banner-Image img{
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
+}
+.title{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 36px;
+    color: #051445;
+    font-family: 'Philosopher', sans-serif;
+    padding: 18px 0px 0px 0px;
+}
+.description{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
+    color: #9EA1AC;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.details-container button.enroll-now {
+    width: 165px;
+    height: 52px;
+    background: linear-gradient(95.04deg, #165CC2 6.03%, #021B77 96.11%);
+    border-radius: 25px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border: none;
+    margin-top: 20px;
+}
+.in-one-row{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+.tag{
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    align-items: center;
+}
+.tags{
+    background: #ececec;
+    box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.tags p, .tags h6{
+    margin-bottom: 0px;
+}

@@ -90,7 +90,10 @@ function HomeComponents(props) {
       <AboutComponents />
       <CoursesComponents data={course} />
       <VideoComponents />
-      <FeatureComponents data={blog} />
+      <FeatureComponents data={blog} onPress={(data)=> props.history.push({
+                                pathname: "/blogdetails",
+                                state: { data: data },
+                              })} />
       <PriceComponents />
       <FooterComponent />
     </LoadingOverlay>

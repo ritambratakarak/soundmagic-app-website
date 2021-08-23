@@ -9,7 +9,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import OwlCarousel from "react-owl-carousel";
 
-function FeatureComponents({ data }) {
+function FeatureComponents({ data, onPress }) {
   const [caurse, setcaurse] = useState([]);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function FeatureComponents({ data }) {
             <OwlCarousel className="owl-carousel owl-theme" {...options}>
               {caurse.map((item, i) => {
                 return (
-                  <div className="item" key={i}>
+                  <div className="item" key={i} onClick={()=>onPress(item)}>
                     <div className="featured-box">
                       <div className="featured-box-img">
                         <img src={item.banner} alt="" />

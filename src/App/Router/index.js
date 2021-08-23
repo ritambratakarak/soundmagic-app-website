@@ -9,6 +9,11 @@ import LoginScreen from "./../Screens/Login/index";
 import Signup from "./../Screens/Register/index";
 import { ToastBox } from '../Components/Toast';
 import Profile from '../Screens/Profile';
+import Track from '../Screens/Track';
+import TrackDetails from '../Screens/Track/Details';
+import Player from '../Screens/Player';
+import BlogDetails from '../Screens/Blog';
+
 
 export const currentURL = '/projects/suvendu/ritam/soundmagic';
 
@@ -43,6 +48,10 @@ function RouterScreen() {
                             <Route path='/signup' component={Signup} />
                             <Route path='/forgotpassword' component={Forgotpassword} />
                             <Route path='/profile' component={Profile} />
+                            <Route path='/track' component={Track} />
+                            <Route path='/trackdetails' component={TrackDetails} />
+                            <Route path='/player' component={Player} />
+                            <Route path='/blogdetails' component={BlogDetails} />
                         </>
                     }
                     <Route component={NotFound} />

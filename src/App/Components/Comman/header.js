@@ -14,18 +14,19 @@ import { toast } from "react-toastify";
 
 function HeaderComponents({ show, onClick, dashboard }) {
   const [user, setUser] = useState({});
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const history = useHistory()
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("user----->", user);
+    // console.log("user----->", user);
     setUser(user);
   }, []);
 
   const handleLogout = (event) => {
     const userRemove = localStorage.removeItem("user");
-    console.log("userRemove", userRemove);
+    // console.log("userRemove", userRemove);
     dispatch(logoutUser());
     toast.success("Logout Sucessfully")
     history.push("/")
@@ -71,9 +72,9 @@ function HeaderComponents({ show, onClick, dashboard }) {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">
+                      <Link to="/track" className="nav-link">
                         Track
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
                       <a className="nav-link" href="#">
@@ -95,6 +96,8 @@ function HeaderComponents({ show, onClick, dashboard }) {
                   type="text"
                   className="search-input"
                   placeholder="Search"
+                  name={"search"}
+                  
                 />
                 <button className="search-btn">
                   <img src={Search} alt="" />
