@@ -84,7 +84,7 @@ function HomeComponents(props) {
 
   return (
     <LoadingOverlay active={loading} spinner text="Loading your content...">
-      <HeaderComponent show={show} onClick={onClick} dashboard={true} />
+      <HeaderComponent show={show} onClick={onClick} dashboard={true} mainsearch={()=> props.history.push("Track")} />
       <BannerComponents />
       <CategoryComponents />
       <AboutComponents />

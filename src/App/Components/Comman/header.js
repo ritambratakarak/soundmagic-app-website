@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 
 
-function HeaderComponents({ show, onClick, dashboard }) {
+function HeaderComponents({ show, onClick, dashboard, mainsearch }) {
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
   const history = useHistory()
@@ -95,6 +95,7 @@ function HeaderComponents({ show, onClick, dashboard }) {
                   type="text"
                   className="search-input"
                   placeholder="Search"
+                  onChange={mainsearch}
                 />
                 <button className="search-btn">
                   <img src={Search} alt="" />
