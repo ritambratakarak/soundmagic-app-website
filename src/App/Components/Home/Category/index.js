@@ -36,9 +36,7 @@ function CategoryComponents(props) {
         <div className="container">
           <h2 className="heading">Categories</h2>
           <p className="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-            <br />
-            do eiusmod tempor incididunt ut labore.
+          Access relaxing sounds different guided meditations, relaxation and yoga.
           </p>
           <div className="category-slider">
             <OwlCarousel className="owl-carousel owl-theme" {...options}>

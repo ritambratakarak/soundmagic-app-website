@@ -79,7 +79,7 @@ function LoginComponents(props) {
 
             Network('login', 'post', obj)
                 .then(async (res) => {
-                    console.log("res success login--->", res);
+                    // console.log("res success login--->", res);
                     if (res.response_code == 2000) {
                         setLoading(false)
                         toast.success(res.response_message)

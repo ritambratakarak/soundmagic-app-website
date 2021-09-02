@@ -169,3 +169,68 @@
         font-size: 18px;
     }
 }
+
+
+
+
+
+.video-track-section{
+    background: none;
+}
+.video-first{
+    margin-left: auto;
+}
+.video-tag{
+    left: -166px;
+}
+.video-second{
+    left: 0;
+    right: auto;
+}
+.video-second .video-tag{
+    right: -166px;
+    left: auto;
+}
+.video-pose:before{
+    background: url(./../../images/about-design.png) no-repeat center center;
+    width: 325px;
+    height: 250px;
+   bottom: -209px;
+    left: -101px;
+    top: auto;
+}
+.video-track-text h3{
+    color: #051445;
+}
+.big-video{
+    border-radius: 20px;
+    overflow: hidden;
+}
+.big-video img{
+    max-width: 100%;
+}
+.video-track-text{
+    position: relative;
+}
+.video-track-text:before{
+    position: absolute;
+    right: -60px;
+    bottom: -30px;
+    background: url(./../../images/about-circle.png) no-repeat center center;
+    width: 317px;
+    height: 129px;
+    content: "";
+}
+
+
+@media(max-width:767px){
+    .video-tag{
+        left: 0;
+    }
+    .video-second .video-tag{
+        right: 0;
+    }
+    .video-track-text{
+        margin-top: 25px;
+    }
+}

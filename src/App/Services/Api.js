@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-var base_url = 'https://nodeserver.mydevfactory.com:1449/api/';
+export var base_url = 'https://nodeserver.mydevfactory.com:1449/api/';
 export const image_url = 'https://nodeserver.mydevfactory.com:1449/';
 var condition = navigator.onLine ? 'online' : 'offline';
 

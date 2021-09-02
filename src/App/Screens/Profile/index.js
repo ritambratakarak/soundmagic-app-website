@@ -12,7 +12,7 @@ import Sidemenu from "../../Components/Sidemenu/Sidemenu";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux/Actions/auth";
 import { toast } from "react-toastify";
-import { Network } from "../../Services/Api";
+import { base_url, Network } from "../../Services/Api";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -27,6 +27,9 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import LoadingOverlay from "react-loading-overlay";
 import axios from "axios";
+import "./../../Components/Sidemenu/index.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +65,7 @@ export default function Profile(props) {
   const [visable3, setvisable3] = useState(false);
   const [file, setFile] = useState("");
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [playedcourse, setplayedcourse] = React.useState([]);
 
   const schema = yup.object().shape({
     oldpassword: yup.string().required("Old Password is required!"),
@@ -90,14 +94,13 @@ export default function Profile(props) {
   };
 
   useEffect(() => {
-    if(JSON.parse(localStorage.getItem("user")) != null){
+    if (JSON.parse(localStorage.getItem("user")) != null) {
       getData();
-    }
-    else{
-      props.history.push("/login")
+      getRecentPlayedCourse();
+    } else {
+      props.history.push("/login");
     }
   }, []);
-
 
   const getData = async () => {
     const alldata = JSON.parse(localStorage.getItem("user"));
@@ -191,7 +194,6 @@ export default function Profile(props) {
     };
     Network("update-password", "post", obj)
       .then(async (res) => {
-        console.log("res success login--->", res);
         if (res.response_code == 200) {
           setLoading(false);
           toast.success(res.response_message);
@@ -234,29 +236,70 @@ export default function Profile(props) {
     form.append("image", file);
     axios({
       method: "POST",
-      url: "https://nodeserver.mydevfactory.com:1449/api/edit-profileImage",
+      url: base_url + "edit-profileImage",
       headers: {
         // Accept: 'application/json',
         "x-access-token": user.authtoken,
         // 'Content-Type': 'application/json'
       },
       data: form,
-    }).then(function (response) {
-      setLoading(false);
-      console.log("response", response);
-      if (response.data?.response_code == 200) {
-        toast.success("Upload Successfully");
-      } else {
-        toast.error("Upload Failure");
-      }
-      // document.getElementById('väljund').innerHTML = JSON.stringify(muutuja);
     })
-    .catch((error) => {
-      setLoading(false);
-      toast.error("Something went wrong !");
-      console.log("error===>", error);
-    });
+      .then(function (response) {
+        setLoading(false);
+        console.log("response", response);
+        if (response.data?.response_code == 200) {
+          toast.success("Upload Successfully");
+        } else {
+          toast.error("Upload Failure");
+        }
+        // document.getElementById('väljund').innerHTML = JSON.stringify(muutuja);
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error("Something went wrong !");
+        console.log("error===>", error);
+      });
   };
+
+  const getRecentPlayedCourse = async () => {
+    setLoading(true);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const authtoken = user.authtoken;
+    Network(`/get-user-recent-play?page=${1}&limit=${100}`, "get", {
+      authtoken,
+    })
+      .then(async (res) => {
+        setLoading(false);
+        if (res.response_code === 200) {
+          console.log("Played data", res.response_data.docs);
+          setplayedcourse(res.response_data.docs);
+          // Toast.show(res.response_message);
+        } else if (res.response_code === 4000) {
+          toast.warn(res.response_message);
+          localStorage.removeItem("user");
+          dispatch(logoutUser());
+        } else {
+          toast.error(res.response_message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error);
+        setLoading(false);
+      });
+  };
+
+  function format(time) {
+    let hrs = ~~(time / 3600);
+    let mins = ~~((time % 3600) / 60);
+    let secs = ~~time % 60;
+    let ret = "";
+    if (hrs > 0) {
+      ret += "" + hrs + " hours " + (mins < 10 ? "0" : "");
+    }
+    ret += "" + mins + " min " + (secs < 10 ? "0" : "");
+    ret += "" + secs + " sec ";
+    return ret;
+  }
 
   return (
     <>
@@ -265,7 +308,43 @@ export default function Profile(props) {
         <div className="dash-board-main">
           <div className="container">
             <div className="row">
-              <Sidemenu />
+              {/* <Sidemenu /> */}
+              <div className="col-lg-3">
+                <div className="dashboard-menu">
+                  <ul>
+                    <li>
+                      <Link to="profile" className="menu1 active">
+                        My Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="" className="menu2">
+                        My Subscriptions
+                      </Link>
+                    </li>
+                    {/* <li>
+            <Link to="" className="menu3">
+              My Courses
+            </Link>
+          </li> */}
+                    {/* <li>
+                      <Link to="" className="menu4">
+                        My Playlists
+                      </Link>
+                    </li> */}
+                    <li>
+                      <Link to="myfavorite" className="menu5">
+                        My Favourite
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="recentplayed" className="menu6">
+                        Recently Watched
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
               <div className="col-lg-9">
                 <div className="dashboard-content-box">
                   <div className="page-title">My Profile</div>
@@ -296,7 +375,7 @@ export default function Profile(props) {
                         <img src={pencil} />
                       </div>
                     </div>
-                    
+
                     <div className="profile-name">
                       <h4>
                         {Object.keys(user).length === 0 &&
@@ -323,7 +402,7 @@ export default function Profile(props) {
                       onClick={() => tabChange("1")}
                       className={tab == "1" && "active"}
                     >
-                      View my courses Enrolled
+                      View my PlayList
                     </button>
                     <button
                       onClick={() => tabChange("2")}
@@ -381,123 +460,55 @@ export default function Profile(props) {
                     </div>
                   ) : tab == "1" ? (
                     <div className="watched-video-section">
-                      <h4>Videos I’ve Watched</h4>
+                      <h4>Track I’ve Watched</h4>
                       <div className="watched-video-list">
                         <div className="row">
-                          <div className="col-lg-4">
-                            <div className="watched-video-box">
-                              <div className="watched-video-box-img">
-                                <img src={videoimage} alt="" />
-                              </div>
-                              <div className="watched-video-box-text">
-                                <div className="whilist-icon">
-                                  <img src="images/menu5.png" alt="" />
+                          {playedcourse.length != 0 ? (
+                            playedcourse.map((data, i) => {
+                              return (
+                                <div className="col-lg-4" key={i}>
+                                  <div
+                                    className="watched-video-box"
+                                    onClick={() =>
+                                      props.history.push({
+                                        pathname: "/player",
+                                        state: {
+                                          id: data.trackDetails._id,
+                                          image:
+                                            data.trackDetails.audioThumbnail,
+                                          url: data.trackDetails.audioURL,
+                                        },
+                                      })
+                                    }
+                                  >
+                                    <div className="watched-video-box-img">
+                                      <img
+                                        src={data.trackDetails.audioThumbnail}
+                                        alt=""
+                                      />
+                                    </div>
+                                    <div className="watched-video-box-text">
+                                      <div className="whilist-icon">
+                                        <img src="images/menu5.png" alt="" />
+                                      </div>
+                                      <h5>{data.trackDetails.name}</h5>
+                                      <p>
+                                        <span>{data.trackDetails.type}:</span>{" "}
+                                        {format(data.trackDetails.duration)}
+                                      </p>
+                                      <p>
+                                        <span>Upload by:</span> Admin
+                                      </p>
+                                    </div>
+                                  </div>
                                 </div>
-                                <h5>Mind meditation tone</h5>
-                                <p>
-                                  <span>Audio:</span> 3 min 45 sec
-                                </p>
-                                <p>
-                                  <span>Upload by:</span> Admin
-                                </p>
-                              </div>
+                              );
+                            })
+                          ) : (
+                            <div>
+                              <p>No data Found</p>
                             </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="watched-video-box">
-                              <div className="watched-video-box-img">
-                                <img src={videoimage} alt="" />
-                              </div>
-                              <div className="watched-video-box-text">
-                                <div className="whilist-icon">
-                                  <img src="images/menu5.png" alt="" />
-                                </div>
-                                <h5>Mind meditation tone</h5>
-                                <p>
-                                  <span>Audio:</span> 3 min 45 sec
-                                </p>
-                                <p>
-                                  <span>Upload by:</span> Admin
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="watched-video-box">
-                              <div className="watched-video-box-img">
-                                <img src={videoimage} alt="" />
-                              </div>
-                              <div className="watched-video-box-text">
-                                <div className="whilist-icon">
-                                  <img src="images/menu5.png" alt="" />
-                                </div>
-                                <h5>Mind meditation tone</h5>
-                                <p>
-                                  <span>Audio:</span> 3 min 45 sec
-                                </p>
-                                <p>
-                                  <span>Upload by:</span> Admin
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="watched-video-box">
-                              <div className="watched-video-box-img">
-                                <img src={videoimage} alt="" />
-                              </div>
-                              <div className="watched-video-box-text">
-                                <div className="whilist-icon">
-                                  <img src="images/menu5.png" alt="" />
-                                </div>
-                                <h5>Mind meditation tone</h5>
-                                <p>
-                                  <span>Audio:</span> 3 min 45 sec
-                                </p>
-                                <p>
-                                  <span>Upload by:</span> Admin
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="watched-video-box">
-                              <div className="watched-video-box-img">
-                                <img src={videoimage} alt="" />
-                              </div>
-                              <div className="watched-video-box-text">
-                                <div className="whilist-icon">
-                                  <img src="images/menu5.png" alt="" />
-                                </div>
-                                <h5>Mind meditation tone</h5>
-                                <p>
-                                  <span>Audio:</span> 3 min 45 sec
-                                </p>
-                                <p>
-                                  <span>Upload by:</span> Admin
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="watched-video-box">
-                              <div className="watched-video-box-img">
-                                <img src={videoimage} alt="" />
-                              </div>
-                              <div className="watched-video-box-text">
-                                <div className="whilist-icon">
-                                  <img src="images/menu5.png" alt="" />
-                                </div>
-                                <h5>Mind meditation tone</h5>
-                                <p>
-                                  <span>Audio:</span> 3 min 45 sec
-                                </p>
-                                <p>
-                                  <span>Upload by:</span> Admin
-                                </p>
-                              </div>
-                            </div>
-                          </div>
+                          )}
                         </div>
                       </div>
                     </div>

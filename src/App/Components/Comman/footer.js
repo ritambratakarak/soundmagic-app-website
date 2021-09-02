@@ -6,10 +6,10 @@ import AppStore from './../../images/app-store.png';
 import GoogleStore from './../../images/google-store.png';
 import fb from './../../images/fb.png';
 import ins from './../../images/ins.svg';
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
+
 
 function FooterComponents() {
-  
-
   return (
     <>
       <div className="footer">
@@ -19,19 +19,19 @@ function FooterComponents() {
               <h4>QUICK LINKS</h4>
               <ul>
                 <li>
-                  <a href="#">Home</a>
+                  <Link to="/">Home</Link>
+                </li>
+                {/* <li>
+                  <Link to="#">Courses</Link>
+                </li> */}
+                <li>
+                  <Link to="/track">Track</Link>
                 </li>
                 <li>
-                  <a href="#">Courses</a>
+                  <Link to="/about">About Us</Link>
                 </li>
                 <li>
-                  <a href="#">Track</a>
-                </li>
-                <li>
-                  <a href="#">About Us</a>
-                </li>
-                <li>
-                  <a href="#">Contact Us</a>
+                  <Link to="/contact">Contact Us</Link>
                 </li>
               </ul>
             </div>
@@ -39,10 +39,10 @@ function FooterComponents() {
               <h4>Legal</h4>
               <ul>
                 <li>
-                  <a href="#">Terms & Conditions</a>
+                  <Link to="/terms">Terms & Conditions</Link>
                 </li>
                 <li>
-                  <a href="#">Privacy Policy</a>
+                <Link to="/terms">Privacy Policy</Link>
                 </li>
                 <li>
                   <a href="#">FAQ</a>
@@ -69,7 +69,7 @@ function FooterComponents() {
                 <a href="#">
                   <img src={AppStore} alt="" />
                 </a>
-                <a href="#">
+                <a href="https://play.google.com/store/apps/details?id=com.soundmagic" target="_blank">
                   <img src={GoogleStore} alt="" />
                 </a>
               </div>

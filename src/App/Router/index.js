@@ -9,6 +9,17 @@ import LoginScreen from "./../Screens/Login/index";
 import Signup from "./../Screens/Register/index";
 import { ToastBox } from '../Components/Toast';
 import Profile from '../Screens/Profile';
+import Track from '../Screens/Track';
+import TrackDetails from '../Screens/Track/Details';
+import Player from '../Screens/Player';
+import BlogDetails from '../Screens/Blog';
+import About from '../Screens/About';
+import Contact from '../Screens/Contact';
+import Courses from '../Screens/Courses';
+import RecentPlayed from '../Screens/Recent Played';
+import MyFavorite from '../Screens/Favorite';
+import Terms from '../Screens/Terms';
+
 
 export const currentURL = '/projects/suvendu/ritam/soundmagic';
 
@@ -43,6 +54,16 @@ function RouterScreen() {
                             <Route path='/signup' component={Signup} />
                             <Route path='/forgotpassword' component={Forgotpassword} />
                             <Route path='/profile' component={Profile} />
+                            <Route path='/track' component={Track} />
+                            <Route path='/about' component={About} />
+                            <Route path='/contact' component={Contact} />
+                            <Route path='/courses' component={Courses} />
+                            <Route path='/trackdetails' component={TrackDetails} />
+                            <Route path='/recentplayed' component={RecentPlayed} />
+                            <Route path='/myfavorite' component={MyFavorite} />
+                            <Route path='/player' component={Player} />
+                            <Route path='/blogdetails' component={BlogDetails} />
+                            <Route path='/terms' component={Terms} />
                         </>
                     }
                     <Route component={NotFound} />

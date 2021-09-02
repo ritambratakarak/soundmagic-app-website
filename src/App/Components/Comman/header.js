@@ -10,22 +10,21 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "./../../Redux/Actions/auth";
 import { toast } from "react-toastify";
 
-
-
 function HeaderComponents({ show, onClick, dashboard, mainsearch }) {
   const [user, setUser] = useState({});
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const history = useHistory()
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("user----->", user);
+    // console.log("user----->", user);
     setUser(user);
   }, []);
 
   const handleLogout = (event) => {
     const userRemove = localStorage.removeItem("user");
-    console.log("userRemove", userRemove);
+    // console.log("userRemove", userRemove);
     dispatch(logoutUser());
     toast.success("Logout Sucessfully")
     history.push("/")
@@ -65,25 +64,25 @@ function HeaderComponents({ show, onClick, dashboard, mainsearch }) {
                         Home
                       </Link>
                     </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">
+                    {/* <li className="nav-item">
+                      <Link to="/courses" className="nav-link">
                         Courses
-                      </a>
-                    </li>
+                      </Link>
+                    </li> */}
                     <li className="nav-item">
-                      <a className="nav-link" href="#">
+                      <Link to="/track" className="nav-link">
                         Track
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">
+                      <Link to="/about" className="nav-link">
                         About Us
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">
+                      <Link to="/contact" className="nav-link">
                         Contact Us
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -96,6 +95,7 @@ function HeaderComponents({ show, onClick, dashboard, mainsearch }) {
                   className="search-input"
                   placeholder="Search"
                   onChange={mainsearch}
+                  name={"search"}
                 />
                 <button className="search-btn">
                   <img src={Search} alt="" />
@@ -139,9 +139,9 @@ function HeaderComponents({ show, onClick, dashboard, mainsearch }) {
                     <Link to="/profile" className="dropdown-item">
                       Profile
                     </Link>
-                    <Link to="/" className="dropdown-item">
+                    {/* <Link to="/" className="dropdown-item">
                       My Courses
-                    </Link>
+                    </Link> */}
                     <Link to="/" className="dropdown-item">
                       My Subscription
                     </Link>

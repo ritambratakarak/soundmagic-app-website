@@ -7,7 +7,7 @@
 
 .course-beginner{
     padding: 60px 0;
-/*    background: #F5F9FF;*/
+    /* background: #F5F9FF; */
 }
 .course-beginner-head{
     display: flex;
@@ -37,7 +37,7 @@
 }
 .view-all button{
     width: 138px;
-    height: 45px;
+    height: 52px;
     border: 1px solid #165CC2;
     font-weight: 600;
     font-size: 15px;
@@ -58,41 +58,31 @@
     overflow: hidden;
     margin-bottom: 30px;
 }
-.watched-video-box:hover{
-    box-shadow: 0px 4px 38px rgba(0, 0, 0, 0.09);
-}
-
 .watched-video-box-text{
-    padding: 18px 20px;
+    padding: 24px;
     position: relative;
 }
-.rating-list{
+/* .rating-list{
     position: absolute;
-    right: 15px;
-    top: 23px;
-}
-.rating-list button{
-    background: none;
-    border: none;
-    padding: 0;
-}
+    right: 20px;
+    top: 30px;
+    padding-right: 15px;
+    background: url(./../../images/star-rate.png) no-repeat right center;
+    font-size: 15px;
+    color: #051445;
+} */
 .watched-video-box-img img{
     width: 100%;
-    height: 10rem;
 }
 .watched-video-box-text h5{
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 24px;
     line-height: 32px;
     color: #021B77;
     margin: 0;
     padding: 0;
-    padding-right: 15px;
     font-family: 'Philosopher', sans-serif;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 .watched-video-box-text p{
     font-style: normal;
@@ -100,11 +90,6 @@
     font-size: 16px;
     line-height: 29px;
     color: #051445;
-    margin-bottom: 0.2rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: 2.2rem;
 }
 .watched-video-box-text p span{
     color: #9EA1AC;
@@ -139,12 +124,6 @@
     outline: 0;
     border: none;
     margin-top: 30px;
-}
-.new-release{
-    background: #F5F9FF;
-}
-.player-section img{
-    width: 100%;
 }
 
 @media(max-width:770px){

@@ -87,10 +87,13 @@ function HomeComponents(props) {
       <HeaderComponent show={show} onClick={onClick} dashboard={true} mainsearch={()=> props.history.push("Track")} />
       <BannerComponents />
       <CategoryComponents />
-      <AboutComponents />
-      <CoursesComponents data={course} />
-      <VideoComponents />
-      <FeatureComponents data={blog} />
+      <AboutComponents click={()=> props.history.push({pathname: "/about"})} />
+      {/* <CoursesComponents data={course}  /> */}
+      <VideoComponents clicktrack={()=> props.history.push({pathname: "/track"})} />
+      <FeatureComponents data={blog} onPress={(data)=> props.history.push({
+                                pathname: "/blogdetails",
+                                state: { data: data },
+                              })} />
       <PriceComponents />
       <FooterComponent />
     </LoadingOverlay>

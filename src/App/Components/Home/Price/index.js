@@ -12,8 +12,7 @@ function PriceComponents(props) {
       <div className="container">
         <h2 className="heading">Start your experience with us</h2>
         <p className="description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed<br />
-          do eiusmod tempor incididunt ut labore.
+          Access relaxing sounds different guided meditations, relaxation and yoga.
         </p>
 
         <div className="main-plan-section">

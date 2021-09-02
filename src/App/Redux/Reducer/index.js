@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux' 
 import authReducer from './auth'
-// import locationReducer from './locationReducer'
-// import profileReducer from "./userProfile"
+import { favoriteReducer } from './favoritereducer'
 
 export default combineReducers({
     userdata: authReducer,
+    favorite: favoriteReducer
     // location: locationReducer,
     // profiledata: profileReducer
 })

@@ -12,24 +12,22 @@ import play from './../../../images/play.png';
 function VideoComponents(props) {
 
   return (
-    <div className="video-track-section">
+    <div className="video-track-section bg-color">
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
-            <div className="video-track-text">
+            <div className="video-track-text home-page">
               <h2>Videos & Tracks</h2>
               <h3>Workout at home with ease</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                ipsum suspendisse ultrices gravida. Risus commodo viverra
-                maecenas accumsan lacus vel facilisis.
-              </p>
-              <p>
-                Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                maecenas accumsan lacus vel facilisis.
-              </p>
-              <button className="get-started">Get Started</button>
+                    Anybody who starts the journey in meditation Long term
+                    practitioners Children Mums to be and mothers Anyone looking
+                    for relaxation and reducing stress Anyone looking to improve
+                    sleep Anyone looking for tips and practices to improve
+                    physical, mental and emotional wellbeing Anyone looking for
+                    gentle and relaxing movement and exercise practices
+                  </p>
+              <button className="get-started" onClick={props.clicktrack}>Get Started</button>
             </div>
           </div>
           <div className="col-lg-6">

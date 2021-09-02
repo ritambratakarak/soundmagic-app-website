@@ -19,11 +19,11 @@ export default function Sidemenu({active}) {
               My Subscriptions
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="" className="menu3">
               My Courses
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="" className="menu4">
               My Playlists

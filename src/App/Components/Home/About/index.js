@@ -22,16 +22,13 @@ function AboutComponents(props) {
                   level with us
                 </h3>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                  maecenas accumsan lacus vel facilisis.
-                </p>
-                <p>
-                  Quis ipsum suspendisse ultrices gravida. Risus commodo viverra
-                  maecenas accumsan lacus vel facilisis.
-                </p>
-                <button className="know-more">Know More</button>
+                    People behind the app are long-term meditators and sound
+                    practitioners who wanted to share their experience with
+                    others, and open space for others to share their insights.
+                    
+                  </p>
+                  
+                <button className="know-more" onClick={props.click}>Know More</button>
               </div>
             </div>
           </div>

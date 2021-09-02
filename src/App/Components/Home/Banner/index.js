@@ -17,10 +17,11 @@ function BannerComponents(props) {
             <h2>Change Your Life</h2>
             <h3>By Meditation</h3>
             <p>
-              We are the most popular yoga studio in town. Rated by more than
-              1000+ customers
-            </p>
-            <button className="enroll-now">Enroll Now</button>
+                  Welcome to Mindfulness Haven. <br />
+                  Access relaxing sounds different guided meditations,
+                  relaxation and yoga.
+                </p>
+            {/* <button className="enroll-now">Enroll Now</button> */}
           </div>
         </div>
       </div>

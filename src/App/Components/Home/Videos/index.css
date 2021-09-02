@@ -4,6 +4,10 @@
     padding: 75px 0 80px;
     overflow: hidden;
 }
+.bg-color{
+    background: #051445 !important;
+}
+
 .video-track-text{
     padding-right: 40px;
 }
@@ -28,6 +32,10 @@
     padding: 0;
     font-family: 'Philosopher', sans-serif;
 }
+.home-page h3{
+    color: #FFFFFF !important;
+}
+
 .video-track-text p{
     font-style: normal;
     font-weight: normal;
